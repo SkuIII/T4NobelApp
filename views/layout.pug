@@ -3,6 +3,8 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src="/javascripts/main.js") 
+    script(src="javascripts/loggIn.js")
+    script(src="https://accounts.google.com/gsi/client" async defer)
   body
+    block login
     block content
