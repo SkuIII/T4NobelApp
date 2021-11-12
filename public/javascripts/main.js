@@ -2,7 +2,7 @@
 
 console.log('main.js is alive!')
 
-fetch('http://localhost:3000/data/NominatedInfo')
+fetch('/data/NominatedInfo')
     .then(response => {
         return response.json();
     })
