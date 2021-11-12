@@ -1,25 +1,26 @@
 'use strict';
 
-console.log('app.js is alive!')
+console.log('main.js is alive!')
 
-const req = new XMLHttpRequest();
-req.open('GET', 'data');
-req.responseType = 'json';
-req.send();
+fetch('http://localhost:3000/data')
+    .then(response => {
+        return response.json();
+    })
+    .then(resNominatedInfo => {
+        const NominatedInfo = resNominatedInfo;
+        Load(NominatedInfo);
+    });
 
-req.onload = () => {
-    const data = req.response;
-
-    console.log(data);
+const Load = (NominatedInfo) => {
+    console.log(NominatedInfo);
 
     const img = document.createElement('img');
     const h1 = document.createElement('h1');
 
-    img.src = data[0].record.fields.Nominerad1Bild[0].url;
+    img.src = NominatedInfo[0].record.fields.Nominerad1Bild[0].url;
 
-    h1.textContent = data[0].record.fields.Nominerad1;
+    h1.textContent = NominatedInfo[0].record.fields.Nominerad1;
 
     document.getElementById('main').appendChild(h1);
     document.getElementById('main').appendChild(img);
-
 };
