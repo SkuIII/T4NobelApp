@@ -10,7 +10,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/anka', function(req, res, next) {
-    res.render('login');
+    res.render('workingFolder/loginVote');
 });
 
 router.get('/LoggedIn', function(req, res, next) {
