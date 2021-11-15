@@ -36,8 +36,19 @@ const Load = (res) => {
         console.log(Category.record.fields.Category);
 
         NominatedInfo.forEach(Nominated => {
-            if (Nominated.record.fields.Category == Category.record.fields.Category)
-                console.log(Nominated.record.fields.Nominated);
-        });
+            if (Nominated.record.fields.Category == Category.record.fields.Category){
+                console.log(Nominated.record.fields.Picture[0].url);
+
+                // const b = document.createElement('h1');
+                // b.textContent = 'HEJ JAG ÄR FETT SEG';
+                // document.getElementById('anka').appendChild(b);
+            
+                // console.log("Hej---------------" + NominatedInfo[0].record.fields.Picture[0].url);
+                // console.log("Hej---------------" + NominatedInfo[3].record.fields.Picture[0].url);
+
+            
+            
+        }});    
+   
     });
 };
