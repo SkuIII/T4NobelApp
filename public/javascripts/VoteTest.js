@@ -65,6 +65,14 @@ const Load = (res) => {
             }
         });
     });
+
+    let counter = 0;
+    StudentInfo.forEach(Student => {
+        if (Student.record.fields.VoteStatus == 'ToVote') {
+            console.log(counter)
+            counter++;
+        }
+    })
 };
 
 const btnVoteClick = (event) => {
