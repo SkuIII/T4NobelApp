@@ -6,24 +6,8 @@ const base = new Airtable({
     apiKey: 'keyt0M8PAWLcKo6Na'
 }).base('app4x1UwZKFrNZnBU');
 
-const updateRecord = (id, nominated, category) => {
-    base('Students').update([{
-        "id": id,
-        "fields": {
-            "VoteStatus": "ToVote",
-            "VotedForCategory1": nominated
-        }
-    }], function(err, records) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
-}
-
-
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'TE4NobelApp' });
+    res.render('index', { title: 'T4NobelApp' });
 });
 
 router.post('/', function(req, res, next) {
@@ -42,14 +26,11 @@ router.get('/LoggedIn', function(req, res, next) {
 });
 
 router.post('/LoggedIn', function(req, res, next) {
-    // console.log(res);
     res.render('Login');
 });
 
 router.get('/Vote', function(req, res, next) {
-    // test();
-
-    res.render('Vote', { title: 'TE4NobelApp' });
+    res.render('Vote', { title: 'T4NobelApp' });
 });
 
 router.post('/Vote', function(req, res, next) {
@@ -57,31 +38,42 @@ router.post('/Vote', function(req, res, next) {
     console.log(req.body);
 
     const response = JSON.stringify(req.body);
-    const mail = JSON.parse(response).email;
+    const email = JSON.parse(response).email;
     const nominated = JSON.parse(response).Nominated;
     const category = JSON.parse(response).Category;
 
     base('students').select().eachPage(function page(records, fetchNextPage) {
-        records.forEach(function(record) {
-            if (record.fields.Mail == mail) {
-                console.log('   This is the mail ' + mail + " " + record.id, " " + record.fields.Category)
+            records.forEach(function(record) {
+                if (record.fields.Mail == email) {
 
-                const id = record.id;
-                updateRecord(id, nominated, category);
+                    console.log(email + " " + record.id + " " + record.fields.Category)
 
+                    base('Students').update([{
+                        "id": record.id,
+                        "fields": {
+                            "VoteStatus": "ToVote",
+                            "VotedForCategory1": nominated
+                        }
+                    }], function(err, records) {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
+                    });
+                }
+            });
+            fetchNextPage();
+
+        },
+        function done(err) {
+
+            if (err) {
+                console.error(err);
+                return;
             }
         });
-        fetchNextPage();
 
-    }, function done(err) {
-
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
-
-    res.render('Vote', { title: 'TE4NobelApp' });
+    res.render('Vote', { title: 'T4NobelApp' });
 });
 
 module.exports = router;
