@@ -1,7 +1,43 @@
 extends layout
 
-block Login
-    h1 hi
+block Header
+    header(class="bs4header bg-secondary mb-4")
+        div(class="container")
+            nav(class="navbar navbar-expand-lg navbar-dark")
+                div(class="col align-self-end")
+                    h1(class="display-1") Login
+//-Leaderboard
+block Login                
+    div(class="container")     
+        div(class="d-flex justify-content-center h-200 w-50")
+        div(class="card w-50 mx-auto my-5 shadow-lg")
+            div(class="card-header bg-secondary text-center") 
+                h1 leaderboard
+                     
+            div(class="card-body")
+                div(class="col-4  bg-danger w-100 py-2 my-2 text-center") Åk 3      antal röster:1337
+                div(class="col-4 bg-info w-100 py-2 my-2 text-center") Åk 2      antal röster: 69
+                div(class="col-4 bg-warning w-100 py-2 my-2 text-center") Åk 1      antal röster: 420
+
+//-kategorier
+block Nobel
+    div(class = "w-75 mx-auto contatiner")
+        div(class = "row")
+            h1(class = "text-center col-12") Kategori 3
+            div(class = " col-sm-4 border border-primary") Hej
+            div(class = " col-sm-4 border border-primary") Hej 
+            div(class = " col-sm-4 border border-primary") Hej
+            h1(class = "text-center col-12") Kategori 1
+        div(class="row")
+            div(class = " col-sm-4 border border-primary") Hej
+            div(class = " col-sm-4 border border-primary") Hej 
+            div(class = " col-sm-4 border border-primary") Hej
+            h1(class = "text-center col-12") Kategori 2
+        div(class="row")
+            div(class = " col-sm-4 border border-primary") Hej
+            div(class = " col-sm-4 border border-primary") Hej 
+            div(class = " col-sm-4 border border-primary") Hej
+            
 
 
 
