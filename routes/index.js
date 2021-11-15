@@ -9,8 +9,11 @@ router.post('/', function(req, res, next) {
     res.render('index');
 });
 
-router.get('/anka', function(req, res, next) {
+router.get('/anka', function(req, res, next) { //Added route for wirju
     res.render('workingFolder/loginVote');
+});
+router.get('/pelikan', function(req, res, next){
+    res.render('workingFolder/loginLeader');
 });
 
 router.get('/LoggedIn', function(req, res, next) {
