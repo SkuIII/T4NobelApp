@@ -70,18 +70,38 @@ const Load = (res) => {
             }
         });
     });
+    // const tBoxData = document.createElement('input');
+    // tBoxData.name = 'tBoxDataName';
+    // tBoxData.id = 'tBoxDataId';
+    // // tBoxData.style.display = 'none';
+    // tBoxData.value = JSON.stringify(StudentInfoTest);
+    // document.getElementById('mainVote').prepend(tBoxData)
 };
 
 const btnVoteClick = (event) => {
 
+    // "event" is which element triggered the function
+    // Gets the id and class of the element
     const id = event.target.id;
     const className = event.target.className;
 
     console.log(id + " " + className);
+
+    // Splits the id of the clicked button to two strings
+    // Since each button has a unique id depending on day and time
+    let test = id.split(',');
+
+    console.log(test)
+    sendVote(test);
 }
 
 const sendVote = () => {
     const url = document.URL;
+
+    // swan
+
+
+    // console.log('{"key":"value", "email":"' + email + '", "Vote":{' + swan + '}}');
 
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -89,6 +109,6 @@ const sendVote = () => {
             'Content-Type': 'application/json'
                 // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: '{"key":"value", "email":"' + email + '"}' // body data type must match "Content-Type" header
+        body: '{"key":"' + value + '", "email":"' + email + '"}' // body data type must match "Content-Type" header   , "Vote":"' + swan + '"
     }).then(() => console.log('Received'));
 };
