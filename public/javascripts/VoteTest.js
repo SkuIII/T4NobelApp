@@ -15,9 +15,12 @@ const fetchCategoryInfo = fetch(
 const fetchStudentInfo = fetch(
     '/data/Students'
 ).then((res) => res.json());
+const fetchStudentInfoTest = fetch(
+    '/data/StudentsTest'
+).then((res) => res.json());
 
 // Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo]);
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo, fetchStudentInfoTest]);
 
 allData.then((res) => Load(res));
 
@@ -26,10 +29,12 @@ const Load = (res) => {
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
     const StudentInfo = res[2];
+    const StudentInfoTest = res[3];
 
     console.log(NominatedInfo);
     console.log(CategoryInfo);
     console.log(StudentInfo);
+    console.log(StudentInfoTest);
 
     // Looping through nominated people by category
     CategoryInfo.forEach((Category, x) => {
@@ -72,20 +77,18 @@ const btnVoteClick = (event) => {
     const id = event.target.id;
     const className = event.target.className;
 
-    console.log(id + " " + className)
+    console.log(id + " " + className);
 }
 
+const sendVote = () => {
+    const url = document.URL;
 
-
-const sendVote = (url) => {
-
-    // const url = 'http://192.168.1.139:3000/Vote';
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
             'Content-Type': 'application/json'
                 // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: '{"key":"value"}' // body data type must match "Content-Type" header
-    }).then(() => console.log('Reseved'));
+        body: '{"key":"value", "email":"' + email + '"}' // body data type must match "Content-Type" header
+    }).then(() => console.log('Received'));
 };

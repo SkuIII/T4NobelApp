@@ -69,4 +69,9 @@ router.get('/Students', function(req, res, next) {
     });
 });
 
+router.get('/StudentsTest', function(req, res, next) {
+    var data = require('../data/Students.json')
+    res.send(data)
+});
+
 module.exports = router;

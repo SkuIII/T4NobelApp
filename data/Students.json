@@ -1,0 +1,39 @@
+{
+    "records": [{
+            "id": "rec0ahnHAVt5rvAKl",
+            "fields": {
+                "Name": "Kasiem Saeed",
+                "Mail": "kasiemsaeed@gmail.com",
+                "Class": "TETE20",
+                "VoteStatus": "ToVote",
+                "Year": "2020",
+                "VotedFor": "None"
+            },
+            "createdTime": "2021-11-15T09:32:51.000Z"
+        },
+        {
+            "id": "recGWOvLl0m4Bjy7B",
+            "fields": {
+                "Name": "Lawe Zangena",
+                "Mail": "lawza02@gmail.com",
+                "Class": "TETE18",
+                "VoteStatus": "ToVote",
+                "Year": "2018",
+                "VotedFor": "None"
+            },
+            "createdTime": "2021-11-15T09:32:51.000Z"
+        },
+        {
+            "id": "recJpR60tLMERWxnG",
+            "fields": {
+                "Name": "Vigor Lundkvist",
+                "Mail": "vigor.lundkvist@live.se",
+                "Class": "TEIMT21",
+                "VoteStatus": "ToVote",
+                "Year": "2021",
+                "VotedFor": "None"
+            },
+            "createdTime": "2021-11-15T09:32:51.000Z"
+        }
+    ]
+}

@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
 router.get('/anka', function(req, res, next) { //Added route for wirju
     res.render('workingFolder/loginVote');
 });
-router.get('/pelikan', function(req, res, next){
+router.get('/pelikan', function(req, res, next) {
     res.render('workingFolder/loginLeader');
 });
 
@@ -30,35 +30,18 @@ router.get('/Vote', function(req, res, next) {
 });
 
 router.post('/Vote', function(req, res, next) {
-    // för att komma åt body gör req.body
-
-
-
-    // base('Students').update([{
-    //         "id": "rec0ahnHAVt5rvAKl",
-    //         "fields": {
-    //             "VoteStatus": "ToVote",
-    //             "VotedFor": "None"
-    //         }
-    //     },
-    //     {
-    //         "id": "recGWOvLl0m4Bjy7B",
-    //         "fields": {
-    //             "VoteStatus": "ToVote",
-    //             "VotedFor": "None"
-    //         }
-    //     }
-    // ], function(err, records) {
-    //     if (err) {
-    //         console.error(err);
-    //         return;
-    //     }
-    //     records.forEach(function(record) {
-    //         console.log(record.get('VoteStatus'));
-    //     });
-    // });
 
     console.log(req.body);
+    console.log(req.body.key);
+    console.log('VotePost is alive!');
+
+    const fs = require('fs');
+
+    fs.writeFile('./data/Students.json', JSON.stringify(req.body), function(err) {
+        if (err) throw err;
+        console.log('File is created successfully.');
+    });
+
     res.send();
 });
 
