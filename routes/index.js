@@ -27,7 +27,36 @@ router.get('/Vote', function(req, res, next) {
 });
 
 router.post('/Vote', function(req, res, next) {
-    res.render('Vote');
+    // för att komma åt body gör req.body
+
+
+
+    // base('Students').update([{
+    //         "id": "rec0ahnHAVt5rvAKl",
+    //         "fields": {
+    //             "VoteStatus": "ToVote",
+    //             "VotedFor": "None"
+    //         }
+    //     },
+    //     {
+    //         "id": "recGWOvLl0m4Bjy7B",
+    //         "fields": {
+    //             "VoteStatus": "ToVote",
+    //             "VotedFor": "None"
+    //         }
+    //     }
+    // ], function(err, records) {
+    //     if (err) {
+    //         console.error(err);
+    //         return;
+    //     }
+    //     records.forEach(function(record) {
+    //         console.log(record.get('VoteStatus'));
+    //     });
+    // });
+
+    console.log(req.body);
+    res.send();
 });
 
 module.exports = router;
