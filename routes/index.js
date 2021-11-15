@@ -43,16 +43,16 @@ router.post('/Vote', function(req, res, next) {
     const category = JSON.parse(response).Category;
 
     base('students').select().eachPage(function page(records, fetchNextPage) {
-            records.forEach(function(record) {
-                if (record.fields.Mail == email) {
+            records.forEach(record => {
+                if (record.fields.Email == email) {
 
-                    console.log(email + " " + record.id + " " + record.fields.Category)
+                    console.log('------------------' + email + " " + record.id + " " + category + '------------------')
 
                     base('Students').update([{
                         "id": record.id,
                         "fields": {
                             "VoteStatus": "ToVote",
-                            "VotedForCategory1": nominated
+                            [category]: nominated
                         }
                     }], function(err, records) {
                         if (err) {
