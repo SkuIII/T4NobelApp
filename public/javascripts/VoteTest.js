@@ -32,11 +32,11 @@ const Load = (res) => {
     console.log(StudentInfo);
 
     // Looping through nominated people by category
-    CategoryInfo.forEach((Category, x) => {
+    CategoryInfo.forEach((Category, counterCategory) => {
 
         let h2Category = document.createElement('h2')
         let divCategory = document.createElement('div')
-        divCategory.id = x;
+        divCategory.id = counterCategory;
 
         h2Category.textContent = Category.record.fields.Category;
 
@@ -50,7 +50,7 @@ const Load = (res) => {
 
                 imgNominated.src = Nominated.record.fields.Picture[0].url;
 
-                document.getElementById(x).appendChild(imgNominated)
+                document.getElementById(counterCategory).appendChild(imgNominated)
 
                 const btnVote = document.createElement('button');
                 btnVote.textContent = "Rösta";
@@ -61,7 +61,7 @@ const Load = (res) => {
 
                 btnVote.addEventListener('click', btnVoteClick)
 
-                document.getElementById(x).appendChild(btnVote);
+                document.getElementById(counterCategory).appendChild(btnVote);
             }
         });
     });
@@ -72,14 +72,10 @@ const btnVoteClick = (event) => {
     const id = event.target.id;
     const className = event.target.className;
 
-    console.log(id + " " + className);
-
     let temp = id.split(',');
 
     const Nominated = temp[1];
     const Category = temp[0];
-
-    console.log(Nominated)
 
     const url = document.URL;
 
