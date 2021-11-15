@@ -6,37 +6,29 @@ const base = new Airtable({
     apiKey: 'keyt0M8PAWLcKo6Na'
 }).base('app4x1UwZKFrNZnBU');
 
-base('Students').update([{
-        "id": "rec0ahnHAVt5rvAKl",
-        "fields": {
-            "Name": "Kasiem Saeed",
-            "Mail": "kasiemsaeed@gmail.com",
-            "Class": "TETE20",
-            "VoteStatus": "ToVote",
-            "Year": "2020",
-            "VotedFor": 'None'
+const test = (record) => {
+    base('Students').update([{
+            "id": 'rec0ahnHAVt5rvAKl',
+            "fields": {
+                "VoteStatus": "ToVote",
+                "VotedFor": 'None'
+            }
+        },
+        {
+            "id": 'recGWOvLl0m4Bjy7B',
+            "fields": {
+                "VoteStatus": "ToVote",
+                "VotedFor": "None"
+            }
         }
-    },
-    {
-        "id": "recGWOvLl0m4Bjy7B",
-        "fields": {
-            "Name": "Lawe Zangena",
-            "Mail": "lawza02@gmail.com",
-            "Class": "TETE18",
-            "VoteStatus": "ToVote",
-            "Year": "2018",
-            "VotedFor": "None"
+    ], function(err, records) {
+        if (err) {
+            console.error(err);
+            return;
         }
-    }
-], function(err, records) {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    records.forEach(function(record) {
-        console.log(record.get('Name'));
     });
-});
+}
+
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'TE4NobelApp' });
@@ -65,38 +57,37 @@ router.post('/LoggedIn', function(req, res, next) {
 router.get('/Vote', function(req, res, next) {
     res.render('Vote', { title: 'TE4NobelApp' });
 });
-router.put('/Vote', function(req, res, next) {
-
-});
 
 router.post('/Vote', function(req, res, next) {
 
-    console.log(req.body);
-    console.log(req.body.key);
-    console.log('VotePost is alive!');
+    // console.log(req.body);
+    // console.log(req.body.key);
+    // console.log('VotePost is alive!');
 
-    const fs = require('fs');
+    // const fs = require('fs');
 
-    fs.readFile('./data/Students.json', (err, data) => {
-        let swan = JSON.parse(data);
-        // console.log(data);
-        console.log(swan);
+    // fs.readFile('./data/Students.json', (err, data) => {
+    //     let swan = JSON.parse(data);
+    //     // console.log(data);
+    //     console.log(swan);
 
-        const find = (duck) => {
-            return duck.name == req.body.email;
-        }
+    //     const find = (duck) => {
+    //         return duck.name == req.body.email;
+    //     }
 
-        let id = swan.elev.findIndex(find);
+    //     let id = swan.elev.findIndex(find);
 
-        swan.elev[id].vote = req.body.key;
+    //     swan.elev[id].vote = req.body.key;
 
-        fs.writeFile('./data/Students.json', swan, function(err) {
-            if (err) throw err;
-            console.log('File is created successfully.');
-        });
-    });
+    //     fs.writeFile('./data/Students.json', swan, function(err) {
+    //         if (err) throw err;
+    //         console.log('File is created successfully.');
+    //     });
+    // });
 
-    res.send();
+    test();
+
+    res.render('Vote', { title: 'TE4NobelApp' });
 });
 
 module.exports = router;
