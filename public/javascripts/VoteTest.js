@@ -56,7 +56,7 @@ const Load = (res) => {
                 btnVote.textContent = "Rösta";
                 btnVote.style.width = "80px"
                 btnVote.style.height = "80px"
-                btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
+                btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
                 btnVote.className = 'btnVoteClass';
 
                 btnVote.addEventListener('click', btnVoteClick)
@@ -74,8 +74,8 @@ const btnVoteClick = (event) => {
 
     let temp = id.split(',');
 
-    const Nominated = temp[1];
     const Category = temp[0];
+    const Nominated = temp[1];
 
     const url = document.URL;
 
