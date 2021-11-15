@@ -18,7 +18,7 @@ router.get('/LoggedIn', function(req, res, next) {
 });
 
 router.post('/LoggedIn', function(req, res, next) {
-    console.log(res);
+    // console.log(res);
     res.render('Login');
 });
 
