@@ -1,0 +1,11 @@
+*,
+**,
+***{
+    font-style: Arial, italic;
+}
+
+body{
+    margin:0px;
+    font-size:2em;
+};
+

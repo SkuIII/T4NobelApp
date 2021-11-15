@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.col-4 {
+  background-color: grey;
+  border: 2px black solid;
+}
