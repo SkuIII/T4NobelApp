@@ -32,12 +32,28 @@ const Load = (res) => {
     console.log(StudentInfo);
 
     // Looping through nominated people by category
-    CategoryInfo.forEach(Category => {
+    CategoryInfo.forEach((Category, x) => {
+        console.log(x);
         console.log(Category.record.fields.Category);
+        let h2Category = document.createElement('h2')
+        let divCategory = document.createElement('div')
+        divCategory.id = x;
+
+        h2Category.textContent = Category.record.fields.Category;
+
+        document.getElementById('mainVote').appendChild(h2Category)
+        document.getElementById('mainVote').appendChild(divCategory)
 
         NominatedInfo.forEach(Nominated => {
-            if (Nominated.record.fields.Category == Category.record.fields.Category)
-                console.log(Nominated.record.fields.Nominated);
+            if (Nominated.record.fields.Category == Category.record.fields.Category) {
+                console.log(Nominated.record.fields.Picture[0].url);
+
+                const imgNominated = document.createElement('img')
+
+                imgNominated.src = Nominated.record.fields.Picture[0].url;
+
+                document.getElementById(x).appendChild(imgNominated)
+            }
         });
     });
 };
