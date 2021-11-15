@@ -5,19 +5,22 @@ console.log('VoteTest.js is alive!')
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
 const fetchNominatedInfo = fetch(
-    '/vote/NominatedInfo'
+    '/data/NominatedInfo'
 ).then((res) => res.json());
 
 const fetchCategoryInfo = fetch(
-    '/vote/Categories'
+    '/data/Categories'
 ).then((res) => res.json());
 
 const fetchStudentInfo = fetch(
-    '/vote/Students'
+    '/data/Students'
+).then((res) => res.json());
+const fetchStudentInfoTest = fetch(
+    '/data/StudentsTest'
 ).then((res) => res.json());
 
 // Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo]);
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo, fetchStudentInfoTest]);
 
 allData.then((res) => Load(res));
 
@@ -26,15 +29,16 @@ const Load = (res) => {
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
     const StudentInfo = res[2];
+    const StudentInfoTest = res[3];
 
     console.log(NominatedInfo);
     console.log(CategoryInfo);
     console.log(StudentInfo);
+    console.log(StudentInfoTest);
 
     // Looping through nominated people by category
     CategoryInfo.forEach((Category, x) => {
-        console.log(x);
-        console.log(Category.record.fields.Category);
+
         let h2Category = document.createElement('h2')
         let divCategory = document.createElement('div')
         divCategory.id = x;
@@ -46,14 +50,65 @@ const Load = (res) => {
 
         NominatedInfo.forEach(Nominated => {
             if (Nominated.record.fields.Category == Category.record.fields.Category) {
-                console.log(Nominated.record.fields.Picture[0].url);
 
                 const imgNominated = document.createElement('img')
 
                 imgNominated.src = Nominated.record.fields.Picture[0].url;
 
                 document.getElementById(x).appendChild(imgNominated)
+
+                const btnVote = document.createElement('button');
+                btnVote.textContent = "Rösta";
+                btnVote.style.width = "80px"
+                btnVote.style.height = "80px"
+                btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
+                btnVote.className = 'btnVoteClass';
+
+                btnVote.addEventListener('click', btnVoteClick)
+
+                document.getElementById(x).appendChild(btnVote);
             }
         });
     });
+    // const tBoxData = document.createElement('input');
+    // tBoxData.name = 'tBoxDataName';
+    // tBoxData.id = 'tBoxDataId';
+    // // tBoxData.style.display = 'none';
+    // tBoxData.value = JSON.stringify(StudentInfoTest);
+    // document.getElementById('mainVote').prepend(tBoxData)
+};
+
+const btnVoteClick = (event) => {
+
+    // "event" is which element triggered the function
+    // Gets the id and class of the element
+    const id = event.target.id;
+    const className = event.target.className;
+
+    console.log(id + " " + className);
+
+    // Splits the id of the clicked button to two strings
+    // Since each button has a unique id depending on day and time
+    let test = id.split(',');
+
+    console.log(test)
+    sendVote(test);
+}
+
+const sendVote = () => {
+    const url = document.URL;
+
+    // swan
+
+
+    // console.log('{"key":"value", "email":"' + email + '", "Vote":{' + swan + '}}');
+
+    fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: '{"key":"' + value + '", "email":"' + email + '"}' // body data type must match "Content-Type" header   , "Vote":"' + swan + '"
+    }).then(() => console.log('Received'));
 };
