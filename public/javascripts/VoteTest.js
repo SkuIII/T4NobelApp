@@ -15,12 +15,9 @@ const fetchCategoryInfo = fetch(
 const fetchStudentInfo = fetch(
     '/data/Students'
 ).then((res) => res.json());
-const fetchStudentInfoTest = fetch(
-    '/data/StudentsTest'
-).then((res) => res.json());
 
 // Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo, fetchStudentInfoTest]);
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo]);
 
 allData.then((res) => Load(res));
 
@@ -29,12 +26,10 @@ const Load = (res) => {
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
     const StudentInfo = res[2];
-    const StudentInfoTest = res[3];
 
     console.log(NominatedInfo);
     console.log(CategoryInfo);
     console.log(StudentInfo);
-    console.log(StudentInfoTest);
 
     // Looping through nominated people by category
     CategoryInfo.forEach((Category, x) => {
@@ -70,45 +65,32 @@ const Load = (res) => {
             }
         });
     });
-    // const tBoxData = document.createElement('input');
-    // tBoxData.name = 'tBoxDataName';
-    // tBoxData.id = 'tBoxDataId';
-    // // tBoxData.style.display = 'none';
-    // tBoxData.value = JSON.stringify(StudentInfoTest);
-    // document.getElementById('mainVote').prepend(tBoxData)
 };
 
 const btnVoteClick = (event) => {
 
-    // "event" is which element triggered the function
-    // Gets the id and class of the element
     const id = event.target.id;
     const className = event.target.className;
 
     console.log(id + " " + className);
 
-    // Splits the id of the clicked button to two strings
-    // Since each button has a unique id depending on day and time
-    let test = id.split(',');
+    let temp = id.split(',');
 
-    console.log(test)
-    sendVote(test);
-}
+    const Nominated = temp[1];
+    const Category = temp[0];
 
-const sendVote = () => {
+    console.log(Nominated)
+
     const url = document.URL;
 
-    // swan
-
-
-    // console.log('{"key":"value", "email":"' + email + '", "Vote":{' + swan + '}}');
+    const email = "kasiemsaeed@gmail.com";
 
     fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST', // *GET, POST, PUT, DELETE, etc
         headers: {
             'Content-Type': 'application/json'
                 // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: '{"key":"' + value + '", "email":"' + email + '"}' // body data type must match "Content-Type" header   , "Vote":"' + swan + '"
-    }).then(() => console.log('Received'));
-};
+        body: '{"email":"' + email + '", "Nominated":"' + Nominated + '", "Category":"' + Category + '"}' // body data type must match "Content-Type" header 
+    });
+}

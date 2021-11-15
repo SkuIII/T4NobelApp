@@ -6,22 +6,14 @@ const base = new Airtable({
     apiKey: 'keyt0M8PAWLcKo6Na'
 }).base('app4x1UwZKFrNZnBU');
 
-const test = (record) => {
+const updateRecord = (id, nominated, category) => {
     base('Students').update([{
-            "id": 'rec0ahnHAVt5rvAKl',
-            "fields": {
-                "VoteStatus": "ToVote",
-                "VotedFor": 'None'
-            }
-        },
-        {
-            "id": 'recGWOvLl0m4Bjy7B',
-            "fields": {
-                "VoteStatus": "ToVote",
-                "VotedFor": "None"
-            }
+        "id": id,
+        "fields": {
+            "VoteStatus": "ToVote",
+            "VotedForCategory1": nominated
         }
-    ], function(err, records) {
+    }], function(err, records) {
         if (err) {
             console.error(err);
             return;
@@ -55,37 +47,39 @@ router.post('/LoggedIn', function(req, res, next) {
 });
 
 router.get('/Vote', function(req, res, next) {
+    // test();
+
     res.render('Vote', { title: 'TE4NobelApp' });
 });
 
 router.post('/Vote', function(req, res, next) {
 
-    // console.log(req.body);
-    // console.log(req.body.key);
-    // console.log('VotePost is alive!');
+    console.log(req.body);
 
-    // const fs = require('fs');
+    const response = JSON.stringify(req.body);
+    const mail = JSON.parse(response).email;
+    const nominated = JSON.parse(response).Nominated;
+    const category = JSON.parse(response).Category;
 
-    // fs.readFile('./data/Students.json', (err, data) => {
-    //     let swan = JSON.parse(data);
-    //     // console.log(data);
-    //     console.log(swan);
+    base('students').select().eachPage(function page(records, fetchNextPage) {
+        records.forEach(function(record) {
+            if (record.fields.Mail == mail) {
+                console.log('   This is the mail ' + mail + " " + record.id, " " + record.fields.Category)
 
-    //     const find = (duck) => {
-    //         return duck.name == req.body.email;
-    //     }
+                const id = record.id;
+                updateRecord(id, nominated, category);
 
-    //     let id = swan.elev.findIndex(find);
+            }
+        });
+        fetchNextPage();
 
-    //     swan.elev[id].vote = req.body.key;
+    }, function done(err) {
 
-    //     fs.writeFile('./data/Students.json', swan, function(err) {
-    //         if (err) throw err;
-    //         console.log('File is created successfully.');
-    //     });
-    // });
-
-    test();
+        if (err) {
+            console.error(err);
+            return;
+        }
+    });
 
     res.render('Vote', { title: 'TE4NobelApp' });
 });
