@@ -5,4 +5,8 @@ router.get('/', function(req, res, next) {
     res.render('index');
 });
 
+router.get('/anka', function(req, res, next) {
+    res.render('login');
+});
+
 module.exports = router;
