@@ -1,6 +1,9 @@
 extends layout
 
 block content
-  h1 Hello World
-  p Welcome to T4NobelApp
+  h1 #{title}
+  p Welcome to #{title}  <!-- title variable is in routes/index.js-->
   div(id='main')
+    div
+      div( id="g_id_onload" data-client_id="623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com" data-context="signin" data-auto_prompt="false" data-ux_mode="redirect" data-login_uri="http://localhost:3000/LoggedIn" data-callback="handleCredentialResponse")
+      div(class="g_id_signin" data-type="standard")

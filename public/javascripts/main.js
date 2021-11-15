@@ -2,43 +2,42 @@
 
 console.log('main.js is alive!')
 
-fetch('/data/NominatedInfo')
-    .then(response => {
-        return response.json();
-    })
-    .then(resNominatedInfo => {
-        const NominatedInfo = resNominatedInfo;
-        Load(NominatedInfo);
-    });
-fetch('/data/Categories')
-    .then(response => {
-        return response.json();
-    })
-    .then(resCategoriesInfo => {
-        const CategoriesInfo = resCategoriesInfo;
-        Load(CategoriesInfo);
-    });
-fetch('/data/Students')
-    .then(response => {
-        return response.json();
-    })
-    .then(resStudentsInfo => {
-        const StudentsInfo = resStudentsInfo;
-        Load(StudentsInfo);
-    });
+// 3 fetch requests, 3 different endpoints/paths
+// Converting to JSON using the json() method
+const fetchNominatedInfo = fetch(
+    '/data/NominatedInfo'
+).then((res) => res.json());
 
-const Load = (NominatedInfo, CategoriesInfo, StudentsInfo) => {
+const fetchCategoryInfo = fetch(
+    '/data/Categories'
+).then((res) => res.json());
+
+const fetchStudentInfo = fetch(
+    '/data/Students'
+).then((res) => res.json());
+
+// Promise.all() does several fetch requests parallel
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo]);
+
+allData.then((res) => Load(res));
+
+const Load = (res) => {
+    // All data recieved from each base
+    const NominatedInfo = res[0];
+    const CategoryInfo = res[1];
+    const StudentInfo = res[2];
+
     console.log(NominatedInfo);
-    console.log(CategoriesInfo);
-    console.log(StudentsInfo);
+    console.log(CategoryInfo);
+    console.log(StudentInfo);
 
-    const img = document.createElement('img');
-    const h1 = document.createElement('h1');
+    // Looping through nominated people by category
+    CategoryInfo.forEach(Category => {
+        console.log(Category.record.fields.Category);
 
-    img.src = NominatedInfo[0].record.fields.Picture[0].url;
-
-    h1.textContent = NominatedInfo[0].record.fields.Nominated;
-
-    document.getElementById('main').appendChild(h1);
-    document.getElementById('main').appendChild(img);
+        NominatedInfo.forEach(Nominated => {
+            if (Nominated.record.fields.Category == Category.record.fields.Category)
+                console.log(Nominated.record.fields.Nominated);
+        });
+    });
 };
