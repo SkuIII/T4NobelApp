@@ -6,54 +6,80 @@ block Header
             div(class="col-auto")
                 h1(class = "p-2") Login
 //-Leaderboard
-block Login                
-    div(class="container")     
+//- block Login                
+//-     div(class="container")     
+//-         div(class="d-flex justify-content-center h-200 w-50")
+//-         div(class="card w-50 mx-auto my-5 shadow-lg")
+//-             div(class="card-header bg-secondary text-center") 
+//-                 h1 Leaderboard
+                     
+//-             div(class="card-body")
+//-                 div(class="col-4  bg-danger w-100 py-2 my-2 text-center") Åk 3      antal röster:1337
+//-                 div(class="col-4 bg-info w-100 py-2 my-2 text-center") Åk 2      antal röster: 69
+//-                 div(class="col-4 bg-warning w-100 py-2 my-2 text-center") Åk 1      antal röster: 420
+
+
+block Login
+    div(class="container")
         div(class="d-flex justify-content-center h-200 w-50")
         div(class="card w-50 mx-auto my-5 shadow-lg")
-            div(class="card-header bg-secondary text-center") 
-                h1 leaderboard
-                     
-            div(class="card-body")
-                div(class="col-4  bg-danger w-100 py-2 my-2 text-center") Åk 3      antal röster:1337
-                div(class="col-4 bg-info w-100 py-2 my-2 text-center") Åk 2      antal röster: 69
-                div(class="col-4 bg-warning w-100 py-2 my-2 text-center") Åk 1      antal röster: 420
+            div(class="card-header bg-secondary text-center")
+            div(class="leaderboard")
+                h1
+                    svg(class="ico-cup")
+                    use(xlink:href="#cup")
+                    Most active players
+                ol 
+                    li
+                        mark T4
+                        small 1337
+                    li
+                        mark Åk 2
+                        small 420
+                    li
+                        mark Åk 1
+                        small 69
+                    li
+                        mark Åk 3
+                        small 0
+       
 
 //-kategorier
 block Nobel
     div(class = "w-75 mx-auto contatiner")
         div(class = "row justify-content-center" )
             h1(class = "text-center col-12 mt-5") Kategori 1
-            div(class = " col-sm-3 border border-primary") Hej
+            div(class = " col-sm-3 border border-primary") 
                 img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
                 p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = " col-sm-3 border border-primary") Hej
+            div(class = " col-sm-3 border border-primary")
                 img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
                 p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum.  
-            div(class = " col-sm-3 border border-primary") Hej
+            div(class = " col-sm-3 border border-primary")
                 img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
                 p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
             h1(class = "text-center col-12 mt-5") Kategori 2
         div(class="row justify-content-center")
-            div(class = " col-sm-3 border border-primary") Hej
+            div(class = " col-sm-3 border border-primary")
                 img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
                 p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = " col-sm-3 border border-primary") Hej 
+            div(class = " col-sm-3 border border-primary")
                 img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
                 p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = " col-sm-3 border border-primary") Hej
+            div(class = " col-sm-3 border border-primary")
                 img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
                 p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
             h1(class = "text-center col-12 mt-5") Kategori 3
         div(class="row justify-content-center")
-            div(class = " col-sm-3 border border-primary") Hej
+            div(class = " col-sm-3 border border-primary")
                 img(class="img-fluid mt-4" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
                 p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = " col-sm-3 border border-primary") Hej 
+            div(class = " col-sm-3 border border-primary") 
                 img(class="img-fluid mt-4 items-align-center" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
                 p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = " col-sm-3 border border-primary") Hej
-              img(class="img-fluid mt-4" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe" )
-            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
+            div(class = " col-sm-3 border border-primary")
+              img(class="img-fluid mt-4 align-items-center " src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe" )
+              p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
             
 
 
