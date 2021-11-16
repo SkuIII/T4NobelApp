@@ -17,6 +17,11 @@ router.post('/', function(req, res, next) {
 router.get('/anka', function(req, res, next) { //Added route for wirju
     res.render('workingFolder/loginVote');
 });
+
+router.get('/leaderboard', function(req, res, next) { //Added route for wirju
+    res.render('workingFolder/leaderboardBig');
+});
+
 router.get('/pelikan', function(req, res, next) {
     res.render('workingFolder/loginLeader');
 });
