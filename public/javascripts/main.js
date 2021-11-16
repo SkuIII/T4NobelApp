@@ -27,31 +27,80 @@ const Load = (res) => {
     const CategoryInfo = res[1];
     const StudentInfo = res[2];
 
-    // console.log(NominatedInfo);
+    console.log(NominatedInfo);
     // console.log(CategoryInfo);
     // console.log(StudentInfo);
 
     //JavaScript code to generate HTML for loginVote
-    const Rubrik = document.createElement('h1');
-    const längk = document.createElement('p');
-    Rubrik.textContent = 'hejsan';
-    längk.textContent = 'he';
-    Rubrik.appendChild(längk);
-    document.getElementById('anka').appendChild(Rubrik);
-    const pic1 = document.getElementById('picture1');
-    pic1.src = 'https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png';
+    
+    // const Rubrik = document.createElement('h1');
+    // const längk = document.createElement('p');
+    // Rubrik.textContent = 'hejsan';
+    // längk.textContent = 'he';
+    // Rubrik.appendChild(längk);
+    // document.getElementById('anka').appendChild(Rubrik);
+
+    // const pic1 = document.createElement('img');
+    // pic1.src = 'https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png';
+    // document.getElementById('test').appendChild(pic1);
     
 
     // Looping through nominated people by category
     CategoryInfo.forEach((Category, counterCategory) => {
         
-        // console.log(Category.record.fields.Category);
+        console.log(Category.record.fields.Category);
+
+        //Creates
+        const content = document.getElementById('content');
+        var h1 = document.createElement('h1');
+        h1.textContent = Category.record.fields.Category;
+        h1.className = 'text-center pt-5';
+        content.appendChild(h1);
+
+        var container = document.createElement('div');
+        container.className = 'container-sm mw-75';
+        container.id = Category.record.fields.Category + '.Container';
+        content.appendChild(container);
+
+        var row = document.createElement('div');
+        row.className = 'row justify-content-center';
+        row.id = Category.record.fields.Category + '.Row';
+        content.appendChild(row);
+        
 
         NominatedInfo.forEach(Nominated => {
             if (Nominated.record.fields.Category == Category.record.fields.Category){
                 // console.log(Nominated.record.fields.Picture[0].url);
 
                 console.log('Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated);
+
+                
+                var rowNominated = document.createElement('div');
+                rowNominated.className = 'row';
+                rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
+                row.appendChild(rowNominated);
+
+                var img = document.createElement('img');
+                img.className = 'col-3 border border-primary display-6 pb-0 img-fluid"';
+                img.src =  Nominated.record.fields.Picture[0].url;
+                rowNominated.appendChild(img);
+
+                var info = document.createElement('div');
+                info.className = 'col-9 border border-primary';
+                info.id = Nominated.record.fields.Nominated + '.Info';
+                rowNominated.appendChild(info);
+
+                var name = document.createElement('h3');
+                name.className = 'text-center p';
+                name.textContent = Nominated.record.fields.Nominated;
+                info.appendChild(name);
+                
+                var bio = document.createElement('p');
+                bio.textContent = Nominated.record.fields.Bio;
+                info.appendChild(bio);
+                
+
+
                 //Nominated, bio, name and Url
 
 
