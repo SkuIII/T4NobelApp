@@ -1,6 +1,8 @@
 'use strict';
 
-console.log('Loggin.js is alive!')
+console.log('LogIn.js is alive!')
+
+let email;
 
 window.onload = function() {
     google.accounts.id.initialize({
@@ -24,6 +26,8 @@ function handleCredentialResponse(response) {
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
+
+    email = responsePayload.email;
 }
 
 function decodeJwtResponse(token) {
