@@ -39,39 +39,39 @@ router.post('/Vote', function(req, res, next) {
 
     const response = JSON.stringify(req.body);
     const email = JSON.parse(response).email;
-    const nominated = JSON.parse(response).Nominated;
-    const category = JSON.parse(response).Category;
+    // const nominated = JSON.parse(response).Nominated;
+    // const category = JSON.parse(response).Category;
 
-    base('students').select().eachPage(function page(records, fetchNextPage) {
-            records.forEach(record => {
-                if (record.fields.Email == email) {
+    // base('students').select().eachPage(function page(records, fetchNextPage) {
+    //         records.forEach(record => {
+    //             if (record.fields.Email == email) {
 
-                    console.log('------------------' + email + " " + record.id + " " + category + '------------------')
+    //                 console.log('------------------' + email + " " + record.id + " " + category + '------------------')
 
-                    base('Students').update([{
-                        "id": record.id,
-                        "fields": {
-                            "VoteStatus": "ToVote",
-                            [category]: nominated
-                        }
-                    }], function(err, records) {
-                        if (err) {
-                            console.error(err);
-                            return;
-                        }
-                    });
-                }
-            });
-            fetchNextPage();
+    //                 base('Students').update([{
+    //                     "id": record.id,
+    //                     "fields": {
+    //                         "VoteStatus": "ToVote",
+    //                         [category]: nominated,
+    //                     }
+    //                 }], function(err, records) {
+    //                     if (err) {
+    //                         console.error(err);
+    //                         return;
+    //                     }
+    //                 });
+    //             }
+    //         });
+    //         fetchNextPage();
 
-        },
-        function done(err) {
+    //     },
+    //     function done(err) {
 
-            if (err) {
-                console.error(err);
-                return;
-            }
-        });
+    //         if (err) {
+    //             console.error(err);
+    //             return;
+    //         }
+    //     });
 
     res.render('Vote', { title: 'T4NobelApp' });
 });
