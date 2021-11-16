@@ -138,14 +138,14 @@ const btnConfirmClick = (event) => {
 
     const email = 'kasiemsaeed@gmail.com';
 
-    console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '"}');
+    console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
 
-    // fetch(url, {
-    //     method: 'POST', // *GET, POST, PUT, DELETE, etc
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //             // 'Content-Type': 'application/x-www-form-urlencoded',
-    //     },
-    //     body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '"}' // body data type must match "Content-Type" header 
-    // });
+    fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc
+        headers: {
+            'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
+    });
 }

@@ -38,8 +38,9 @@ router.post('/Vote', function(req, res, next) {
     console.log(req.body);
 
     const response = JSON.stringify(req.body);
-    const email = JSON.parse(response).email;
-    // const nominated = JSON.parse(response).Nominated;
+    const object = JSON.parse(response);
+    const nominated = object.vote[0].Nom;
+    console.log(JSON.stringify(nominated));
     // const category = JSON.parse(response).Category;
 
     // base('students').select().eachPage(function page(records, fetchNextPage) {
