@@ -1,5 +1,7 @@
 'use strict';
 
+let vote = [];
+
 console.log('VoteTest.js is alive!')
 
 // 3 fetch requests, 3 different endpoints/paths
@@ -40,43 +42,65 @@ const Load = (res) => {
 
         h2Category.textContent = Category.record.fields.Category;
 
+        vote.push({ Cat: 'Category' + (counterCategory + 1), Nom: null });
+
         document.getElementById('mainVote').appendChild(h2Category)
         document.getElementById('mainVote').appendChild(divCategory)
 
         NominatedInfo.forEach(Nominated => {
             if (Nominated.record.fields.Category == Category.record.fields.Category) {
 
-                const imgNominated = document.createElement('img')
+                // const imgNominated = document.createElement('img')
 
-                imgNominated.src = Nominated.record.fields.Picture[0].url;
+                // imgNominated.src = Nominated.record.fields.Picture[0].url;
 
-                document.getElementById(counterCategory).appendChild(imgNominated)
+                // document.getElementById(counterCategory).appendChild(imgNominated)
 
-                const btnVote = document.createElement('button');
-                btnVote.textContent = "Rösta";
-                btnVote.style.width = "80px"
-                btnVote.style.height = "80px"
-                btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
-                btnVote.className = 'btnVoteClass';
+                // const btnVote = document.createElement('button');
+                // btnVote.textContent = "Rösta";
+                // btnVote.style.width = "80px"
+                // btnVote.style.height = "80px"
+                // btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
+                // btnVote.className = 'btnVoteClass';
 
-                btnVote.addEventListener('click', btnVoteClick)
+                // // btnVote.addEventListener('click', btnVoteClick)
 
-                document.getElementById(counterCategory).appendChild(btnVote);
+                // document.getElementById(counterCategory).appendChild(btnVote);
+
+                const divNominated = document.createElement('div');
+                divNominated.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
+
+                divNominated.style.backgroundColor = 'black';
+                divNominated.style.height = '400px';
+                divNominated.style.width = '400px';
+                divNominated.style.border = 'thick solid #0000FF';
+                divNominated.addEventListener('click', divVoteClick)
+                document.getElementById(counterCategory).appendChild(divNominated)
             }
         });
     });
 
-    let counter = 0;
-    StudentInfo.forEach(Student => {
-        if (Student.record.fields.VoteStatus == 'ToVote') {
-            console.log(counter)
-            counter++;
-        }
-    })
+    // let counter = 0;
+    // StudentInfo.forEach(Student => {
+    //     if (Student.record.fields.VoteStatus == 'ToVote') {
+    //         console.log(counter)
+    //         counter++;
+    //     }
+    // })
+
+    const btnConfirm = document.createElement('button');
+
+    btnConfirm.textContent = 'Bekräfta';
+
+    btnConfirm.style.width = "80px"
+    btnConfirm.style.height = "80px"
+
+    btnConfirm.addEventListener('click', btnConfirmClick)
+    document.getElementById('mainVote').prepend(btnConfirm);
 };
 
-const btnVoteClick = (event) => {
 
+const divVoteClick = (event) => {
     const id = event.target.id;
     const className = event.target.className;
 
@@ -85,14 +109,43 @@ const btnVoteClick = (event) => {
     const Category = temp[0];
     const Nominated = temp[1];
 
+    vote.forEach(element => {
+        if (element.Cat == Category) {
+            console.log(element)
+            element.Nom = Nominated;
+            console.log(element)
+        }
+    })
+
+    console.log(JSON.stringify(vote));
+
+    console.log(id)
+}
+
+const btnConfirmClick = (event) => {
+
+    const id = event.target.id;
+    const className = event.target.className;
+
+    document.getElementsByClassName('btnVoteClass').disabled = true;
+
+    let temp = id.split(',');
+
+    const Category = temp[0];
+    const Nominated = temp[1];
+
     const url = document.URL;
 
-    fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc
-        headers: {
-            'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: '{"email":"' + email + '", "Nominated":"' + Nominated + '", "Category":"' + Category + '"}' // body data type must match "Content-Type" header 
-    });
+    const email = 'kasiemsaeed@gmail.com';
+
+    console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '"}');
+
+    // fetch(url, {
+    //     method: 'POST', // *GET, POST, PUT, DELETE, etc
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //             // 'Content-Type': 'application/x-www-form-urlencoded',
+    //     },
+    //     body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '"}' // body data type must match "Content-Type" header 
+    // });
 }
