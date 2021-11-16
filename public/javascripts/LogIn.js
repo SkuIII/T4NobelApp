@@ -2,6 +2,8 @@
 
 console.log('Loggin.js is alive!')
 
+let email;
+
 window.onload = function() {
     google.accounts.id.initialize({
         client_id: "623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com",
@@ -24,6 +26,8 @@ function handleCredentialResponse(response) {
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
+
+    email = responsePayload.email;
 }
 
 function decodeJwtResponse(token) {
