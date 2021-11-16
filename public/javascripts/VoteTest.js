@@ -136,8 +136,6 @@ const btnConfirmClick = (event) => {
 
     const url = document.URL;
 
-    const email = 'kasiemsaeed@gmail.com';
-
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
 
     fetch(url, {
