@@ -87,8 +87,6 @@ const btnVoteClick = (event) => {
 
     const url = document.URL;
 
-    const email = "kasiemsaeed@gmail.com";
-
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
         headers: {

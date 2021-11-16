@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('Loggin.js is alive!')
+console.log('LogIn.js is alive!')
 
 let email;
 
