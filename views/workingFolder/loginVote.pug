@@ -1,13 +1,15 @@
 extends layout
 
 block Header
-    
-    div(class="header container-fluid bg-primary")
-        div(class="row justify-content-end")
-            div(class="col-auto")
-                h1(class = "p-2") Login
+    div(id = "header")
+        div(class="header container-fluid bg-primary")
+            div(class="row justify-content-end")
+                div(class="col-auto")
+                    h1(class = "p-2") Login
+
 
 block Login
+    div(id = "login")
     div(class = "container-sm")
         h1(class="text-center mx-2") Katogorier
         div(id="anka")
@@ -16,11 +18,13 @@ block Login
             div(class = "row justify-content-center")
                 
                 div(class = "col-3 border border-primary display-6") 
-                    img(class="img-fluid" src="/images/7-eleven.png" )
+                    img(id = "picture1" class = "img-fluid")
                 div(class = "col-9 border border-primary") Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+
                 div(class = "col-3 border border-primary display-6") 
                     img(class="img-fluid" src="/images/7-eleven.png" )
                 div(class = "col-9 border border-primary") Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+
                 div(class = "col-3 border border-primary display-6") 
                     img(class="img-fluid" src="/images/7-eleven.png" )
                 div(class = "col-9 border border-primary") Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
