@@ -1,10 +1,10 @@
 // TODO
 //  Lawe kan inte logga in
-//  Bara edu mail på klienten, Om inte edu redirect till en speciell sida
-//  (Om inte en del av skolan ska ändå kunna rösta)
-//  Tänka på säkerheten
-//  Räkna röster per årskurs
+//  *** Bara edu mail på klienten, Om inte edu redirect till en speciell sida
+//  *** (Om inte en del av skolan ska ändå kunna rösta)
+//  *** Räkna röster per årskurs
 //  Om man har redan röstat ska man inte kunna rösta igen, titta på null i vote arrayen
+//  Tänka på säkerheten
 
 'use strict';
 
@@ -44,7 +44,7 @@ const Load = (res) => {
 
         h2Category.textContent = Category.record.fields.Category;
 
-        vote.push({ Cat: 'Category' + (counterCategory + 1), Nom: null });
+        vote.push({ CategoryVoted: 'Category' + (counterCategory + 1), NominatedVoted: null });
 
         document.getElementById('mainVote').appendChild(h2Category)
         document.getElementById('mainVote').appendChild(divCategory)
@@ -74,14 +74,11 @@ const Load = (res) => {
 
     btnConfirm.addEventListener('click', btnConfirmClick)
     document.getElementById('mainVote').prepend(btnConfirm);
-
-
 };
 
 
 const divVoteClick = (event) => {
     const id = event.target.id;
-    const className = event.target.className;
 
     let temp = id.split(',');
 
@@ -89,30 +86,13 @@ const divVoteClick = (event) => {
     const Nominated = temp[1];
 
     vote.forEach(element => {
-        if (element.Cat == Category) {
-            console.log(element)
-            element.Nom = Nominated;
-            console.log(element)
+        if (element.CategoryVoted == Category) {
+            element.NominatedVoted = Nominated;
         }
     })
-
-    console.log(JSON.stringify(vote));
-
-    console.log(id)
 }
 
-const btnConfirmClick = (event) => {
-
-    const id = event.target.id;
-    const className = event.target.className;
-
-    document.getElementsByClassName('btnVoteClass').disabled = true;
-
-    let temp = id.split(',');
-
-    const Category = temp[0];
-    const Nominated = temp[1];
-
+const btnConfirmClick = () => {
     const url = document.URL;
 
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
@@ -121,7 +101,6 @@ const btnConfirmClick = (event) => {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
         headers: {
             'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
     });
