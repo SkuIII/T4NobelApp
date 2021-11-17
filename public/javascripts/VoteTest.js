@@ -1,3 +1,11 @@
+// TODO
+//  Lawe kan inte logga in
+//  *** Bara edu mail på klienten, Om inte edu redirect till en speciell sida
+//  *** (Om inte en del av skolan ska ändå kunna rösta)
+//  *** Räkna röster per årskurs
+//  Om man har redan röstat ska man inte kunna rösta igen, titta på null i vote arrayen
+//  Tänka på säkerheten
+
 'use strict';
 
 let vote = [];
@@ -14,12 +22,8 @@ const fetchCategoryInfo = fetch(
     '/data/Categories'
 ).then((res) => res.json());
 
-const fetchStudentInfo = fetch(
-    '/data/Students'
-).then((res) => res.json());
-
 // Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo]);
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
 
 allData.then((res) => Load(res));
 
@@ -27,11 +31,9 @@ const Load = (res) => {
     // All data recieved from each base
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
-    const StudentInfo = res[2];
 
     console.log(NominatedInfo);
     console.log(CategoryInfo);
-    console.log(StudentInfo);
 
     // Looping through nominated people by category
     CategoryInfo.forEach((Category, counterCategory) => {
@@ -42,30 +44,13 @@ const Load = (res) => {
 
         h2Category.textContent = Category.record.fields.Category;
 
-        vote.push({ Cat: 'Category' + (counterCategory + 1), Nom: null });
+        vote.push({ CategoryVoted: 'Category' + (counterCategory + 1), NominatedVoted: null });
 
         document.getElementById('mainVote').appendChild(h2Category)
         document.getElementById('mainVote').appendChild(divCategory)
 
         NominatedInfo.forEach(Nominated => {
             if (Nominated.record.fields.Category == Category.record.fields.Category) {
-
-                // const imgNominated = document.createElement('img')
-
-                // imgNominated.src = Nominated.record.fields.Picture[0].url;
-
-                // document.getElementById(counterCategory).appendChild(imgNominated)
-
-                // const btnVote = document.createElement('button');
-                // btnVote.textContent = "Rösta";
-                // btnVote.style.width = "80px"
-                // btnVote.style.height = "80px"
-                // btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
-                // btnVote.className = 'btnVoteClass';
-
-                // // btnVote.addEventListener('click', btnVoteClick)
-
-                // document.getElementById(counterCategory).appendChild(btnVote);
 
                 const divNominated = document.createElement('div');
                 divNominated.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
@@ -79,14 +64,6 @@ const Load = (res) => {
             }
         });
     });
-
-    // let counter = 0;
-    // StudentInfo.forEach(Student => {
-    //     if (Student.record.fields.VoteStatus == 'ToVote') {
-    //         console.log(counter)
-    //         counter++;
-    //     }
-    // })
 
     const btnConfirm = document.createElement('button');
 
@@ -102,7 +79,6 @@ const Load = (res) => {
 
 const divVoteClick = (event) => {
     const id = event.target.id;
-    const className = event.target.className;
 
     let temp = id.split(',');
 
@@ -110,30 +86,13 @@ const divVoteClick = (event) => {
     const Nominated = temp[1];
 
     vote.forEach(element => {
-        if (element.Cat == Category) {
-            console.log(element)
-            element.Nom = Nominated;
-            console.log(element)
+        if (element.CategoryVoted == Category) {
+            element.NominatedVoted = Nominated;
         }
     })
-
-    console.log(JSON.stringify(vote));
-
-    console.log(id)
 }
 
-const btnConfirmClick = (event) => {
-
-    const id = event.target.id;
-    const className = event.target.className;
-
-    document.getElementsByClassName('btnVoteClass').disabled = true;
-
-    let temp = id.split(',');
-
-    const Category = temp[0];
-    const Nominated = temp[1];
-
+const btnConfirmClick = () => {
     const url = document.URL;
 
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
@@ -142,7 +101,6 @@ const btnConfirmClick = (event) => {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
         headers: {
             'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
     });

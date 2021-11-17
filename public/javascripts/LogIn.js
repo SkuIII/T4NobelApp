@@ -27,7 +27,11 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
 
-    email = responsePayload.email;
+    if (responsePayload.email.includes('edu.huddinge.se')) {
+        email = responsePayload.email;
+    } else {
+        // Frontend måste skapa en popup i detta fall för att informera använadren om felaktig email
+    }
 }
 
 function decodeJwtResponse(token) {

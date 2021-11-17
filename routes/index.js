@@ -47,22 +47,20 @@ router.post('/Vote', function(req, res, next) {
     console.log(req.body);
 
     const response = JSON.stringify(req.body);
-    const object = JSON.parse(response);
-    const nominated = object.vote[0].Nom;
-    console.log(JSON.stringify(nominated));
+    const Votes = JSON.parse(response);
 
     base('students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
-                object.vote.forEach(element => {
-                    if (record.fields.Email == object.email) {
+                Votes.vote.forEach(element => {
+                    if (record.fields.Email == Votes.email) {
 
-                        console.log('------------------' + object.email + " " + element.Cat + " " + element.Nom + '------------------')
+                        console.log('------------------' + Votes.email + " " + element.CategoryVoted + " " + element.NominatedVoted + '------------------')
 
                         base('Students').update([{
                             "id": record.id,
                             "fields": {
                                 "VoteStatus": "ToVote",
-                                [element.Cat]: element.Nom,
+                                [element.CategoryVoted]: element.NominatedVoted,
                             }
                         }], function(err, records) {
                             if (err) {
