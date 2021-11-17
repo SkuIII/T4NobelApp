@@ -12,12 +12,12 @@ const fetchCategoryInfo = fetch(
     '/data/Categories'
 ).then((res) => res.json());
 
-const fetchStudentInfo = fetch(
-    '/data/Students'
-).then((res) => res.json());
+// const fetchStudentInfo = fetch(
+//     '/data/Students'
+// ).then((res) => res.json());
 
 // Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo]);
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
 
 allData.then((res) => Load(res));
 
@@ -25,7 +25,7 @@ const Load = (res) => {
     // All data recieved from each base
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
-    const StudentInfo = res[2];
+    // const StudentInfo = res[2];
 
     console.log(NominatedInfo);
     // console.log(CategoryInfo);
@@ -50,20 +50,16 @@ const Load = (res) => {
         
         console.log(Category.record.fields.Category);
 
-        //Creates
+        //Creates headline
         const content = document.getElementById('content');
         var h1 = document.createElement('h1');
         h1.textContent = Category.record.fields.Category;
         h1.className = 'text-center pt-5';
         content.appendChild(h1);
-
-        var container = document.createElement('div');
-        container.className = 'container-sm mw-75';
-        container.id = Category.record.fields.Category + '.Container';
-        content.appendChild(container);
-
+        
+        //rows
         var row = document.createElement('div');
-        row.className = 'row justify-content-center';
+        row.className = 'row justify-content-center '
         row.id = Category.record.fields.Category + '.Row';
         content.appendChild(row);
         
@@ -76,17 +72,17 @@ const Load = (res) => {
 
                 
                 var rowNominated = document.createElement('div');
-                rowNominated.className = 'row';
+                rowNominated.className = 'row  shadow-lg p-0 border-phat pb-3';
                 rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
                 row.appendChild(rowNominated);
 
                 var img = document.createElement('img');
-                img.className = 'col-3 border border-primary display-6 pb-0 img-fluid"';
+                img.className = 'col-3 p-0 img-fluid rounded-3';
                 img.src =  Nominated.record.fields.Picture[0].url;
                 rowNominated.appendChild(img);
 
                 var info = document.createElement('div');
-                info.className = 'col-9 border border-primary';
+                info.className = 'col-9';
                 info.id = Nominated.record.fields.Nominated + '.Info';
                 rowNominated.appendChild(info);
 
@@ -96,6 +92,7 @@ const Load = (res) => {
                 info.appendChild(name);
                 
                 var bio = document.createElement('p');
+                bio.className = "bioText";
                 bio.textContent = Nominated.record.fields.Bio;
                 info.appendChild(bio);
                 
