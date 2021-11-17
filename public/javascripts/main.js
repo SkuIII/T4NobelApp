@@ -72,7 +72,7 @@ const Load = (res) => {
 
                 
                 var rowNominated = document.createElement('div');
-                rowNominated.className = 'row shadow-lg p-0 border-phat justify-content-center mb-4 mx-0';
+                rowNominated.className = 'row p-0 border-phat justify-content-center mb-4 mx-0';
                 rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
                 row.appendChild(rowNominated);
 
@@ -82,7 +82,7 @@ const Load = (res) => {
                 rowNominated.appendChild(img);
 
                 var info = document.createElement('div');
-                info.className = 'col-9 text-center';
+                info.className = 'col-9 text-center m-0';
                 info.id = Nominated.record.fields.Nominated + '.Info';
                 rowNominated.appendChild(info);
 
@@ -110,7 +110,12 @@ const Load = (res) => {
 
             
             
-        }});    
+        }});
+        
+        var Button = document.createElement('div');
+        Button.className = 'col'
+        Button.id = Category.record.fields.Category + '.Row';
+        content.appendChild(row);
    
     });
 };
