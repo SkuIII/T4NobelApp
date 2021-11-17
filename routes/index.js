@@ -38,37 +38,44 @@ router.post('/LoggedIn', function(req, res, next) {
     res.render('Login');
 });
 
-// router.post('/VoteLogin', function(req, res, next) {
-//     console.log(req.body);
+router.post('/VoteLogin', function(req, res, next) {
+    let UserCategories = [];
 
-//     let UserCategories = [];
+    let Category1 = '';
+    let Category2 = '';
+    let Category3 = '';
 
-//     const response = JSON.stringify(req.body);
-//     const User = JSON.parse(response);
-//     console.log(User);
+    const response = JSON.stringify(req.body);
+    const User = JSON.parse(response);
+    console.log(User);
 
-//     base('students').select().eachPage(function page(records, fetchNextPage) {
-//             records.forEach(record => {
-//                 if (User.email == record.fields.Email) {
-//                     const Category1 = record.fields.Category1;
-//                     const Category2 = record.fields.Category2;
-//                     const Category3 = record.fields.Category3;
+    base('students').select().eachPage(function page(records, fetchNextPage) {
+            records.forEach(record => {
+                if (User.email == record.fields.Email) {
+                    console.log(record.fields.Category1, record.fields.Category2, record.fields.Category3);
 
-//                     UserCategories = [Category1, Category2, Category3];
-//                 }
-//             });
-//             fetchNextPage();
+                    Category1 = record.fields.Category1;
+                    Category2 = record.fields.Category2;
+                    Category3 = record.fields.Category3;
 
-//         },
-//         function done(err) {
-//             res.send(UserCategories);
-//             console.log(UserCategories);
-//             if (err) {
-//                 console.error(err);
-//                 return;
-//             }
-//         });
-// });
+                    console.log(Category1 + Category2 + Category3);
+
+                    UserCategories = [Category1, Category2, Category3];
+
+                    res.send(UserCategories);
+                }
+            });
+            fetchNextPage();
+
+        },
+        function done(err) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+    console.log(Category1 + Category2 + Category3);
+});
 
 // router.get('/VoteLogin', function(req, res, next) {
 //     res.send(UserCategories);

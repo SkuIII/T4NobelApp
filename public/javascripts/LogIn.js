@@ -30,20 +30,26 @@ function handleCredentialResponse(response) {
     if (responsePayload.email.includes('edu.huddinge.se')) {
         email = responsePayload.email;
     } else {
+        // function myFunction() {
+        //     var popup = document.getElementById("myPopup");
+        //     popup.classList.toggle("show");
+        // }
+        // myFunction();
+
         // Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
     }
 
-    // const url = document.URL + 'Login';
+    const url = document.URL + 'Login';
 
-    // console.log('{"email":"' + email + '"}');
+    console.log('{"email":"' + email + '"}');
 
-    // fetch(url, {
-    //     method: 'POST', // *GET, POST, PUT, DELETE, etc
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
-    // }).then((test) => console.log(test))
+    fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
+    }).then(response => response.json()).then(data => console.log(data))
 }
 
 function decodeJwtResponse(token) {
