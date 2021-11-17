@@ -38,6 +38,42 @@ router.post('/LoggedIn', function(req, res, next) {
     res.render('Login');
 });
 
+// router.post('/VoteLogin', function(req, res, next) {
+//     console.log(req.body);
+
+//     let UserCategories = [];
+
+//     const response = JSON.stringify(req.body);
+//     const User = JSON.parse(response);
+//     console.log(User);
+
+//     base('students').select().eachPage(function page(records, fetchNextPage) {
+//             records.forEach(record => {
+//                 if (User.email == record.fields.Email) {
+//                     const Category1 = record.fields.Category1;
+//                     const Category2 = record.fields.Category2;
+//                     const Category3 = record.fields.Category3;
+
+//                     UserCategories = [Category1, Category2, Category3];
+//                 }
+//             });
+//             fetchNextPage();
+
+//         },
+//         function done(err) {
+//             res.send(UserCategories);
+//             console.log(UserCategories);
+//             if (err) {
+//                 console.error(err);
+//                 return;
+//             }
+//         });
+// });
+
+// router.get('/VoteLogin', function(req, res, next) {
+//     res.send(UserCategories);
+// });
+
 router.get('/Vote', function(req, res, next) {
     res.render('Vote', { title: 'T4NobelApp' });
 });
