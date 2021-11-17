@@ -27,11 +27,11 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
 
-    // if (responsePayload.email.includes('edu.huddinge.se')) {
-    //     email = responsePayload.email;
-    // } else {
-    //     // Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
-    // }
+    if (responsePayload.email.includes('edu.huddinge.se')) {
+        email = responsePayload.email;
+    } else {
+        // Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
+    }
 
     // const url = document.URL + 'Login';
 
