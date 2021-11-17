@@ -1,3 +1,9 @@
+// TODO
+//  Lawe kan inte logga in
+//  Bara edu mail på klienten, Om inte edu redirect till en speciell sida
+//  (Om inte en del av skolan ska ändå kunna rösta)
+//  Tänka på säkerheten
+
 'use strict';
 
 let vote = [];
