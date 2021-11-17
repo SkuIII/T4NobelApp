@@ -3,6 +3,8 @@
 //  Bara edu mail på klienten, Om inte edu redirect till en speciell sida
 //  (Om inte en del av skolan ska ändå kunna rösta)
 //  Tänka på säkerheten
+//  Räkna röster per årskurs
+//  Om man har redan röstat ska man inte kunna rösta igen, titta på null i vote arrayen
 
 'use strict';
 
@@ -20,12 +22,8 @@ const fetchCategoryInfo = fetch(
     '/data/Categories'
 ).then((res) => res.json());
 
-const fetchStudentInfo = fetch(
-    '/data/Students'
-).then((res) => res.json());
-
 // Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchStudentInfo]);
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
 
 allData.then((res) => Load(res));
 
@@ -33,11 +31,9 @@ const Load = (res) => {
     // All data recieved from each base
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
-    const StudentInfo = res[2];
 
     console.log(NominatedInfo);
     console.log(CategoryInfo);
-    console.log(StudentInfo);
 
     // Looping through nominated people by category
     CategoryInfo.forEach((Category, counterCategory) => {
@@ -56,23 +52,6 @@ const Load = (res) => {
         NominatedInfo.forEach(Nominated => {
             if (Nominated.record.fields.Category == Category.record.fields.Category) {
 
-                // const imgNominated = document.createElement('img')
-
-                // imgNominated.src = Nominated.record.fields.Picture[0].url;
-
-                // document.getElementById(counterCategory).appendChild(imgNominated)
-
-                // const btnVote = document.createElement('button');
-                // btnVote.textContent = "Rösta";
-                // btnVote.style.width = "80px"
-                // btnVote.style.height = "80px"
-                // btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
-                // btnVote.className = 'btnVoteClass';
-
-                // // btnVote.addEventListener('click', btnVoteClick)
-
-                // document.getElementById(counterCategory).appendChild(btnVote);
-
                 const divNominated = document.createElement('div');
                 divNominated.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
 
@@ -86,14 +65,6 @@ const Load = (res) => {
         });
     });
 
-    // let counter = 0;
-    // StudentInfo.forEach(Student => {
-    //     if (Student.record.fields.VoteStatus == 'ToVote') {
-    //         console.log(counter)
-    //         counter++;
-    //     }
-    // })
-
     const btnConfirm = document.createElement('button');
 
     btnConfirm.textContent = 'Bekräfta';
@@ -103,6 +74,8 @@ const Load = (res) => {
 
     btnConfirm.addEventListener('click', btnConfirmClick)
     document.getElementById('mainVote').prepend(btnConfirm);
+
+
 };
 
 
