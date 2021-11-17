@@ -59,7 +59,7 @@ const Load = (res) => {
         
         //rows
         var row = document.createElement('div');
-        row.className = 'row justify-content-center '
+        row.className = 'row justify-content-center'
         row.id = Category.record.fields.Category + '.Row';
         content.appendChild(row);
         
@@ -72,31 +72,29 @@ const Load = (res) => {
 
                 
                 var rowNominated = document.createElement('div');
-                rowNominated.className = 'row  shadow-lg p-0 border-phat pb-3';
+                rowNominated.className = 'row p-0 border-phat justify-content-center mb-4 mx-0';
                 rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
                 row.appendChild(rowNominated);
 
                 var img = document.createElement('img');
-                img.className = 'col-3 p-0 img-fluid rounded-3';
+                img.className = 'col-auto p-0 rounded-3 img-size align-self-center';
                 img.src =  Nominated.record.fields.Picture[0].url;
                 rowNominated.appendChild(img);
 
                 var info = document.createElement('div');
-                info.className = 'col-9';
+                info.className = 'col-9 text-center m-0';
                 info.id = Nominated.record.fields.Nominated + '.Info';
                 rowNominated.appendChild(info);
 
                 var name = document.createElement('h3');
-                name.className = 'text-center p';
+                name.className = 'text-center';
                 name.textContent = Nominated.record.fields.Nominated;
                 info.appendChild(name);
                 
                 var bio = document.createElement('p');
-                bio.className = "bioText";
+                bio.className = "text-start";
                 bio.textContent = Nominated.record.fields.Bio;
                 info.appendChild(bio);
-                
-
 
                 //Nominated, bio, name and Url
 
@@ -112,7 +110,12 @@ const Load = (res) => {
 
             
             
-        }});    
+        }});
+        
+        var Button = document.createElement('div');
+        Button.className = 'col'
+        Button.id = Category.record.fields.Category + '.Row';
+        content.appendChild(row);
    
     });
 };
