@@ -22,6 +22,10 @@ router.get('/leaderboard', function(req, res, next) { //Added route for wirju
     res.render('workingFolder/leaderboardBig');
 });
 
+router.get('/test1', function(req, res, next) { //Added route for wirju
+    res.render('workingFolder/sliderTest');
+});
+
 router.get('/pelikan', function(req, res, next) {
     res.render('workingFolder/loginLeader');
 });

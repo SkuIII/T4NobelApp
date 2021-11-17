@@ -1,0 +1,119 @@
+doctype html
+// Design by foolishdeveloper.com
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  title 3d Image Slider with Carousel using HTML &amp; CSS
+  style(media='screen').
+    body {
+    margin: 0;
+    background: #EEE;
+    user-select: none;
+    font-family: sans-serif;
+    }
+    #slider {
+    position: relative;
+    width: 50%;
+    height: 32vw;
+    margin: 150px auto;
+    font-family: 'Helvetica Neue', sans-serif;
+    perspective: 1400px;
+    transform-style: preserve-3d;
+    }
+    input[type=radio] {
+    position: relative;
+    top: 108%;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    margin: 0 15px 0 0;
+    opacity: 0.4;
+    transform: translateX(-83px);
+    cursor: pointer;
+    }
+    input[type=radio]:nth-child(5) {
+    margin-right: 0px;
+    }
+    input[type=radio]:checked {
+    opacity: 1;
+    }
+    #slider label,
+    #slider label img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    color: white;
+    font-size: 70px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 400ms ease;
+    }
+    /* Slider Functionality */
+    /* Active Slide */
+    #s1:checked ~ #slide1,
+    #s2:checked ~ #slide2,
+    #s3:checked ~ #slide3,
+    #s4:checked ~ #slide4,
+    #s5:checked ~ #slide5 {
+    box-shadow: 0 13px 26px rgba(0,0,0, 0.3), 0 12px 6px rgba(0,0,0, 0.2);
+    transform: translate3d(0%, 0, 0px);
+    }
+    /* Next Slide */
+    #s1:checked ~ #slide2,
+    #s2:checked ~ #slide3,
+    #s3:checked ~ #slide4,
+    #s4:checked ~ #slide5,
+    #s5:checked ~ #slide1 {
+    box-shadow: 0 6px 10px rgba(0,0,0, 0.3), 0 2px 2px rgba(0,0,0, 0.2);
+    transform: translate3d(20%, 0, -100px);
+    }
+    /* Next to Next Slide */
+    #s1:checked ~ #slide3,
+    #s2:checked ~ #slide4,
+    #s3:checked ~ #slide5,
+    #s4:checked ~ #slide1,
+    #s5:checked ~ #slide2 {
+    box-shadow: 0 1px 4px rgba(0,0,0, 0.4);
+    transform: translate3d(40%, 0, -250px);
+    }
+    /* Previous to Previous Slide */
+    #s1:checked ~ #slide4,
+    #s2:checked ~ #slide5,
+    #s3:checked ~ #slide1,
+    #s4:checked ~ #slide2,
+    #s5:checked ~ #slide3 {
+    box-shadow: 0 1px 4px rgba(0,0,0, 0.4);
+    transform: translate3d(-40%, 0, -250px);
+    }
+    /* Previous Slide */
+    #s1:checked ~ #slide5,
+    #s2:checked ~ #slide1,
+    #s3:checked ~ #slide2,
+    #s4:checked ~ #slide3,
+    #s5:checked ~ #slide4 {
+    box-shadow: 0 6px 10px rgba(0,0,0, 0.3), 0 2px 2px rgba(0,0,0, 0.2);
+    transform: translate3d(-20%, 0, -100px);
+    }
+section#slider
+  input#s1(type='radio' name='slider' checked='')
+  input#s2(type='radio' name='slider')
+  input#s3(type='radio' name='slider')
+  input#s4(type='radio' name='slider')
+  input#s5(type='radio' name='slider')
+  label#slide1(for='s1')
+    img(src='https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png' alt='')
+  label#slide2(for='s2')
+    img(src='https://dl.airtable.com/.attachmentThumbnails/d007e4bacd7d5054c559cceae2b1f9e6/d13a9a3a' alt='')
+  label#slide3(for='s3')
+    img(src='https://dl.airtable.com/.attachmentThumbnails/3c69e96d6147e14f9a01c614eb329e86/e8e8149e' alt='')
+  label#slide4(for='s4')
+    img(src='https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png' alt='')
+  label#slide5(for='s5')
+    img(src='https://dl.airtable.com/.attachmentThumbnails/3c69e96d6147e14f9a01c614eb329e86/e8e8149e' alt='')
