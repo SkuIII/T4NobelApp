@@ -77,7 +77,7 @@ const Load = (res) => {
 };
 
 
-const divVoteClick = (event) => {
+const divVoteClick = (event, res) => {
     const id = event.target.id;
 
     let temp = id.split(',');

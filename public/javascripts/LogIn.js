@@ -27,11 +27,23 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
 
-    if (responsePayload.email.includes('edu.huddinge.se')) {
-        email = responsePayload.email;
-    } else {
-        // Frontend måste skapa en popup i detta fall för att informera använadren om felaktig email
-    }
+    // if (responsePayload.email.includes('edu.huddinge.se')) {
+    //     email = responsePayload.email;
+    // } else {
+    //     // Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
+    // }
+
+    // const url = document.URL + 'Login';
+
+    // console.log('{"email":"' + email + '"}');
+
+    // fetch(url, {
+    //     method: 'POST', // *GET, POST, PUT, DELETE, etc
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
+    // }).then((test) => console.log(test))
 }
 
 function decodeJwtResponse(token) {
