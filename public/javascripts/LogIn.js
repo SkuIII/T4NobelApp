@@ -3,6 +3,8 @@
 console.log('LogIn.js is alive!')
 
 let email;
+let UserVoteData;
+let data;
 
 window.onload = function() {
     google.accounts.id.initialize({
@@ -41,15 +43,13 @@ function handleCredentialResponse(response) {
 
     const url = document.URL + 'Login';
 
-    console.log('{"email":"' + email + '"}');
-
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
         headers: {
             'Content-Type': 'application/json'
         },
         body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
-    }).then(response => response.json()).then(data => console.log(data))
+    }).then(response => response.json()).then(data => UserVoteData = data)
 }
 
 function decodeJwtResponse(token) {

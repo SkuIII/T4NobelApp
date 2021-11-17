@@ -60,7 +60,7 @@ router.post('/VoteLogin', function(req, res, next) {
 
                     console.log(Category1 + Category2 + Category3);
 
-                    UserCategories = [Category1, Category2, Category3];
+                    UserCategories = [{ "Category1": Category1 }, { "Category2": Category2 }, { "Category3": Category3 }];
 
                     res.send(UserCategories);
                 }

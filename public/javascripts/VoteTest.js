@@ -77,7 +77,7 @@ const Load = (res) => {
 };
 
 
-const divVoteClick = (event, res) => {
+const divVoteClick = (event) => {
     const id = event.target.id;
 
     let temp = id.split(',');
@@ -85,11 +85,29 @@ const divVoteClick = (event, res) => {
     const Category = temp[0];
     const Nominated = temp[1];
 
-    vote.forEach(element => {
+    console.log(UserVoteData)
+
+    vote.forEach((element) => {
         if (element.CategoryVoted == Category) {
             element.NominatedVoted = Nominated;
+            console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
+        }
+        if (element.CategoryVoted == Category) {
+            console.log('Du har redan röstat i ' + element.CategoryVoted)
         }
     })
+
+    // vote.forEach((element, elementCounter) => {
+    //     console.log(elementCounter + '--------------------------------------------------')
+    //     if (element.CategoryVoted == Category && UserVoteData[1] == null) {
+    //         element.NominatedVoted = Nominated;
+    //         console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
+    //     }
+    //     if (element.CategoryVoted == Category && UserVoteData[elementCounter] != null) {
+    //         console.log('Du har redan röstat i ' + element.CategoryVoted)
+    //         console.log(UserVoteData[elementCounter])
+    //     }
+    // })
 }
 
 const btnConfirmClick = () => {
