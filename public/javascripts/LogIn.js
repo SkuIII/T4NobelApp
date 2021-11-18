@@ -41,7 +41,7 @@ function handleCredentialResponse(response) {
         // Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
     }
 
-    const url = document.URL + 'Login';
+    const url = 'https://shrouded-wave-16183.herokuapp.com/' + 'VoteLogin';
 
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc

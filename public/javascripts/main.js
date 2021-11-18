@@ -51,7 +51,7 @@ const Load = (res) => {
 
     const rowDefault = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover';
     const rowSelected = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover row-selected';
-    const rowHome = 'row p-0 border-phat justify-content-center mb-4 mx-0 '
+    const rowHome = 'row p-0 justify-content-center mb-4 mx-0 '
     //Javascript for votingPage
     const votePage = () => {
         //BS5 classes for th
@@ -86,6 +86,7 @@ const Load = (res) => {
                 var rowNominated = document.createElement('div');
                 rowNominated.className = rowDefault;
                 rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
+                rowNominated.addEventListener('click', divVoteClick);
                 row.appendChild(rowNominated);
 
                 var img = document.createElement('img');
@@ -110,10 +111,7 @@ const Load = (res) => {
             }
         });
 
-        var Button = document.createElement('div');
-        Button.className = 'col'
-        Button.id = Category.record.fields.Category + '.Row';
-        content.appendChild(row);
+        document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick)
 
         });
     }
@@ -178,7 +176,7 @@ const Load = (res) => {
     
             //rows
             var row = document.createElement('div');
-            row.className = 'row justify-content-center'
+            row.className = rowHome
             row.id = Category.record.fields.Category + '.Row';
             content.appendChild(row);
     
@@ -190,24 +188,24 @@ const Load = (res) => {
                     console.log('Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated);
     
                     
-                    var rowNominated = document.createElement('div');
-                    rowNominated.className = rowHome;
-                    rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
-                    row.appendChild(rowNominated);
+                    // var rowNominated = document.createElement('div');
+                    // rowNominated.className = rowHome;
+                    // rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
+                    // row.appendChild(rowNominated);
 
-                    var anka = document.createElement('div');
-                    anka.className = 'col-3'
-                    row.appendChild(anka);
+                    var newCol = document.createElement('div');
+                    newCol.className = 'col-sm-12 col-md-3 col-l-3 border-phatHome mx-3 p-0'
+                    row.appendChild(newCol);
     
                     var img = document.createElement('img');
-                    img.className = ' p-0 rounded-3 img-size align-self-center img-fluid';
+                    img.className = ' p-0 rounded-3 img-size img-fluid align-content-self';
                     img.src =  Nominated.record.fields.Picture[0].url;
-                    anka.appendChild(img);
+                    newCol.appendChild(img);
     
                     var info = document.createElement('div');
                     info.className = 'text-center m-0';
                     info.id = Nominated.record.fields.Nominated + '.Info';
-                    anka.appendChild(info);
+                    newCol.appendChild(info);
     
                     var name = document.createElement('h3');
                     name.className = 'text-center';

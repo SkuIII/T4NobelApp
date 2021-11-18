@@ -7,6 +7,12 @@
     /* padding-bottom: 20px; */
 }
 
+.border-phatHome{
+    border: 15px solid #ff8000;
+    border-radius: 20px;
+    color:black;
+}
+
 .img-size{
     width: 250px;
     height: 250px;

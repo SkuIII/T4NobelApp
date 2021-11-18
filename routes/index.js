@@ -24,6 +24,7 @@ router.get('/leaderboard', function(req, res, next) {
     res.render('workingFolder/leaderboardBig');
 });
 
+
 router.get('/test1', function(req, res, next) {
     res.render('workingFolder/sliderTest');
 });
