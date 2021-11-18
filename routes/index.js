@@ -7,7 +7,9 @@ const base = new Airtable({
 }).base('app4x1UwZKFrNZnBU');
 
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'T4NobelApp' });
+    res.render('index', {
+        title: 'T4NobelApp'
+    });
 });
 
 router.post('/', function(req, res, next) {
@@ -87,7 +89,9 @@ router.post('/VoteLogin', function(req, res, next) {
 // });
 
 router.get('/Vote', function(req, res, next) {
-    res.render('Vote', { title: 'T4NobelApp' });
+    res.render('Vote', {
+        title: 'T4NobelApp'
+    });
 });
 
 router.post('/Vote', function(req, res, next) {
@@ -131,7 +135,117 @@ router.post('/Vote', function(req, res, next) {
             }
         });
 
-    res.render('Vote', { title: 'T4NobelApp' });
+    res.render('Vote', {
+        title: 'T4NobelApp'
+    });
+});
+
+router.get('/admin', function(req, res, next) {
+    res.render('admin');
+});
+
+router.post('/admin', function(req, res, next) {
+    let ArrayCounter = [];
+
+    let YearOne;
+    let YearTwo;
+    let YearThree;
+
+    base('students2').select().eachPage(function page(records, fetchNextPage) {
+            records.forEach(record => {
+                if (record.fields.Name.includes('1')) {
+                    // console.log(record.fields)
+                    ArrayCounter.push(
+                        record.fields.Class
+                    )
+                } else
+                if (record.fields.Name.includes('2')) {
+                    // console.log(record.fields)
+                    ArrayCounter.push(
+                        record.fields.Class
+                    )
+
+                } else
+                if (record.fields.Name.includes('3')) {
+                    // console.log(record.fields)
+                    ArrayCounter.push(
+                        record.fields.Class
+                    )
+                }
+            });
+            fetchNextPage();
+        },
+        function done(err) {
+            ArrayCounter.sort();
+            console.log(ArrayCounter)
+
+            YearOne = ArrayCounter[2]
+            YearTwo = ArrayCounter[1]
+            YearThree = ArrayCounter[0]
+
+            updateYear();
+
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+    const updateYear = () => {
+        base('students2').select().eachPage(function page(records, fetchNextPage) {
+                records.forEach(record => {
+                    if (record.fields.Class.includes(YearThree)) {
+                        base('Students2').update([{
+                            "id": record.id,
+                            "fields": {
+                                "Year": '3',
+                            }
+                        }], function(err, records) {
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+                        });
+                    }
+                    if (record.fields.Class.includes(YearTwo)) {
+                        base('Students2').update([{
+                            "id": record.id,
+                            "fields": {
+                                "Year": '2',
+                            }
+                        }], function(err, records) {
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+                        });
+                    }
+                    if (record.fields.Class.includes(YearOne)) {
+                        base('Students2').update([{
+                            "id": record.id,
+                            "fields": {
+                                "Year": '1',
+                            }
+                        }], function(err, records) {
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+                        });
+                    }
+                });
+                fetchNextPage();
+
+            },
+            function done(err) {
+                console.log('Nu borde allt vara sorterat')
+                res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+            });
+    }
 });
 
 module.exports = router;
