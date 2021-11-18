@@ -45,24 +45,36 @@ const Load = (res) => {
     // document.getElementById('test').appendChild(pic1);
     
 
-    // Looping through nominated people by category
-    CategoryInfo.forEach((Category, counterCategory) => {
+   
+    
+
+
+    const rowDefault = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover';
+    const rowSelected = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover row-selected';
+    const rowHome = 'row p-0 border-phat justify-content-center mb-4 mx-0 '
+    //Javascript for votingPage
+    const votePage = () => {
+        //BS5 classes for th
         
+        // Looping through nominated people by category
+        CategoryInfo.forEach((Category, counterCategory) => {
+
         console.log(Category.record.fields.Category);
 
         //Creates headline
         const content = document.getElementById('content');
+
         var h1 = document.createElement('h1');
         h1.textContent = Category.record.fields.Category;
         h1.className = 'text-center pt-5';
         content.appendChild(h1);
-        
+
         //rows
         var row = document.createElement('div');
         row.className = 'row justify-content-center'
         row.id = Category.record.fields.Category + '.Row';
         content.appendChild(row);
-        
+
 
         NominatedInfo.forEach(Nominated => {
             if (Nominated.record.fields.Category == Category.record.fields.Category){
@@ -72,7 +84,7 @@ const Load = (res) => {
 
                 
                 var rowNominated = document.createElement('div');
-                rowNominated.className = 'row p-0 border-phat justify-content-center mb-4 mx-0';
+                rowNominated.className = rowDefault;
                 rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
                 row.appendChild(rowNominated);
 
@@ -92,30 +104,130 @@ const Load = (res) => {
                 info.appendChild(name);
                 
                 var bio = document.createElement('p');
-                bio.className = "text-start";
+                bio.className = 'text-start';
                 bio.textContent = Nominated.record.fields.Bio;
                 info.appendChild(bio);
+            }
+        });
 
-                //Nominated, bio, name and Url
-
-
-                // const b = document.createElement('h1');
-                // b.textContent = 'HEJ JAG ÄR FETT SEG';
-                // document.getElementById('anka').appendChild(b);
-            
-                // console.log("Hej---------------" + NominatedInfo[0].record.fields.Picture[0].url);
-                // console.log("Hej---------------" + NominatedInfo[3].record.fields.Picture[0].url);
-
-                // Image url NominatedInfo[0].record.fields.Picture[0].url
-
-            
-            
-        }});
-        
         var Button = document.createElement('div');
         Button.className = 'col'
         Button.id = Category.record.fields.Category + '.Row';
         content.appendChild(row);
-   
-    });
-};
+
+        });
+    }
+    
+    const homePage = () => {
+
+        //Rounding function
+        function round(value, decimals) {
+            return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+        }
+        
+        var maxVotesYears = [256, 256, 256];
+        var voteYears = [30, 100, 80];
+        var progressBarColor = ['', 'bg-danger', 'bg-warning']
+        
+        //Selected nominee function
+        for (let i = 0; i < 3; i++) {
+            var fullPercent = (voteYears[i]/maxVotesYears[i]) * 100;
+            var percentage = round(fullPercent, 1);
+
+            var rowProgress = document.createElement('div');
+            rowProgress.className = 'row mt-5';
+            document.getElementById('progressBarContainer').appendChild(rowProgress);
+
+            var classYear = document.createElement('label');
+            classYear.className = 'fw-bold fs-4 p-2 pb-0';
+            classYear.textContent = 'åk1';
+            rowProgress.appendChild(classYear);
+
+            var colProgress = document.createElement('div');
+            colProgress.className = 'col-12 p-2 pt-0';
+            rowProgress.appendChild(colProgress);
+
+            var progress = document.createElement('div');
+            progress.className = 'progress';
+            progress.style.height = '50px';
+            progress.style.width = '100%';
+            colProgress.appendChild(progress);
+
+            var progressBar = document.createElement('div');
+            progressBar.className = 'progress-bar progress-bar-striped progress-bar-animated';
+            progressBar.style.width = `${percentage}%`;
+            progress.appendChild(progressBar);
+            
+
+
+            
+        }
+
+        //HÄR JOHAN
+        CategoryInfo.forEach((Category, counterCategory) => {
+
+            console.log(Category.record.fields.Category);
+    
+            //Creates headline
+            const content = document.getElementById('content');
+    
+            var h1 = document.createElement('h1');
+            h1.textContent = Category.record.fields.Category;
+            h1.className = 'text-center pt-5';
+            content.appendChild(h1);
+    
+            //rows
+            var row = document.createElement('div');
+            row.className = 'row justify-content-center'
+            row.id = Category.record.fields.Category + '.Row';
+            content.appendChild(row);
+    
+    
+            NominatedInfo.forEach(Nominated => {
+                if (Nominated.record.fields.Category == Category.record.fields.Category){
+                    // console.log(Nominated.record.fields.Picture[0].url);
+    
+                    console.log('Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated);
+    
+                    
+                    var rowNominated = document.createElement('div');
+                    rowNominated.className = rowHome;
+                    rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
+                    row.appendChild(rowNominated);
+
+                    var anka = document.createElement('div');
+                    anka.className = 'col-3'
+                    row.appendChild(anka);
+    
+                    var img = document.createElement('img');
+                    img.className = ' p-0 rounded-3 img-size align-self-center img-fluid';
+                    img.src =  Nominated.record.fields.Picture[0].url;
+                    anka.appendChild(img);
+    
+                    var info = document.createElement('div');
+                    info.className = 'text-center m-0';
+                    info.id = Nominated.record.fields.Nominated + '.Info';
+                    anka.appendChild(info);
+    
+                    var name = document.createElement('h3');
+                    name.className = 'text-center';
+                    name.textContent = Nominated.record.fields.Nominated;
+                    info.appendChild(name);
+                    
+                    var bio = document.createElement('p');
+                    bio.className = 'text-start';
+                    bio.textContent = Nominated.record.fields.Bio;
+                    info.appendChild(bio);
+                }
+            });
+        });
+        //HÄR JOHAN
+    };
+    if(document.getElementById('headline').textContent == 'Rösta'){
+        votePage();
+    }else if(document.getElementById('headline').textContent == 'ÖSTRA ALT. NOBEL PRIS'){
+        homePage();
+    };
+    
+
+}
