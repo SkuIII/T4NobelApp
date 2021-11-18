@@ -1,7 +1,16 @@
 .border-phat{
     border: 15px solid #ff8000;
     border-radius: 20px;
+    color:white;
+    /* margin-left: 0px;
+    margin-right: 0px; */
     /* padding-bottom: 20px; */
+}
+
+.border-phatHome{
+    border: 15px solid #ff8000;
+    border-radius: 20px;
+    color:black;
 }
 
 .img-size{
@@ -11,3 +20,15 @@
     margin-right:auto; */
 }
 
+.row-hover{
+    background-color: rgb(130, 130, 130);
+}
+
+.row-hover:hover{
+    cursor: pointer;
+    background-color: rgb(80, 80, 80);
+}
+
+.row-selected{
+    background-color: rgb(80, 80, 80);
+}
