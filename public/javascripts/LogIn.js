@@ -43,7 +43,7 @@ function handleCredentialResponse(response) {
         //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
     }
 
-    const url = document.URL + 'Login';
+    const url = 'https://shrouded-wave-16183.herokuapp.com/' + 'VoteLogin';
 
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
@@ -51,7 +51,12 @@ function handleCredentialResponse(response) {
             'Content-Type': 'application/json'
         },
         body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
-    }).then(response => response.json()).then(data => UserVoteData = data)
+    }).then(response => response.json()).then(data => UserVoteData = data).then(() =>
+        UserVoteData.forEach((data, dataCount) => {
+            vote.push({ CategoryVoted: 'Category' + (dataCount + 1), NominatedVoted: data });
+        })
+    );
+
 }
 
 function decodeJwtResponse(token) {

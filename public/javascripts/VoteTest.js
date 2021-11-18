@@ -14,67 +14,71 @@ console.log('VoteTest.js is alive!')
 
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
-const fetchNominatedInfo = fetch(
-    '/data/NominatedInfo'
-).then((res) => res.json());
+// const dataLoad = () => {
+// const fetchNominatedInfo = fetch(
+//     '/data/NominatedInfo'
+// ).then((res) => res.json());
 
-const fetchCategoryInfo = fetch(
-    '/data/Categories'
-).then((res) => res.json());
+// const fetchCategoryInfo = fetch(
+//     '/data/Categories'
+// ).then((res) => res.json());
 
-// Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
+// // Promise.all() does several fetch requests parallel
+// const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
 
-allData.then((res) => Load(res));
+// allData.then((res) => Load(res));
+// // }
 
-const Load = (res) => {
-    // All data recieved from each base
-    const NominatedInfo = res[0];
-    const CategoryInfo = res[1];
+// const Load = (res) => {
+//     // All data recieved from each base
+//     const NominatedInfo = res[0];
+//     const CategoryInfo = res[1];
 
-    console.log(NominatedInfo);
-    console.log(CategoryInfo);
+//     console.log(NominatedInfo);
+//     console.log(CategoryInfo);
+//     console.log(vote);
 
-    // Looping through nominated people by category
-    CategoryInfo.forEach((Category, counterCategory) => {
+//     // Looping through nominated people by category
+//     CategoryInfo.forEach((Category, counterCategory) => {
 
-        let h2Category = document.createElement('h2')
-        let divCategory = document.createElement('div')
-        divCategory.id = counterCategory;
+//         let h2Category = document.createElement('h2')
+//         let divCategory = document.createElement('div')
+//         divCategory.id = counterCategory;
 
-        h2Category.textContent = Category.record.fields.Category;
+//         h2Category.textContent = Category.record.fields.Category;
 
-        vote.push({ CategoryVoted: 'Category' + (counterCategory + 1), NominatedVoted: null });
+//         document.getElementById('mainVote').appendChild(h2Category)
+//         document.getElementById('mainVote').appendChild(divCategory)
 
-        document.getElementById('mainVote').appendChild(h2Category)
-        document.getElementById('mainVote').appendChild(divCategory)
+//         NominatedInfo.forEach(Nominated => {
+//             if (Nominated.record.fields.Category == Category.record.fields.Category) {
 
-        NominatedInfo.forEach(Nominated => {
-            if (Nominated.record.fields.Category == Category.record.fields.Category) {
+//                 const divNominated = document.createElement('div');
+//                 divNominated.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
 
-                const divNominated = document.createElement('div');
-                divNominated.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
+//                 divNominated.style.backgroundColor = 'black';
+//                 divNominated.style.height = '400px';
+//                 divNominated.style.width = '400px';
+//                 divNominated.style.border = 'thick solid #0000FF';
 
-                divNominated.style.backgroundColor = 'black';
-                divNominated.style.height = '400px';
-                divNominated.style.width = '400px';
-                divNominated.style.border = 'thick solid #0000FF';
-                divNominated.addEventListener('click', divVoteClick)
-                document.getElementById(counterCategory).appendChild(divNominated)
-            }
-        });
-    });
+//                 // if (UserVoteData[counterCategory] == 'Empty') {
+//                 divNominated.addEventListener('click', divVoteClick);
+//                 // }
+//                 document.getElementById(counterCategory).appendChild(divNominated);
+//             }
+//         });
+//     });
 
-    const btnConfirm = document.createElement('button');
+//     const btnConfirm = document.createElement('button');
 
-    btnConfirm.textContent = 'Bekräfta';
+//     btnConfirm.textContent = 'Bekräfta';
 
-    btnConfirm.style.width = "80px"
-    btnConfirm.style.height = "80px"
+//     btnConfirm.style.width = "80px"
+//     btnConfirm.style.height = "80px"
 
-    btnConfirm.addEventListener('click', btnConfirmClick)
-    document.getElementById('mainVote').prepend(btnConfirm);
-};
+//     btnConfirm.addEventListener('click', btnConfirmClick)
+//     document.getElementById('mainVote').prepend(btnConfirm);
+// };
 
 
 const divVoteClick = (event) => {
@@ -85,33 +89,21 @@ const divVoteClick = (event) => {
     const Category = temp[0];
     const Nominated = temp[1];
 
-    console.log(UserVoteData)
-
-    vote.forEach((element) => {
-        if (element.CategoryVoted == Category) {
+    vote.forEach((element, elementCounter) => {
+        console.log(elementCounter + '--------------------------------------------------')
+        if (element.CategoryVoted == Category && UserVoteData[elementCounter] == 'Empty') {
             element.NominatedVoted = Nominated;
             console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
-        }
-        if (element.CategoryVoted == Category) {
+        } else
+        if (element.CategoryVoted == Category && UserVoteData[elementCounter] != 'Empty') {
             console.log('Du har redan röstat i ' + element.CategoryVoted)
+            console.log(UserVoteData[elementCounter])
         }
     })
-
-    // vote.forEach((element, elementCounter) => {
-    //     console.log(elementCounter + '--------------------------------------------------')
-    //     if (element.CategoryVoted == Category && UserVoteData[1] == null) {
-    //         element.NominatedVoted = Nominated;
-    //         console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
-    //     }
-    //     if (element.CategoryVoted == Category && UserVoteData[elementCounter] != null) {
-    //         console.log('Du har redan röstat i ' + element.CategoryVoted)
-    //         console.log(UserVoteData[elementCounter])
-    //     }
-    // })
 }
 
 const btnConfirmClick = () => {
-    const url = document.URL;
+    const url = 'https://shrouded-wave-16183.herokuapp.com/Vote';
 
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
 

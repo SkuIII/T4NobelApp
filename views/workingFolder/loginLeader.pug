@@ -1,75 +1,90 @@
 extends layout
 block Header
-    div(class="header container-fluid bg-primary")
-        div(class="row justify-content-end")
-            div(class="col-auto")
-                h1(class = "p-2") Login
+    div(id = "header")
+        div(class="header container-fluid " style="background-color:  #ff8000;")
+            div(class="row justify-content-end")
+                div(class="col-auto")
+                    h1(class = "p-2") Login
 
        
 
-block karusell 
-    div(class="container mt-5 " )
-        label(style="float:left; margin-right:2%;") Åk 3
-        div(class="progress mx-auto", style="height:30px; width: 75%;")
-            div(class="progress-bar progress-bar-striped progress-bar-animated", role="progressbar", aria-valuenow="75", aria-valuemin="0",aria-valuemax="100",style="width: 75.6%",) 75%
-                
-    div(class="container justify-content-center mt-5")
-        label(style="float:left; margin-right: 2%") Åk 2
-        div(class="progress mx-auto", style="height:30px; width:75%;" )
-            div(class="progress-bar progress-bar-striped progress-bar-animated", role="progressbar", aria-valuenow="75", aria-valuemin="0",aria-valuemax="100",style="width: 75%", ) 75%
-            
-    div(class="container justify-content-center mt-5")
-        label(style="float:left; margin-right: 2%") Åk 1
-        div(class="progress mx-auto", style="height:30px; width:75%;" )
-            div(class="progress-bar progress-bar-striped progress-bar-animated", role="progressbar", aria-valuenow="75", aria-valuemin="0",aria-valuemax="100",style="width: 75%", ) 75%
+block Progress 
+    div(id="progressBarContainer" class = "container-sm")
+        h1(id = "headline" class="text-center mx-2") ÖSTRA ALT. NOBEL PRIS
+        //- div(class="row mt-5")
+        //-     label(class = "fw-bold fs-4 p-2 pb-0") Åk 3
+        //-     div(class="col-12 p-2 pt-0")
+        //-         div(class="progress", style="height:50px; width: 100%;")
+        //-             div(class="progress-bar progress-bar-striped progress-bar-animated", style="width: 55%",) 7Bajs
+                        
+        //- div(class="row mt-5")
+        //-     label(class = "fw-bold fs-4 p-2 pb-0") Åk 2
+        //-     div(class="col-12 p-2 pt-0")
+        //-         div(class="progress ", style="height:50px; width: 100%;")
+        //-             div(class="progress-bar progress-bar-striped bg-danger progress-bar-animated", role="progressbar", aria-valuenow="75", aria-valuemin="0",aria-valuemax="100",style="width: 30%",) 75%
+
+        //- div(class="row mt-5")
+        //-     label(class = "fw-bold fs-4 p-2 pb-0") Åk 1 - LEADER
+        //-     div(class="col-12 p-2 pt-0")
+        //-         div(class="progress ", style="height:50px; width: 100%;")
+        //-             div(class="progress-bar progress-bar-striped bg-warning progress-bar-animated", role="progressbar", aria-valuenow="75", aria-valuemin="0",aria-valuemax="100",style="width: 67%",) 75%
 
 
 //-kategorier
 block Nobel
-    div(class = "w-75 mx-auto contatiner")
-        div(class = "row justify-content-center" )
-    
-            div(class = "row")
-                div(class = "col col-test")
+    div(id="content" class="container-sm")
+        //- div(class = "w-75 mx-auto contatiner my-4")
+        //-     div(class = "row justify-content-center" )
+        
+        //-         div(class = "row")
+        //-             div(class = "col col-test")
 
-            h1(class = "text-center") Kategori 1
-            div(class = "col-sm-3 border border-primary") 
-                img(class="p-0 img-size align-self-center" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = "col-sm-3 border border-primary")
-                img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum.  
-            div(class = "col-sm-3 border border-primary")
-                img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-
-            
-        div(class="row justify-content-center")
-            h1(class = "text-center") Kategori 2
-            div(class = "col-sm-3 border border-primary")
-                img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = "col-sm-3 border border-primary")
-                img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = "col-sm-3 border border-primary")
-                img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
+        //-         h1(class = "text-center my-5") Kategori 1
+        //-         div(class = "col-sm-3 border border-primary") 
+        //-             img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
+        //-             p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
+        //-         div(class = "col-sm-3 border border-primary")
+        //-             img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
+        //-             p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum.  
+        //-         div(class = "col-sm-3 border border-primary")
+        //-             img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
+        //-             p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
 
             
-        div(class="row justify-content-center")
-            h1(class = "text-center") Kategori 3
-            div(class = "col-sm-3 border border-primary")
-                img(class="img-fluid mt-4" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = "col-sm-3 border border-primary") 
-                img(class="img-fluid mt-4 items-align-center" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            div(class = "col-sm-3 border border-primary")
-              img(class="img-fluid mt-4 align-items-center " src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe" )
-              p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
-            
+        //- div(class="row justify-content-center")
+        //-     h1(class = "text-center") Kategori 2
+        //-     div(class = "col-sm-3 border border-primary")
+        //-         img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
+        //-         p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
+        //-     div(class = "col-sm-3 border border-primary")
+        //-         img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
+        //-         p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
+        //-     div(class = "col-sm-3 border border-primary")
+        //-         img(class="img-fluid mt-2" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
+        //-         p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
 
+            
+        //- div(class="row justify-content-center")
+        //-     h1(class = "text-center") Kategori 3
+        //-     div(class = "col-sm-3 border border-primary")
+        //-         img(class="img-fluid mt-4" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
+        //-         p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
+        //-     div(class = "col-sm-3 border border-primary") 
+        //-         img(class="img-fluid mt-4 items-align-center" src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe")
+        //-         p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
+        //-     div(class = "col-sm-3 border border-primary")
+        //-       img(class="img-fluid mt-4 align-items-center " src="/images/coffee.jpg" alt="bild på en kaffekopp med kaffe" )
+        //-       p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nostrum. Exercitationem facilis. lorem ipsum. 
+            
+block Footer
+    div(id = "footer")
+        div(class="footer container-fluid " style="background-color:  #ff8000;")
+            div(class="row justify-content-center")
+                div(class="col-12 align-self-start")
+                    h1(class = "p-2 text-light") ÖSTRA GYMNASIET 2021
+                    //- p(class = "p-2 text-dark text-end") Made by TE4-21
+                div(class="col-12 text-end")
+                    p(class = "p-2 text-dark fw-bold") Made by TE4-21
 
 
     
