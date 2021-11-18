@@ -32,13 +32,15 @@ function handleCredentialResponse(response) {
     if (responsePayload.email.includes('edu.huddinge.se')) {
         email = responsePayload.email;
     } else {
-        // function myFunction() {
-        //     var popup = document.getElementById("myPopup");
-        //     popup.classList.toggle("show");
-        // }
-        // myFunction();
+          { 
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show"); 
+            
+            popup.textContent = ("Byt till din edu mail");
 
-        // Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
+        }
+      
+        //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
     }
 
     const url = document.URL + 'Login';
