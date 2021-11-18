@@ -52,16 +52,21 @@ router.post('/VoteLogin', function(req, res, next) {
     base('students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 if (User.email == record.fields.Email) {
-                    console.log(record.fields.Category1, record.fields.Category2, record.fields.Category3);
 
                     Category1 = record.fields.Category1;
                     Category2 = record.fields.Category2;
                     Category3 = record.fields.Category3;
 
-                    console.log(Category1 + Category2 + Category3);
+                    UserCategories = [Category1, Category2, Category3];
 
-                    UserCategories = [{ "Category1": Category1 }, { "Category2": Category2 }, { "Category3": Category3 }];
-
+                    UserCategories.forEach((element, elementCounter) => {
+                        if (typeof element === 'undefined') {
+                            element = 'Empty';
+                            UserCategories[elementCounter] = 'Empty'
+                            console.log(element)
+                        }
+                    })
+                    console.log(UserCategories)
                     res.send(UserCategories);
                 }
             });
