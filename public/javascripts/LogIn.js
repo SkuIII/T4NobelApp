@@ -49,7 +49,12 @@ function handleCredentialResponse(response) {
             'Content-Type': 'application/json'
         },
         body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
-    }).then(response => response.json()).then(data => UserVoteData = data)
+    }).then(response => response.json()).then(data => UserVoteData = data).then(() =>
+        UserVoteData.forEach((data, dataCount) => {
+            vote.push({ CategoryVoted: 'Category' + (dataCount + 1), NominatedVoted: data });
+        })
+    );
+
 }
 
 function decodeJwtResponse(token) {

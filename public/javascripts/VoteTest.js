@@ -14,6 +14,7 @@ console.log('VoteTest.js is alive!')
 
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
+// const dataLoad = () => {
 const fetchNominatedInfo = fetch(
     '/data/NominatedInfo'
 ).then((res) => res.json());
@@ -26,6 +27,7 @@ const fetchCategoryInfo = fetch(
 const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
 
 allData.then((res) => Load(res));
+// }
 
 const Load = (res) => {
     // All data recieved from each base
@@ -34,6 +36,7 @@ const Load = (res) => {
 
     console.log(NominatedInfo);
     console.log(CategoryInfo);
+    console.log(vote);
 
     // Looping through nominated people by category
     CategoryInfo.forEach((Category, counterCategory) => {
@@ -43,8 +46,6 @@ const Load = (res) => {
         divCategory.id = counterCategory;
 
         h2Category.textContent = Category.record.fields.Category;
-
-        vote.push({ CategoryVoted: 'Category' + (counterCategory + 1), NominatedVoted: null });
 
         document.getElementById('mainVote').appendChild(h2Category)
         document.getElementById('mainVote').appendChild(divCategory)
@@ -59,8 +60,11 @@ const Load = (res) => {
                 divNominated.style.height = '400px';
                 divNominated.style.width = '400px';
                 divNominated.style.border = 'thick solid #0000FF';
-                divNominated.addEventListener('click', divVoteClick)
-                document.getElementById(counterCategory).appendChild(divNominated)
+
+                // if (UserVoteData[counterCategory] == 'Empty') {
+                divNominated.addEventListener('click', divVoteClick);
+                // }
+                document.getElementById(counterCategory).appendChild(divNominated);
             }
         });
     });
@@ -85,29 +89,17 @@ const divVoteClick = (event) => {
     const Category = temp[0];
     const Nominated = temp[1];
 
-    console.log(UserVoteData)
-
-    vote.forEach((element) => {
-        if (element.CategoryVoted == Category) {
+    vote.forEach((element, elementCounter) => {
+        console.log(elementCounter + '--------------------------------------------------')
+        if (element.CategoryVoted == Category && UserVoteData[elementCounter] == 'Empty') {
             element.NominatedVoted = Nominated;
             console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
-        }
-        if (element.CategoryVoted == Category) {
+        } else
+        if (element.CategoryVoted == Category && UserVoteData[elementCounter] != 'Empty') {
             console.log('Du har redan röstat i ' + element.CategoryVoted)
+            console.log(UserVoteData[elementCounter])
         }
     })
-
-    // vote.forEach((element, elementCounter) => {
-    //     console.log(elementCounter + '--------------------------------------------------')
-    //     if (element.CategoryVoted == Category && UserVoteData[1] == null) {
-    //         element.NominatedVoted = Nominated;
-    //         console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
-    //     }
-    //     if (element.CategoryVoted == Category && UserVoteData[elementCounter] != null) {
-    //         console.log('Du har redan röstat i ' + element.CategoryVoted)
-    //         console.log(UserVoteData[elementCounter])
-    //     }
-    // })
 }
 
 const btnConfirmClick = () => {
