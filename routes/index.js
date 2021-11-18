@@ -16,15 +16,15 @@ router.post('/', function(req, res, next) {
     res.render('index');
 });
 
-router.get('/anka', function(req, res, next) { //Added route for wirju
+router.get('/anka', function(req, res, next) {
     res.render('workingFolder/loginVote');
 });
 
-router.get('/leaderboard', function(req, res, next) { //Added route for wirju
+router.get('/leaderboard', function(req, res, next) {
     res.render('workingFolder/leaderboardBig');
 });
 
-router.get('/test1', function(req, res, next) { //Added route for wirju
+router.get('/test1', function(req, res, next) {
     res.render('workingFolder/sliderTest');
 });
 
