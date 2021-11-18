@@ -49,7 +49,6 @@ router.post('/VoteLogin', function(req, res, next) {
 
     const response = JSON.stringify(req.body);
     const User = JSON.parse(response);
-    console.log(User);
 
     base('students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
@@ -65,10 +64,8 @@ router.post('/VoteLogin', function(req, res, next) {
                         if (typeof element === 'undefined') {
                             element = 'Empty';
                             UserCategories[elementCounter] = 'Empty'
-                            console.log(element)
                         }
                     })
-                    console.log(UserCategories)
                     res.send(UserCategories);
                 }
             });
@@ -81,7 +78,6 @@ router.post('/VoteLogin', function(req, res, next) {
                 return;
             }
         });
-    console.log(Category1 + Category2 + Category3);
 });
 
 // router.get('/VoteLogin', function(req, res, next) {
@@ -96,7 +92,6 @@ router.get('/Vote', function(req, res, next) {
 
 router.post('/Vote', function(req, res, next) {
 
-    console.log(req.body);
 
     const response = JSON.stringify(req.body);
     const Votes = JSON.parse(response);
@@ -106,7 +101,6 @@ router.post('/Vote', function(req, res, next) {
                 Votes.vote.forEach(element => {
                     if (record.fields.Email == Votes.email) {
 
-                        console.log('------------------' + Votes.email + " " + element.CategoryVoted + " " + element.NominatedVoted + '------------------')
 
                         base('Students').update([{
                             "id": record.id,
@@ -154,20 +148,17 @@ router.post('/admin', function(req, res, next) {
     base('students2').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 if (record.fields.Name.includes('1')) {
-                    // console.log(record.fields)
                     ArrayCounter.push(
                         record.fields.Class
                     )
                 } else
                 if (record.fields.Name.includes('2')) {
-                    // console.log(record.fields)
                     ArrayCounter.push(
                         record.fields.Class
                     )
 
                 } else
                 if (record.fields.Name.includes('3')) {
-                    // console.log(record.fields)
                     ArrayCounter.push(
                         record.fields.Class
                     )
@@ -177,7 +168,6 @@ router.post('/admin', function(req, res, next) {
         },
         function done(err) {
             ArrayCounter.sort();
-            console.log(ArrayCounter)
 
             YearOne = ArrayCounter[2]
             YearTwo = ArrayCounter[1]
@@ -238,7 +228,6 @@ router.post('/admin', function(req, res, next) {
 
             },
             function done(err) {
-                console.log('Nu borde allt vara sorterat')
                 res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
                 if (err) {
                     console.error(err);
