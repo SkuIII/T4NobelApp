@@ -22,6 +22,11 @@
     color:black;
     overflow: hidden;
 }
+.ClickMeCss{
+    font-size: small;
+    text-decoration: underline;
+    color:blue;
+}
 
 
 .img-size{
