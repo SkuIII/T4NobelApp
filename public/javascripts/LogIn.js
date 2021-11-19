@@ -32,19 +32,19 @@ function handleCredentialResponse(response) {
     if (responsePayload.email.includes('edu.huddinge.se')) {
         email = responsePayload.email;
     } else {
-      
-          
-            var popup = document.getElementById("myPopup");
-            popup.classList.toggle("show"); 
-            
-            popup.textContent = ("Byt till din edu mail");
 
-        
-      
+
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+
+        popup.textContent = ("Byt till din edu mail");
+
+
+
         //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
     }
 
-    const url = document.url +'Login';
+    const url = document.URL + 'Login';
 
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
@@ -70,5 +70,3 @@ function decodeJwtResponse(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 };
-
-

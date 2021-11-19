@@ -51,7 +51,7 @@ router.post('/VoteLogin', function(req, res, next) {
     const response = JSON.stringify(req.body);
     const User = JSON.parse(response);
 
-    base('students').select().eachPage(function page(records, fetchNextPage) {
+    base('Students2').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 if (User.email == record.fields.Email) {
 
@@ -81,10 +81,6 @@ router.post('/VoteLogin', function(req, res, next) {
         });
 });
 
-// router.get('/VoteLogin', function(req, res, next) {
-//     res.send(UserCategories);
-// });
-
 router.get('/Vote', function(req, res, next) {
     res.render('Vote', {
         title: 'T4NobelApp'
@@ -95,11 +91,11 @@ router.post('/Vote', function(req, res, next) {
     const response = JSON.stringify(req.body);
     const Votes = JSON.parse(response);
 
-    base('students').select().eachPage(function page(records, fetchNextPage) {
+    base('Students2').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 Votes.vote.forEach(element => {
                     if (record.fields.Email == Votes.email) {
-                        base('Students').update([{
+                        base('Students2').update([{
                             "id": record.id,
                             "fields": {
                                 "VoteStatus": "Voted",
@@ -182,7 +178,7 @@ router.post('/admin', function(req, res, next) {
     // CounterYearX starta at -1 because airtable has an extra record per year
 
 
-    base('students2').select().eachPage(function page(records, fetchNextPage) {
+    base('Students2').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 if (record.fields.Name.includes('1')) {
                     ArrayCounter.push(
@@ -219,7 +215,7 @@ router.post('/admin', function(req, res, next) {
         });
 
     const updateYear = () => {
-        base('students2').select().eachPage(function page(records, fetchNextPage) {
+        base('Students2').select().eachPage(function page(records, fetchNextPage) {
                 records.forEach(record => {
                     if (record.fields.Class.includes(YearThree)) {
                         CounterYearThree++;
