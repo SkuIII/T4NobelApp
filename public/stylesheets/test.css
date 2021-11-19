@@ -11,6 +11,12 @@
     border: 15px solid #ff8000;
     border-radius: 20px;
     color:black;
+    height:500px;
+    overflow: hidden;
+    
+}
+.border-phatHome:hover{
+    height:auto;
 }
 
 .img-size{
@@ -19,6 +25,9 @@
     /* margin-left: auto;
     margin-right:auto; */
 }
+
+
+
 
 .row-hover{
     background-color: rgb(130, 130, 130);

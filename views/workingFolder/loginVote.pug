@@ -8,7 +8,7 @@ html
     link(rel='stylesheet' href='/stylesheets/test.css')
 
     
-    script(src = "javascripts/VoteTest.js")
+    
     script(src="javascripts/main.js")
     script(src = "javascripts/LogIn.js")
     
@@ -27,14 +27,13 @@ block Header
                             data-context="signin" 
                             data-auto_prompt="false" 
                             data-ux_mode="popup" 
-                            data-login_uri="localhost:3000/anka"
+                  
                             data-callback="handleCredentialResponse")
                     div(class = "p-3")
                         div(class="g_id_signin" data-type="standard") <!-- Maybe unnecessary since one tap is enabled-->
 
 
-
-block Main 
+block Main
         div(id = "content" class = "container-md")
             h1(id = "headline" class="text-center mx-2") Rösta
 

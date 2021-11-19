@@ -32,16 +32,12 @@ function handleCredentialResponse(response) {
     if (responsePayload.email.includes('edu.huddinge.se')) {
         email = responsePayload.email;
     } else {
-        // function myFunction() {
-        //     var popup = document.getElementById("myPopup");
-        //     popup.classList.toggle("show");
-        // }
-        // myFunction();
+      
 
         // Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
     }
 
-    const url = 'https://shrouded-wave-16183.herokuapp.com/' + 'VoteLogin';
+    const url = document.url +'Login';
 
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
@@ -67,3 +63,5 @@ function decodeJwtResponse(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 };
+
+

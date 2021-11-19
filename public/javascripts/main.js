@@ -1,6 +1,8 @@
 'use strict';
 
 console.log('main.js is alive!')
+let vote = [];
+
 
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
@@ -213,7 +215,7 @@ const Load = (res) => {
                     info.appendChild(name);
                     
                     var bio = document.createElement('p');
-                    bio.className = 'text-start';
+                    bio.className = 'text-start bio-Overflow ';
                     bio.textContent = Nominated.record.fields.Bio;
                     info.appendChild(bio);
                 }
@@ -226,6 +228,42 @@ const Load = (res) => {
     }else if(document.getElementById('headline').textContent == 'ÖSTRA ALT. NOBEL PRIS'){
         homePage();
     };
+
     
 
+}
+
+const divVoteClick = (event) => {
+    const id = event.target.id;
+
+    let temp = id.split(',');
+
+    const Category = temp[0];
+    const Nominated = temp[1];
+
+    vote.forEach((element, elementCounter) => {
+        console.log(elementCounter + '--------------------------------------------------')
+        if (element.CategoryVoted == Category && UserVoteData[elementCounter] == 'Empty') {
+            element.NominatedVoted = Nominated;
+            console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
+        } else
+        if (element.CategoryVoted == Category && UserVoteData[elementCounter] != 'Empty') {
+            console.log('Du har redan röstat i ' + element.CategoryVoted)
+            console.log(UserVoteData[elementCounter])
+        }
+    })
+}
+
+const btnConfirmClick = () => {
+    const url = 'https://shrouded-wave-16183.herokuapp.com/Vote';
+
+    console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
+
+    fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
+    });
 }
