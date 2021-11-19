@@ -1,10 +1,13 @@
 // TODO
-//  Lawe kan inte logga in
 //  *** Bara edu mail på klienten, Om inte edu redirect till en speciell sida
 //  *** (Om inte en del av skolan ska ändå kunna rösta)
 //  *** Räkna röster per årskurs
-//  Om man har redan röstat ska man inte kunna rösta igen, titta på null i vote arrayen
+//  *** Inget ska fungera om man inte är inloggad (röstnings relaterat)
+//  *** Om man har redan röstat ska man inte kunna rösta igen, titta på null i vote arrayen
+//  Lawe kan inte logga in
 //  Tänka på säkerheten
+//      Användare kan se js filerna
+//      Användare kan ändra innehållet av variabler på konsolen i klienten
 
 'use strict';
 
@@ -61,9 +64,8 @@ const Load = (res) => {
                 divNominated.style.width = '400px';
                 divNominated.style.border = 'thick solid #0000FF';
 
-                // if (UserVoteData[counterCategory] == 'Empty') {
                 divNominated.addEventListener('click', divVoteClick);
-                // }
+
                 document.getElementById(counterCategory).appendChild(divNominated);
             }
         });
@@ -99,19 +101,24 @@ const divVoteClick = (event) => {
             console.log('Du har redan röstat i ' + element.CategoryVoted)
             console.log(UserVoteData[elementCounter])
         }
-    })
+    });
 }
 
 const btnConfirmClick = () => {
-    const url = document.URL;
 
-    console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
+    if (UserVoteData[0] == 'Empty' && UserVoteData[1] == 'Empty' && UserVoteData[2] == 'Empty') {
+        const url = document.URL;
 
-    fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
-    });
+        console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
+
+        fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
+        });
+    } else {
+        console.log('Du har redan röstat, du kan inte rösta igen')
+    }
 }
