@@ -187,7 +187,7 @@ const Load = (res) => {
             content.appendChild(row);
     
     
-            NominatedInfo.forEach(Nominated => {
+            NominatedInfo.forEach((Nominated, counterNominated) => {
                 if (Nominated.record.fields.Category == Category.record.fields.Category){
                     // console.log(Nominated.record.fields.Picture[0].url);
     
@@ -201,7 +201,7 @@ const Load = (res) => {
 
                     var newCol = document.createElement('div');
                     newCol.className = 'col-sm-3 border-phatHome mx-3 p-0';
-                    newCol.addEventListener('click', showBio);
+                    newCol.id = counterCategory + '+' + counterNominated;
                     row.appendChild(newCol);
     
                     var img = document.createElement('img');
@@ -220,13 +220,17 @@ const Load = (res) => {
                     info.appendChild(name);
 
                     const ClickMe = document.createElement('p');
+                    ClickMe.className = 'ClickMeCss'
                     ClickMe.textContent = 'Show more';
+                    ClickMe.name = counterCategory + '+' + counterNominated;
+                    ClickMe.addEventListener('click', showBio);
                     name.appendChild(ClickMe);
                     
                     var bio = document.createElement('p');
                     bio.className = 'text-start bio-Overflow ';
                     bio.textContent = Nominated.record.fields.Bio;
                     info.appendChild(bio);
+
                 }
             });
         });
@@ -242,11 +246,15 @@ const Load = (res) => {
 
 }
 const showBio = (sender) =>{
-    if (sender.target.className == 'col-sm-3 border-phatHome mx-3 p-0') {
-        sender.target.className = 'col-sm-3 border-phatHome-hover mx-3 p-0';
-
-    }else if(sender.target.className == 'col-sm-3 border-phatHome-hover mx-3 p-0'){ 
-        sender.target.className = 'col-sm-3 border-phatHome mx-3 p-0';
+    const ID = sender.target.name;
+    const anka = document.getElementById(ID);
+    if (anka.className == 'col-sm-3 border-phatHome mx-3 p-0') {
+        anka.className = 'col-sm-3 border-phatHome-hover mx-3 p-0';
+        sender.target.textContent = 'Show less';
+    }
+    else if(anka.className == 'col-sm-3 border-phatHome-hover mx-3 p-0'){ 
+        anka.className = 'col-sm-3 border-phatHome mx-3 p-0';
+        sender.target.textContent = 'Show more';
     }
 
    
