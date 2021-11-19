@@ -1,6 +1,8 @@
 'use strict';
 
 console.log('main.js is alive!')
+let vote = [];
+
 
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
@@ -54,7 +56,8 @@ const Load = (res) => {
 
     const rowDefault = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover';
     const rowSelected = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover row-selected';
-    const rowHome = 'row p-0 justify-content-center mb-4 mx-0 '
+    const rowHome = 'row p-0 justify-content-center mb-4 mx-0 rowCSS'
+
     //Javascript for votingPage
     const votePage = () => {
         //BS5 classes for th
@@ -179,12 +182,12 @@ const Load = (res) => {
     
             //rows
             var row = document.createElement('div');
-            row.className = rowHome
+            row.className =  rowHome;
             row.id = Category.record.fields.Category + '.Row';
             content.appendChild(row);
     
     
-            NominatedInfo.forEach(Nominated => {
+            NominatedInfo.forEach((Nominated, counterNominated) => {
                 if (Nominated.record.fields.Category == Category.record.fields.Category){
                     // console.log(Nominated.record.fields.Picture[0].url);
     
@@ -197,7 +200,8 @@ const Load = (res) => {
                     // row.appendChild(rowNominated);
 
                     var newCol = document.createElement('div');
-                    newCol.className = 'col-sm-12 col-md-3 col-l-3 border-phatHome mx-3 p-0'
+                    newCol.className = 'col-sm-3 border-phatHome mx-3 p-0';
+                    newCol.id = counterCategory + '+' + counterNominated;
                     row.appendChild(newCol);
     
                     var img = document.createElement('img');
@@ -214,11 +218,19 @@ const Load = (res) => {
                     name.className = 'text-center';
                     name.textContent = Nominated.record.fields.Nominated;
                     info.appendChild(name);
+
+                    const ClickMe = document.createElement('p');
+                    ClickMe.className = 'ClickMeCss'
+                    ClickMe.textContent = 'Show more';
+                    ClickMe.name = counterCategory + '+' + counterNominated;
+                    ClickMe.addEventListener('click', showBio);
+                    name.appendChild(ClickMe);
                     
                     var bio = document.createElement('p');
-                    bio.className = 'text-start';
+                    bio.className = 'text-start bio-Overflow ';
                     bio.textContent = Nominated.record.fields.Bio;
                     info.appendChild(bio);
+
                 }
             });
         });
@@ -229,6 +241,56 @@ const Load = (res) => {
     }else if(document.getElementById('headline').textContent == 'ÖSTRA ALT. NOBEL PRIS'){
         homePage();
     };
+
     
 
+}
+const showBio = (sender) =>{
+    const ID = sender.target.name;
+    const anka = document.getElementById(ID);
+    if (anka.className == 'col-sm-3 border-phatHome mx-3 p-0') {
+        anka.className = 'col-sm-3 border-phatHome-hover mx-3 p-0';
+        sender.target.textContent = 'Show less';
+    }
+    else if(anka.className == 'col-sm-3 border-phatHome-hover mx-3 p-0'){ 
+        anka.className = 'col-sm-3 border-phatHome mx-3 p-0';
+        sender.target.textContent = 'Show more';
+    }
+
+   
+}
+
+const divVoteClick = (event) => {
+    const id = event.target.id;
+
+    let temp = id.split(',');
+
+    const Category = temp[0];
+    const Nominated = temp[1];
+
+    vote.forEach((element, elementCounter) => {
+        console.log(elementCounter + '--------------------------------------------------')
+        if (element.CategoryVoted == Category && UserVoteData[elementCounter] == 'Empty') {
+            element.NominatedVoted = Nominated;
+            console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
+        } else
+        if (element.CategoryVoted == Category && UserVoteData[elementCounter] != 'Empty') {
+            console.log('Du har redan röstat i ' + element.CategoryVoted)
+            console.log(UserVoteData[elementCounter])
+        }
+    })
+}
+
+const btnConfirmClick = () => {
+    const url = 'https://shrouded-wave-16183.herokuapp.com/Vote';
+
+    console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
+
+    fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
+    });
 }

@@ -1,10 +1,13 @@
 // TODO
-//  Lawe kan inte logga in
 //  *** Bara edu mail på klienten, Om inte edu redirect till en speciell sida
 //  *** (Om inte en del av skolan ska ändå kunna rösta)
 //  *** Räkna röster per årskurs
-//  Om man har redan röstat ska man inte kunna rösta igen, titta på null i vote arrayen
+//  *** Inget ska fungera om man inte är inloggad (röstnings relaterat)
+//  *** Om man har redan röstat ska man inte kunna rösta igen, titta på null i vote arrayen
+//  Lawe kan inte logga in
 //  Tänka på säkerheten
+//      Användare kan se js filerna
+//      Användare kan ändra innehållet av variabler på konsolen i klienten
 
 'use strict';
 
@@ -15,70 +18,69 @@ console.log('VoteTest.js is alive!')
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
 // const dataLoad = () => {
-// const fetchNominatedInfo = fetch(
-//     '/data/NominatedInfo'
-// ).then((res) => res.json());
+const fetchNominatedInfo = fetch(
+    '/data/NominatedInfo'
+).then((res) => res.json());
 
-// const fetchCategoryInfo = fetch(
-//     '/data/Categories'
-// ).then((res) => res.json());
+const fetchCategoryInfo = fetch(
+    '/data/Categories'
+).then((res) => res.json());
 
-// // Promise.all() does several fetch requests parallel
-// const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
+// Promise.all() does several fetch requests parallel
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
 
-// allData.then((res) => Load(res));
-// // }
+allData.then((res) => Load(res));
+// }
 
-// const Load = (res) => {
-//     // All data recieved from each base
-//     const NominatedInfo = res[0];
-//     const CategoryInfo = res[1];
+const Load = (res) => {
+    // All data recieved from each base
+    const NominatedInfo = res[0];
+    const CategoryInfo = res[1];
 
-//     console.log(NominatedInfo);
-//     console.log(CategoryInfo);
-//     console.log(vote);
+    console.log(NominatedInfo);
+    console.log(CategoryInfo);
+    console.log(vote);
 
-//     // Looping through nominated people by category
-//     CategoryInfo.forEach((Category, counterCategory) => {
+    // Looping through nominated people by category
+    CategoryInfo.forEach((Category, counterCategory) => {
 
-//         let h2Category = document.createElement('h2')
-//         let divCategory = document.createElement('div')
-//         divCategory.id = counterCategory;
+        let h2Category = document.createElement('h2')
+        let divCategory = document.createElement('div')
+        divCategory.id = counterCategory;
 
-//         h2Category.textContent = Category.record.fields.Category;
+        h2Category.textContent = Category.record.fields.Category;
 
-//         document.getElementById('mainVote').appendChild(h2Category)
-//         document.getElementById('mainVote').appendChild(divCategory)
+        document.getElementById('mainVote').appendChild(h2Category)
+        document.getElementById('mainVote').appendChild(divCategory)
 
-//         NominatedInfo.forEach(Nominated => {
-//             if (Nominated.record.fields.Category == Category.record.fields.Category) {
+        NominatedInfo.forEach(Nominated => {
+            if (Nominated.record.fields.Category == Category.record.fields.Category) {
 
-//                 const divNominated = document.createElement('div');
-//                 divNominated.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
+                const divNominated = document.createElement('div');
+                divNominated.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
 
-//                 divNominated.style.backgroundColor = 'black';
-//                 divNominated.style.height = '400px';
-//                 divNominated.style.width = '400px';
-//                 divNominated.style.border = 'thick solid #0000FF';
+                divNominated.style.backgroundColor = 'black';
+                divNominated.style.height = '400px';
+                divNominated.style.width = '400px';
+                divNominated.style.border = 'thick solid #0000FF';
 
-//                 // if (UserVoteData[counterCategory] == 'Empty') {
-//                 divNominated.addEventListener('click', divVoteClick);
-//                 // }
-//                 document.getElementById(counterCategory).appendChild(divNominated);
-//             }
-//         });
-//     });
+                divNominated.addEventListener('click', divVoteClick);
 
-//     const btnConfirm = document.createElement('button');
+                document.getElementById(counterCategory).appendChild(divNominated);
+            }
+        });
+    });
 
-//     btnConfirm.textContent = 'Bekräfta';
+    const btnConfirm = document.createElement('button');
 
-//     btnConfirm.style.width = "80px"
-//     btnConfirm.style.height = "80px"
+    btnConfirm.textContent = 'Bekräfta';
 
-//     btnConfirm.addEventListener('click', btnConfirmClick)
-//     document.getElementById('mainVote').prepend(btnConfirm);
-// };
+    btnConfirm.style.width = "80px"
+    btnConfirm.style.height = "80px"
+
+    btnConfirm.addEventListener('click', btnConfirmClick)
+    document.getElementById('mainVote').prepend(btnConfirm);
+};
 
 
 const divVoteClick = (event) => {
@@ -99,19 +101,24 @@ const divVoteClick = (event) => {
             console.log('Du har redan röstat i ' + element.CategoryVoted)
             console.log(UserVoteData[elementCounter])
         }
-    })
+    });
 }
 
 const btnConfirmClick = () => {
-    const url = 'https://shrouded-wave-16183.herokuapp.com/Vote';
 
-    console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
+    if (UserVoteData[0] == 'Empty' && UserVoteData[1] == 'Empty' && UserVoteData[2] == 'Empty') {
+        const url = document.URL;
 
-    fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
-    });
+        console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
+
+        fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
+        });
+    } else {
+        console.log('Du har redan röstat, du kan inte rösta igen')
+    }
 }

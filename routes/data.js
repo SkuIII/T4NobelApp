@@ -7,18 +7,18 @@ const base = new Airtable({
 }).base('app4x1UwZKFrNZnBU');
 
 router.get('/NominatedInfo', function(req, res, next) {
-    let recordArr = [];
+    let recordArray = [];
 
     base('nominated').select().eachPage(function page(records, fetchNextPage) {
         records.forEach(function(record) {
-            recordArr.push({
+            recordArray.push({
                 "record": record._rawJson
             });
         });
         fetchNextPage();
 
     }, function done(err) {
-        res.send(recordArr);
+        res.send(recordArray);
 
         if (err) {
             console.error(err);
@@ -28,18 +28,18 @@ router.get('/NominatedInfo', function(req, res, next) {
 });
 
 router.get('/Categories', function(req, res, next) {
-    let recordArr = [];
+    let recordArray = [];
 
     base('categories').select().eachPage(function page(records, fetchNextPage) {
         records.forEach(function(record) {
-            recordArr.push({
+            recordArray.push({
                 "record": record._rawJson
             });
         });
         fetchNextPage();
 
     }, function done(err) {
-        res.send(recordArr);
+        res.send(recordArray);
 
         if (err) {
             console.error(err);
@@ -49,29 +49,24 @@ router.get('/Categories', function(req, res, next) {
 });
 
 router.get('/Students', function(req, res, next) {
-    let recordArr = [];
+    let recordArray = [];
 
-    base('students').select().eachPage(function page(records, fetchNextPage) {
+    base('Students').select().eachPage(function page(records, fetchNextPage) {
         records.forEach(function(record) {
-            recordArr.push({
+            recordArray.push({
                 "record": record._rawJson
             });
         });
         fetchNextPage();
 
     }, function done(err) {
-        res.send(recordArr);
+        res.send(recordArray);
 
         if (err) {
             console.error(err);
             return;
         }
     });
-});
-
-router.get('/StudentsTest', function(req, res, next) {
-    var data = require('../data/Students.json')
-    res.send(data)
 });
 
 module.exports = router;

@@ -24,21 +24,12 @@ router.get('/leaderboard', function(req, res, next) {
     res.render('workingFolder/leaderboardBig');
 });
 
-
 router.get('/test1', function(req, res, next) {
     res.render('workingFolder/sliderTest');
 });
 
 router.get('/pelikan', function(req, res, next) {
     res.render('workingFolder/loginLeader');
-});
-
-router.get('/LoggedIn', function(req, res, next) {
-    res.render('Login');
-});
-
-router.post('/LoggedIn', function(req, res, next) {
-    res.render('Login');
 });
 
 router.post('/VoteLogin', function(req, res, next) {
@@ -51,7 +42,7 @@ router.post('/VoteLogin', function(req, res, next) {
     const response = JSON.stringify(req.body);
     const User = JSON.parse(response);
 
-    base('students').select().eachPage(function page(records, fetchNextPage) {
+    base('Students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 if (User.email == record.fields.Email) {
 
@@ -71,7 +62,6 @@ router.post('/VoteLogin', function(req, res, next) {
                 }
             });
             fetchNextPage();
-
         },
         function done(err) {
             if (err) {
@@ -80,10 +70,6 @@ router.post('/VoteLogin', function(req, res, next) {
             }
         });
 });
-
-// router.get('/VoteLogin', function(req, res, next) {
-//     res.send(UserCategories);
-// });
 
 router.get('/Vote', function(req, res, next) {
     res.render('Vote', {
@@ -95,7 +81,7 @@ router.post('/Vote', function(req, res, next) {
     const response = JSON.stringify(req.body);
     const Votes = JSON.parse(response);
 
-    base('students').select().eachPage(function page(records, fetchNextPage) {
+    base('Students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 Votes.vote.forEach(element => {
                     if (record.fields.Email == Votes.email) {
@@ -112,12 +98,13 @@ router.post('/Vote', function(req, res, next) {
                             }
                         });
                         base('votinginfo').select().eachPage(function page(records, fetchNextPage) {
-                                records.forEach(record1 => {
-                                    if (record1.fields.Name == 'CounterVotedYearOne') {
-                                        let CounterVoted = record1.fields.Number;
-                                        if (record.fields.Year == '1') {
+                                records.forEach((recordVotingInfo, recordVotingInfoCounter) => {
+                                    if (recordVotingInfo.fields.Name == 'CounterVotedYear' + (recordVotingInfoCounter - 2)) {
+                                        let CounterVoted = recordVotingInfo.fields.Number;
+                                        CounterVoted++;
+                                        if (record.fields.Year == (recordVotingInfoCounter - 2)) {
                                             base('VotingInfo').update([{
-                                                "id": record1.id,
+                                                "id": recordVotingInfo.id,
                                                 "fields": {
                                                     "Number": CounterVoted,
                                                 }
@@ -128,14 +115,11 @@ router.post('/Vote', function(req, res, next) {
                                                 }
                                             });
                                         }
-                                        CounterVoted++;
                                     }
                                 });
                                 fetchNextPage();
-
                             },
                             function done(err) {
-
                                 if (err) {
                                     console.error(err);
                                     return;
@@ -143,13 +127,10 @@ router.post('/Vote', function(req, res, next) {
                             });
                     }
                 })
-
             });
             fetchNextPage();
-
         },
         function done(err) {
-
             if (err) {
                 console.error(err);
                 return;
@@ -165,9 +146,11 @@ router.get('/admin', function(req, res, next) {
     res.render('admin');
 });
 
+// CounterYearX starts at -1 because airtable has an extra record per year
 let CounterYearOne = -1;
 let CounterYearTwo = -1;
 let CounterYearThree = -1;
+
 let CounterVotedYearOne = 0;
 let CounterVotedYearTwo = 0;
 let CounterVotedYearThree = 0;
@@ -179,23 +162,19 @@ router.post('/admin', function(req, res, next) {
     let YearTwo;
     let YearThree;
 
-    // CounterYearX starta at -1 because airtable has an extra record per year
-
-
-    base('students2').select().eachPage(function page(records, fetchNextPage) {
+    base('Students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
-                if (record.fields.Name.includes('1')) {
+                if (record.fields.Name.includes(1)) {
                     ArrayCounter.push(
                         record.fields.Class
                     )
                 } else
-                if (record.fields.Name.includes('2')) {
+                if (record.fields.Name.includes(2)) {
                     ArrayCounter.push(
                         record.fields.Class
                     )
-
                 } else
-                if (record.fields.Name.includes('3')) {
+                if (record.fields.Name.includes(3)) {
                     ArrayCounter.push(
                         record.fields.Class
                     )
@@ -209,8 +188,7 @@ router.post('/admin', function(req, res, next) {
             YearOne = ArrayCounter[2]
             YearTwo = ArrayCounter[1]
             YearThree = ArrayCounter[0]
-
-            updateYear();
+            console.log(`Yearone=${YearOne} Yeartwo=${YearTwo} Yearthree=${YearThree}`)
 
             if (err) {
                 console.error(err);
@@ -219,11 +197,11 @@ router.post('/admin', function(req, res, next) {
         });
 
     const updateYear = () => {
-        base('students2').select().eachPage(function page(records, fetchNextPage) {
+        base('Students').select().eachPage(function page(records, fetchNextPage) {
                 records.forEach(record => {
                     if (record.fields.Class.includes(YearThree)) {
                         CounterYearThree++;
-                        base('Students2').update([{
+                        base('Students').update([{
                             "id": record.id,
                             "fields": {
                                 "Year": '3',
@@ -240,7 +218,7 @@ router.post('/admin', function(req, res, next) {
                     }
                     if (record.fields.Class.includes(YearTwo)) {
                         CounterYearTwo++;
-                        base('Students2').update([{
+                        base('Students').update([{
                             "id": record.id,
                             "fields": {
                                 "Year": '2',
@@ -257,7 +235,7 @@ router.post('/admin', function(req, res, next) {
                     }
                     if (record.fields.Class.includes(YearOne)) {
                         CounterYearOne++;
-                        base('Students2').update([{
+                        base('Students').update([{
                             "id": record.id,
                             "fields": {
                                 "Year": '1',
@@ -274,11 +252,8 @@ router.post('/admin', function(req, res, next) {
                     }
                 });
                 fetchNextPage();
-
             },
             function done(err) {
-                console.log(`Yearone=${CounterYearOne} Yeartwo=${CounterYearTwo} Yearthree=${CounterYearThree} YearVotedone=${CounterVotedYearOne} YearVotedtwo=${CounterVotedYearTwo} YearVotedthree=${CounterVotedYearThree}`)
-                loading()
                 res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
                 if (err) {
                     console.error(err);
@@ -287,9 +262,5 @@ router.post('/admin', function(req, res, next) {
             });
     }
 });
-
-const CountingFunction = () => {
-    console.log(`Yearone=${CounterYearOne} Yeartwo=${CounterYearTwo} Yearthree=${CounterYearThree} YearVotedone=${CounterVotedYearOne} YearVotedtwo=${CounterVotedYearTwo} YearVotedthree=${CounterVotedYearThree}`)
-}
 
 module.exports = router;
