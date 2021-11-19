@@ -191,7 +191,7 @@ const Load = (res) => {
                 if (Nominated.record.fields.Category == Category.record.fields.Category){
                     // console.log(Nominated.record.fields.Picture[0].url);
     
-                    console.log('Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated);
+                    console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
     
                     
                     // var rowNominated = document.createElement('div');
@@ -231,10 +231,15 @@ const Load = (res) => {
                     bio.textContent = Nominated.record.fields.Bio;
                     info.appendChild(bio);
 
+                    const btnVote = document.createElement('button');
+                    btnVote.textContent = 'Rösta';
+                    btnVote.addEventListener('click', divVoteClick);
+                    btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated
+                    newCol.appendChild(btnVote);
                 }
             });
         });
-        //HÄR JOHAN
+        
     };
     if(document.getElementById('headline').textContent == 'Rösta'){
         votePage();
@@ -262,7 +267,7 @@ const showBio = (sender) =>{
 
 const divVoteClick = (event) => {
     const id = event.target.id;
-
+    
     let temp = id.split(',');
 
     const Category = temp[0];
