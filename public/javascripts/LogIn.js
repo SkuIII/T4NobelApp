@@ -33,8 +33,15 @@ function handleCredentialResponse(response) {
         email = responsePayload.email;
     } else {
       
+          
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show"); 
+            
+            popup.textContent = ("Byt till din edu mail");
 
-        // Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
+        
+      
+        //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
     }
 
     const url = document.url +'Login';

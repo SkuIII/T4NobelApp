@@ -18,12 +18,15 @@ const fetchCategoryInfo = fetch(
 //     '/data/Students'
 // ).then((res) => res.json());
 
+
 // Promise.all() does several fetch requests parallel
 const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
 
 allData.then((res) => Load(res));
 
 const Load = (res) => {
+
+    
     // All data recieved from each base
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
