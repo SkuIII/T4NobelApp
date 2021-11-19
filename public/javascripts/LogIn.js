@@ -28,20 +28,26 @@ function handleCredentialResponse(response) {
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
+    
+    var popup = document.getElementById("myPopup");
 
     if (responsePayload.email.includes('edu.huddinge.se')) {
+       
         email = responsePayload.email;
+        popup.style.display = "none"; 
+        
     } else {
-          { 
-            var popup = document.getElementById("myPopup");
-            popup.classList.toggle("show"); 
             
-            popup.textContent = ("Byt till din edu mail");
+        popup.classList.toggle("show"); 
+        popup.textContent = ("Du måste välja din " +
+            "edu mail för att din röst ska registreras");
+    } 
+        
+         
 
-        }
-      
-        //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
-    }
+            
+       //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
+
 
     const url = 'https://shrouded-wave-16183.herokuapp.com/' + 'VoteLogin';
 
