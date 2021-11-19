@@ -56,7 +56,8 @@ const Load = (res) => {
 
     const rowDefault = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover';
     const rowSelected = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover row-selected';
-    const rowHome = 'row p-0 justify-content-center mb-4 mx-0 '
+    const rowHome = 'row p-0 justify-content-center mb-4 mx-0 rowCSS'
+
     //Javascript for votingPage
     const votePage = () => {
         //BS5 classes for th
@@ -181,7 +182,7 @@ const Load = (res) => {
     
             //rows
             var row = document.createElement('div');
-            row.className = rowHome
+            row.className =  rowHome;
             row.id = Category.record.fields.Category + '.Row';
             content.appendChild(row);
     
@@ -199,7 +200,8 @@ const Load = (res) => {
                     // row.appendChild(rowNominated);
 
                     var newCol = document.createElement('div');
-                    newCol.className = 'col-sm-12 col-md-3 col-l-3 border-phatHome mx-3 p-0'
+                    newCol.className = 'col-sm-3 border-phatHome mx-3 p-0';
+                    newCol.addEventListener('click', showBio);
                     row.appendChild(newCol);
     
                     var img = document.createElement('img');
@@ -216,6 +218,10 @@ const Load = (res) => {
                     name.className = 'text-center';
                     name.textContent = Nominated.record.fields.Nominated;
                     info.appendChild(name);
+
+                    const ClickMe = document.createElement('p');
+                    ClickMe.textContent = 'Show more';
+                    name.appendChild(ClickMe);
                     
                     var bio = document.createElement('p');
                     bio.className = 'text-start bio-Overflow ';
@@ -234,6 +240,16 @@ const Load = (res) => {
 
     
 
+}
+const showBio = (sender) =>{
+    if (sender.target.className == 'col-sm-3 border-phatHome mx-3 p-0') {
+        sender.target.className = 'col-sm-3 border-phatHome-hover mx-3 p-0';
+
+    }else if(sender.target.className == 'col-sm-3 border-phatHome-hover mx-3 p-0'){ 
+        sender.target.className = 'col-sm-3 border-phatHome mx-3 p-0';
+    }
+
+   
 }
 
 const divVoteClick = (event) => {
