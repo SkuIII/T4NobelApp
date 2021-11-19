@@ -51,7 +51,7 @@ router.get('/Categories', function(req, res, next) {
 router.get('/Students', function(req, res, next) {
     let recordArray = [];
 
-    base('Students2').select().eachPage(function page(records, fetchNextPage) {
+    base('Students').select().eachPage(function page(records, fetchNextPage) {
         records.forEach(function(record) {
             recordArray.push({
                 "record": record._rawJson
