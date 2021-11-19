@@ -103,7 +103,7 @@ const divVoteClick = (event) => {
 }
 
 const btnConfirmClick = () => {
-    const url = 'https://shrouded-wave-16183.herokuapp.com/Vote';
+    const url = document.URL;
 
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
 
