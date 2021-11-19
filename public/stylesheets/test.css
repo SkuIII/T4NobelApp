@@ -11,13 +11,18 @@
     border: 15px solid #ff8000;
     border-radius: 20px;
     color:black;
-    height:500px;
     overflow: hidden;
+    height:500px;
     
 }
-.border-phatHome:hover{
-    height:auto;
+.border-phatHome-hover{
+    height: auto;
+    border: 15px solid #ff8000;
+    border-radius: 20px;
+    color:black;
+    overflow: hidden;
 }
+
 
 .img-size{
     width: 250px;
