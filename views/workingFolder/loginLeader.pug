@@ -37,19 +37,24 @@ block Header
 
 block Progress 
     div(id="progressBarContainer" class = "container-sm")
-        h1(id = "headline" class="text-center mx-2") ÖSTRA ALT. NOBEL PRIS
+        h1(id = "headline" class="text-center mx-2") ÖSTRAS ALTERNATIVA NOBEL PRIS
         
 
 //-kategorier
 block Nobel
     div(id="content" class="container-sm")
- 
+    div(class = "row justify-content-center m-0")
+            div(class = "col-auto")
+                h2(class="text-center display-6 m-0 text-danger fw-bold") Varning! 
+                h5(class="text-center m-0 text-danger fw-bold" ) Svaret kan ej ändras
+                button(id = "confirm-btn" type="button" class="btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100") Bekräfta röstning 
+
 block Footer
     div(id = "footer")
         div(class="footer container-fluid " style="background-color:  #ff8000;")
             div(class="row justify-content-center")
                 div(class="col-12 align-self-start")
-                    h1(class = "p-2 text-light") ÖSTRA GYMNASIET 2021
+                    h2(class = "p-2 text-light") ÖSTRA GYMNASIET 2021
                     //- p(class = "p-2 text-dark text-end") Made by TE4-21
                 div(class="col-12 text-end")
                     p(class = "p-2 text-dark fw-bold") Made by TE4-21

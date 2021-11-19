@@ -117,7 +117,7 @@ const Load = (res) => {
             }
         });
 
-        document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick)
+       
 
         });
     }
@@ -243,11 +243,11 @@ const Load = (res) => {
     };
     if(document.getElementById('headline').textContent == 'Rösta'){
         votePage();
-    }else if(document.getElementById('headline').textContent == 'ÖSTRA ALT. NOBEL PRIS'){
+    }else if(document.getElementById('headline').textContent == 'ÖSTRAS ALTERNATIVA NOBEL PRIS'){
         homePage();
     };
 
-    
+    document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick);
 
 }
 const showBio = (sender) =>{
