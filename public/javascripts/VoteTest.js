@@ -77,8 +77,11 @@ const Load = (res) => {
 
     btnConfirm.style.width = "80px"
     btnConfirm.style.height = "80px"
+    btnConfirm.disabled = true;
+    btnConfirm.id = 'btnConfirmId'
 
     btnConfirm.addEventListener('click', btnConfirmClick)
+
     document.getElementById('mainVote').prepend(btnConfirm);
 };
 
@@ -91,6 +94,8 @@ const divVoteClick = (event) => {
     const Category = temp[0];
     const Nominated = temp[1];
 
+    console.log(vote)
+
     vote.forEach((element, elementCounter) => {
         console.log(elementCounter + '--------------------------------------------------')
         if (element.CategoryVoted == Category && UserVoteData[elementCounter] == 'Empty') {
@@ -101,24 +106,24 @@ const divVoteClick = (event) => {
             console.log('Du har redan röstat i ' + element.CategoryVoted)
             console.log(UserVoteData[elementCounter])
         }
+
+        if (vote[0] != 'Empty' && vote[1] != 'Empty' && vote[2] != 'Empty') {
+            document.getElementById('btnConfirmId').disabled = false;
+        }
     });
 }
 
 const btnConfirmClick = () => {
+    document.getElementById('btnConfirmId').disabled = false;
+    const url = document.URL;
 
-    if (UserVoteData[0] == 'Empty' && UserVoteData[1] == 'Empty' && UserVoteData[2] == 'Empty') {
-        const url = document.URL;
+    console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
 
-        console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
-
-        fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
-        });
-    } else {
-        console.log('Du har redan röstat, du kan inte rösta igen')
-    }
+    fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
+    });
 }
