@@ -28,26 +28,21 @@ function handleCredentialResponse(response) {
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
-    
-    var popup = document.getElementById("myPopup");
+
+    let popup = document.getElementById("myPopup");
 
     if (responsePayload.email.includes('edu.huddinge.se')) {
-       
+
         email = responsePayload.email;
-        popup.style.display = "none"; 
-        
+        popup.style.display = "none";
+
     } else {
-            
-        popup.classList.toggle("show"); 
+        //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
+
+        popup.classList.toggle("show");
         popup.textContent = ("Du måste välja din " +
             "edu mail för att din röst ska registreras");
-    } 
-        
-         
-
-            
-       //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
-
+    }
 
     const url = document.URL + 'Login';
 
@@ -59,10 +54,12 @@ function handleCredentialResponse(response) {
         body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
     }).then(response => response.json()).then(data => UserVoteData = data).then(() =>
         UserVoteData.forEach((data, dataCount) => {
-            vote.push({ CategoryVoted: 'Category' + (dataCount + 1), NominatedVoted: data });
+            vote.push({
+                CategoryVoted: 'Category' + (dataCount + 1),
+                NominatedVoted: data
+            });
         })
     );
-
 }
 
 function decodeJwtResponse(token) {
