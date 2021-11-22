@@ -2,7 +2,8 @@
 
 console.log('main.js is alive!');
 
-
+let NominatedInfo = [];
+let CategoryInfo = [];
 
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
@@ -21,8 +22,8 @@ allData.then((res) => Load(res));
 
 const Load = (res) => {
     // All data recieved from each base
-    const NominatedInfo = res[0];
-    const CategoryInfo = res[1];
+    NominatedInfo = res[0];
+    CategoryInfo = res[1];
 
     const rowHome = 'row p-0 mb-4 mx-0 justify-content-center'
 

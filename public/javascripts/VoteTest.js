@@ -34,8 +34,8 @@ allData.then((res) => Load(res));
 
 const Load = (res) => {
     // All data recieved from each base
-    const NominatedInfo = res[0];
-    const CategoryInfo = res[1];
+    NominatedInfo = res[0];
+    CategoryInfo = res[1];
 
     console.log(NominatedInfo);
     console.log(CategoryInfo);

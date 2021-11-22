@@ -12,11 +12,11 @@ router.get('/', function(req, res, next) { // Huvudsidan
     });
 });
 
-router.get('/leaderboard', function(req, res, next) { // Routen för sotra sjärmen 
+router.get('/leaderboard', function(req, res, next) { // Routen för stora skärmen 
     res.render('workingFolder/leaderboardBig');
 });
 
-router.post('/VoteLogin', function(req, res, next) { // reseves user   Returns vote status
+router.post('/VoteLogin', function(req, res, next) { // receive user   Returns vote status
     let VoteStatus;
     const response = JSON.stringify(req.body);
     const User = JSON.parse(response);
@@ -42,13 +42,13 @@ router.post('/VoteLogin', function(req, res, next) { // reseves user   Returns v
         });
 });
 
-router.get('/Vote', function(req, res, next) { // För att testa olika saker med röstninssystemet
+router.get('/Vote', function(req, res, next) { // To test voting system
     res.render('Vote', {
         title: 'T4NobelApp'
     });
 });
 
-router.post('/Vote', function(req, res, next) { // Reseves The vote ansends it to Airtable
+router.post('/Vote', function(req, res, next) { // Receives the vote and sends it to Airtable
     const response = JSON.stringify(req.body);
     const Votes = JSON.parse(response);
 
@@ -135,7 +135,7 @@ router.post('/Vote', function(req, res, next) { // Reseves The vote ansends it t
     res.send();
 });
 
-router.get('/admin', function(req, res, next) { // Is for Admin controles
+router.get('/admin', function(req, res, next) { // Is for Admin controls
     res.render('admin');
 });
 
@@ -153,9 +153,6 @@ router.post('/admin', function(req, res, next) {
     let YearOne;
     let YearTwo;
     let YearThree;
-
-    // CounterYearX starta at -1 because airtable has an extra record per year
-
 
     base('Students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
