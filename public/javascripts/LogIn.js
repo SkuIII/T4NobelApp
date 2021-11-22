@@ -41,7 +41,7 @@ function handleCredentialResponse(response) {
 
         popup.classList.toggle("show");
         popup.textContent = ("Du måste välja din " +
-            "edu mail för att din röst ska registreras");
+            "edu mail för att din röst ska registreras.");
     }
 
     const url = document.URL + 'Login';
