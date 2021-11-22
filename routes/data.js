@@ -69,4 +69,25 @@ router.get('/Students', function(req, res, next) {
     });
 });
 
+router.get('/VotingInfo', function(req, res, next) {
+    let recordArray = [];
+
+    base('VotingInfo').select().eachPage(function page(records, fetchNextPage) {
+        records.forEach(function(record) {
+            recordArray.push({
+                "record": record._rawJson
+            });
+        });
+        fetchNextPage();
+
+    }, function done(err) {
+        res.send(recordArray);
+
+        if (err) {
+            console.error(err);
+            return;
+        }
+    });
+});
+
 module.exports = router;
