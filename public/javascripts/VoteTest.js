@@ -98,17 +98,12 @@ const divVoteClick = (event) => {
 
     vote.forEach((element, elementCounter) => {
         console.log(elementCounter + '--------------------------------------------------')
-        if (element.CategoryVoted == Category && UserVoteData[elementCounter] == 'Empty') {
+        if (VoteStatus == 'ToVote' && Category == element.CategoryVoted) {
             element.NominatedVoted = Nominated;
             console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
-        } else
-        if (element.CategoryVoted == Category && UserVoteData[elementCounter] != 'Empty') {
-            console.log('Du har redan röstat i ' + element.CategoryVoted)
-            console.log(UserVoteData[elementCounter])
         }
-
-        if (vote[0] != 'Empty' && vote[1] != 'Empty' && vote[2] != 'Empty') {
-            document.getElementById('btnConfirmId').disabled = false;
+        if (VoteStatus == 'Voted') {
+            console.log('Du har redan röstat i ' + element.CategoryVoted)
         }
     });
 }
