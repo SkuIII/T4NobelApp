@@ -6,7 +6,7 @@ const fetchCategory = fetch(
     '/data/Categories'
 ).then(res => res.json()).then(Categories => {
     Categories.forEach((element, elementCounter) => {
-        vote.push({ CategoryVoted: 'Category' + (elementCounter + 1), NominatedVoted: null, testing: 0 });
+        vote.push({ CategoryVoted: 'Category' + (elementCounter + 1), NominatedVoted: null, CheckVotes: 0 });
     });
 });
 

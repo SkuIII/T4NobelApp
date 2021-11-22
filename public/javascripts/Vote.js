@@ -18,7 +18,7 @@ const divVoteClick = (event) => {
         console.log(elementCounter + '--------------------------------------------------')
         if (VoteStatus == 'ToVote' && Category == element.CategoryVoted) {
             element.NominatedVoted = Nominated;
-            element.testing = 1;
+            element.CheckVotes = 1;
             console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
         }
         if (VoteStatus == 'Voted') {
@@ -29,7 +29,7 @@ const divVoteClick = (event) => {
     let counter = 0;
 
     vote.forEach(Vote => {
-        if (Vote.testing == 1) {
+        if (Vote.CheckVotes == 1) {
             counter++
             if (counter == 3) {
                 document.getElementById('confirm-btn').disabled = false;
@@ -55,10 +55,14 @@ const btnConfirmClick = () => {
     
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('btn btn-primary disabled');
-    
-    do {
+    try {
+        do {
         showBtn[0].className = 'btn btn-primary';
     } while (typeof showBtn !== 'undefined' );
 
+    } catch (error) {
+        console.log(error)
+    }
+    
 
 };
