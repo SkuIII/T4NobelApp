@@ -284,12 +284,12 @@ p.ism-badge a.ism-link:hover {
 /* SLIDER */
 
 #my-slider {
-    width: 1000px;
+    width: 100%;
     -webkit-border-radius: 5px; border-radius: 5px; 
 }
 
 #my-slider-ism-badge {
-    width: 1000px;
+    width: 100%;
 }
 
 #my-slider:before {
@@ -305,7 +305,7 @@ p.ism-badge a.ism-link:hover {
     border-radius: 25px;
     width: 50px; height: 50px; background-size: 16px 16px; top: 50%; margin-top: -25px;
     color: #fff; background-color: rgba(0, 0, 0, 0.3);
-    display: block; visibility: visible;
+    visibility: hidden;
 }
 
 #my-slider .ism-button-prev {
@@ -335,52 +335,20 @@ p.ism-badge a.ism-link:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
+#my-slider:hover .ism-button {
+    visibility: visible;
+}
+
 #my-slider .ism-radios {
     display: block;
-    height: 32px;
+    height: 20px;
     text-align: center;
 }
 
 #my-slider .ism-radios label {
-    width: 60px; height: 32px;
-    border-radius: 10px;
+    width: 20px; height: 20px;
+    border-radius: 3px;
     color: #000; background-color: rgba(255, 255, 255, 0.5);
-}
-
-#my-slider .ism-radios li.ism-radio-0 label {
-    background-image: url(../image/slides/flower-729514_1280.jpg);
-}
-
-#my-slider .ism-radios li.ism-radio-1 label {
-    background-image: url(../image/slides/beautiful-701678_1280.jpg);
-}
-
-#my-slider .ism-radios li.ism-radio-2 label {
-    background-image: url(../image/slides/summer-192179_1280.jpg);
-}
-
-#my-slider .ism-radios li.ism-radio-3 label {
-    background-image: url(../image/slides/city-690332_1280.jpg);
-}
-
-#my-slider .ism-radios li.ism-radio-4 label {
-    background-image: url(../image/slides/bora-bora-685303_1280.jpg);
-}
-
-#my-slider .ism-radios li.ism-radio-5 label {
-    background-image: url(../image/slides/pier-569314_1280.jpg);
-}
-
-#my-slider .ism-radios li.ism-radio-6 label {
-    background-image: url(../image/slides/chainlink-690503_1280.jpg);
-}
-
-#my-slider .ism-radios li.ism-radio-7 label {
-    background-image: url(../image/slides/tree-701688_1280.jpg);
-}
-
-#my-slider .ism-radios li.ism-radio-8 label {
-    background-image: url(../image/slides/sky-690293_1280.jpg);
 }
 
 #my-slider .ism-radios li.active label {
@@ -587,13 +555,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-0 .ism-caption-0 {
-    font-size: 3em;
-    font-family: "Open Sans", sans-serif;
+    font-size: 2em;
+    font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
     border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-0 .ism-caption-1 {
@@ -617,13 +585,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-1 .ism-caption-0 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
     border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-1 .ism-caption-1 {
@@ -647,13 +615,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-2 .ism-caption-0 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
     border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-2 .ism-caption-1 {
@@ -677,13 +645,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-3 .ism-caption-0 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
-    border-radius: 0;
+    border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-3 .ism-caption-1 {
@@ -707,13 +675,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-4 .ism-caption-0 {
-    font-size: 3em;
-    font-family: "Raleway", sans-serif;
+    font-size: 2em;
+    font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
     border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-4 .ism-caption-1 {
@@ -737,13 +705,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-5 .ism-caption-0 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
     border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-5 .ism-caption-1 {
@@ -767,13 +735,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-6 .ism-caption-0 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
     border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-6 .ism-caption-1 {
@@ -797,13 +765,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-7 .ism-caption-0 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
     border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-7 .ism-caption-1 {
@@ -827,13 +795,13 @@ p.ism-badge a.ism-link:hover {
 }
 
 #my-slider .ism-slide-8 .ism-caption-0 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: sans-serif;
     position: absolute; top: 10%;
     left: 5%;
     border-radius: 4px;
     border: none;
-    color: #fff; background-color: rgba(0, 0, 0, 0.40);
+    color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
 #my-slider .ism-slide-8 .ism-caption-1 {
