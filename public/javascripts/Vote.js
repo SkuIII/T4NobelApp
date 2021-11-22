@@ -26,11 +26,12 @@ const divVoteClick = (event) => {
 }
 
 const btnConfirmClick = () => {
-    const url = 'https://shrouded-wave-16183.herokuapp.com/Vote';
+    const url = document.URL.split('/');
+    const urlSend = `${url[0]}//${url[2]}/Vote`;
 
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
 
-    fetch(url, {
+    fetch(urlSend, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
         headers: {
             'Content-Type': 'application/json'
