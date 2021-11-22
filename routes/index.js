@@ -32,7 +32,7 @@ router.get('/pelikan', function(req, res, next) {
     res.render('workingFolder/loginLeader');
 });
 
-router.post('/VoteLogin', function(req, res, next) {
+router.post('/VoteLogin', function(req, res, next) { // reseves user   Returns vote status
     let VoteStatus;
     const response = JSON.stringify(req.body);
     const User = JSON.parse(response);
@@ -64,7 +64,7 @@ router.get('/Vote', function(req, res, next) {
     });
 });
 
-router.post('/Vote', function(req, res, next) {
+router.post('/Vote', function(req, res, next) { // Reseves The vote
     const response = JSON.stringify(req.body);
     const Votes = JSON.parse(response);
 

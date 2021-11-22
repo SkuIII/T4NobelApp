@@ -39,12 +39,12 @@ const divVoteClick = (event) => {
 }
 
 const btnConfirmClick = () => {
-    document.getElementById('confirm-btn').disabled = true;
-    const url = document.URL;
+    const url = document.URL.split('/');
+    const urlSend = `${url[0]}//${url[2]}/Vote`;
 
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
 
-    fetch(url, {
+    fetch(urlSend, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
         headers: {
             'Content-Type': 'application/json'

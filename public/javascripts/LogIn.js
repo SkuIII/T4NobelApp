@@ -57,9 +57,10 @@ function handleCredentialResponse(response) {
             "edu mail för att din röst ska registreras.");
     }
 
-    const url = document.URL + 'Login';
+    const url = document.URL.split('/');
+    const urlSend = `${url[0]}//${url[2]}/VoteLogin`;
 
-    fetch(url, {
+    fetch(urlSend, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc
         headers: {
             'Content-Type': 'application/json'
