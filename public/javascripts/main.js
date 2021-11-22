@@ -14,13 +14,18 @@ const fetchCategoryInfo = fetch(
     '/data/Categories'
 ).then((res) => res.json());
 
+const fetchVotingInfo = fetch(
+    '/data/VotingInfo'
+).then((res) => res.json());
+
+
 // const fetchStudentInfo = fetch(
 //     '/data/Students'
 // ).then((res) => res.json());
 
 
 // Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchVotingInfo]);
 
 allData.then((res) => Load(res));
 
@@ -30,29 +35,19 @@ const Load = (res) => {
     // All data recieved from each base
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
+    const VotingInfo = res[2];
     // const StudentInfo = res[2];
 
-    console.log(NominatedInfo);
-    // console.log(CategoryInfo);
-    // console.log(StudentInfo);
+    //Number of students that have voted
+    console.log(VotingInfo);
+    console.log(VotingInfo[3].record.fields.Number);
+    console.log(VotingInfo[4].record.fields.Number);
+    console.log(VotingInfo[5].record.fields.Number);
 
-    //JavaScript code to generate HTML for loginVote
-    
-    // const Rubrik = document.createElement('h1');
-    // const längk = document.createElement('p');
-    // Rubrik.textContent = 'hejsan';
-    // längk.textContent = 'he';
-    // Rubrik.appendChild(längk);
-    // document.getElementById('anka').appendChild(Rubrik);
-
-    // const pic1 = document.createElement('img');
-    // pic1.src = 'https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png';
-    // document.getElementById('test').appendChild(pic1);
-    
-
-   
-    
-
+    //Max student
+    console.log(VotingInfo[0].record.fields.Number);
+    console.log(VotingInfo[1].record.fields.Number);
+    console.log(VotingInfo[2].record.fields.Number);
 
     const rowDefault = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover';
     const rowSelected = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover row-selected';
@@ -124,19 +119,21 @@ const Load = (res) => {
     
     const homePage = () => {
 
-        //Rounding function
+        //Rounding function for percentage
         function round(value, decimals) {
             return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
         }
         
-        var maxVotesYears = [256, 256, 256];
-        var voteYears = [30, 100, 80];
-        var progressBarColor = ['', 'bg-danger', 'bg-warning']
+        //Arrays for number of students in each years and number of students who had voted in each years
+        var maxVotesYears = [VotingInfo[0].record.fields.Number, VotingInfo[1].record.fields.Number, VotingInfo[2].record.fields.Number];
+        var voteYears = [VotingInfo[3].record.fields.Number, VotingInfo[4].record.fields.Number, VotingInfo[5].record.fields.Number];
+        var progressBarColor = ['', 'bg-danger', 'bg-warning'];
+      
         
         //Selected nominee function
         for (let i = 0; i < 3; i++) {
             var fullPercent = (voteYears[i]/maxVotesYears[i]) * 100;
-            var percentage = round(fullPercent, 1);
+            var roundedPercentage = round(fullPercent, 1);
 
             var rowProgress = document.createElement('div');
             rowProgress.className = 'row mt-5';
@@ -144,7 +141,7 @@ const Load = (res) => {
 
             var classYear = document.createElement('label');
             classYear.className = 'fw-bold fs-4 p-2 pb-0';
-            classYear.textContent = 'åk1';
+            classYear.textContent = 'Åk ' + (i+1);
             rowProgress.appendChild(classYear);
 
             var colProgress = document.createElement('div');
@@ -158,9 +155,15 @@ const Load = (res) => {
             colProgress.appendChild(progress);
 
             var progressBar = document.createElement('div');
-            progressBar.className = 'progress-bar progress-bar-striped progress-bar-animated';
-            progressBar.style.width = `${percentage}%`;
+            progressBar.className = 'progress-bar progress-bar-striped progress-bar-animated fw-bold fs-5 text '  + progressBarColor[i];
+            progressBar.style.width = `${roundedPercentage}%`;
             progress.appendChild(progressBar);
+            
+            progressBar.innerHTML = roundedPercentage  + '%';
+            // var barPercent = roundedPercentage  + '%';
+            // barPercent.className = 'fw-bold';
+            // progressBar.innerHTML = barPercent;
+            
             
 
 
