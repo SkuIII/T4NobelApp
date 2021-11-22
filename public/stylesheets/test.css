@@ -36,7 +36,9 @@
     margin-right:auto; */
 }
 
-
+.pointer{
+    cursor: pointer;
+}
 
 
 .row-hover{
