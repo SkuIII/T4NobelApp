@@ -93,11 +93,16 @@ const divVoteClick = (event) => {
 
     const Category = temp[0];
     const Nominated = temp[1];
+    let counter = 0;
 
     console.log(vote)
 
     vote.forEach((element, elementCounter) => {
         console.log(elementCounter + '--------------------------------------------------')
+        if (VoteStatus == 'ToVote' && typeof element.Category === 'undefined') {
+            counter++;
+            console.log(counter)
+        }
         if (VoteStatus == 'ToVote' && Category == element.CategoryVoted) {
             element.NominatedVoted = Nominated;
             console.log('Du har nu röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted)
@@ -105,11 +110,14 @@ const divVoteClick = (event) => {
         if (VoteStatus == 'Voted') {
             console.log('Du har redan röstat i ' + element.CategoryVoted)
         }
+        if (counter = 3) {
+            document.getElementById('btnConfirmId').disabled = true;
+        }
     });
 }
 
 const btnConfirmClick = () => {
-    document.getElementById('btnConfirmId').disabled = false;
+    document.getElementById('btnConfirmId').disabled = true;
     const url = document.URL;
 
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
