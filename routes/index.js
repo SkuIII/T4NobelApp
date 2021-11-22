@@ -35,7 +35,6 @@ router.post('/VoteLogin', function(req, res, next) { // receive user   Returns v
         },
         function done(err) {
             res.send(JSON.stringify(VoteStatus));
-            console.log(JSON.stringify(VoteStatus));
             if (err) {
                 console.error(err);
                 return;

@@ -50,9 +50,8 @@ function handleCredentialResponse(response) {
         popup.style.display = "none";
 
     } else {
-        //Frontend måste skapa en indikation i detta fall för att informera använadren om felaktig email
 
-        popup.classList.toggle("show");
+        popup.classList.add("show");
         popup.textContent = ("Du måste välja din " +
             "edu mail för att din röst ska registreras.");
     }
