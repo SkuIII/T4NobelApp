@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('main.js is alive!');
+// console.log('main.js is alive!');
 
 let NominatedInfo = [];
 let CategoryInfo = [];
@@ -29,7 +29,7 @@ const Load = (res) => {
 
     CategoryInfo.forEach((Category, counterCategory) => {
 
-        console.log(Category.record.fields.Category);
+        // console.log(Category.record.fields.Category);
 
         //Creates headline
         const content = document.getElementById('content');
@@ -50,7 +50,7 @@ const Load = (res) => {
             if (Nominated.record.fields.Category == Category.record.fields.Category){
                 // console.log(Nominated.record.fields.Picture[0].url);
 
-                console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
+                // console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
 
                 var newCol = document.createElement('div');
                 newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
@@ -88,13 +88,14 @@ const Load = (res) => {
                 btnVote.textContent = 'Rösta';
                 btnVote.className = 'btn btn-primary disabled';
                 btnVote.addEventListener('click', divVoteClick);
-                btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
+                btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
                 newCol.appendChild(btnVote);
             }
         });
     });
 
     document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick);
+    
 }
 
 const showBio = (sender) =>{

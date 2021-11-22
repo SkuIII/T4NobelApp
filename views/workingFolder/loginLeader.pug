@@ -48,10 +48,11 @@ block Nobel
     div(id="content" class="container-sm")
     div(class = "row justify-content-center m-0")
             div(class = "col-auto")
-                h2(class="text-center display-6 m-0 text-danger fw-bold") Varning! 
-                h5(class="text-center m-0 text-danger fw-bold" ) Svaret kan ej ändras
+                h2(id = "warning" class="text-center display-6 m-0 text-danger fw-bold" style="display:none;") Varning! 
+                h5(id = "warning2" class="text-center m-0 text-danger fw-bold" style="display:none;" ) Svaret kan ej ändras
+                     div(id="votedFor")
                 button(id = "confirm-btn" type="button" class="disabled btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100" ) Bekräfta röstning 
-
+               
 block Footer
     div(id = "footer")
         div(class="footer container-fluid " style="background-color:  #ff8000;")
