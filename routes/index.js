@@ -6,30 +6,14 @@ const base = new Airtable({
     apiKey: 'keyt0M8PAWLcKo6Na'
 }).base('app4x1UwZKFrNZnBU');
 
-router.get('/', function(req, res, next) {
-    res.render('index', {
+router.get('/', function(req, res, next) { // Huvudsidan
+    res.render('workingFolder/loginLeader', {
         title: 'T4NobelApp'
     });
 });
 
-router.post('/', function(req, res, next) {
-    res.render('index');
-});
-
-router.get('/anka', function(req, res, next) {
-    res.render('workingFolder/loginVote');
-});
-
-router.get('/leaderboard', function(req, res, next) {
+router.get('/leaderboard', function(req, res, next) { // Routen för sotra sjärmen 
     res.render('workingFolder/leaderboardBig');
-});
-
-router.get('/test1', function(req, res, next) {
-    res.render('workingFolder/sliderTest');
-});
-
-router.get('/pelikan', function(req, res, next) {
-    res.render('workingFolder/loginLeader');
 });
 
 router.post('/VoteLogin', function(req, res, next) { // reseves user   Returns vote status
@@ -51,6 +35,7 @@ router.post('/VoteLogin', function(req, res, next) { // reseves user   Returns v
         },
         function done(err) {
             res.send(JSON.stringify(VoteStatus));
+            console.log(JSON.stringify(VoteStatus));
             if (err) {
                 console.error(err);
                 return;
@@ -58,13 +43,13 @@ router.post('/VoteLogin', function(req, res, next) { // reseves user   Returns v
         });
 });
 
-router.get('/Vote', function(req, res, next) {
+router.get('/Vote', function(req, res, next) { // För att testa olika saker med röstninssystemet
     res.render('Vote', {
         title: 'T4NobelApp'
     });
 });
 
-router.post('/Vote', function(req, res, next) { // Reseves The vote
+router.post('/Vote', function(req, res, next) { // Reseves The vote ansends it to Airtable
     const response = JSON.stringify(req.body);
     const Votes = JSON.parse(response);
 
@@ -148,12 +133,10 @@ router.post('/Vote', function(req, res, next) { // Reseves The vote
             });
     }
 
-    res.render('Vote', {
-        title: 'T4NobelApp'
-    });
+    res.send();
 });
 
-router.get('/admin', function(req, res, next) {
+router.get('/admin', function(req, res, next) { // Is for Admin controles
     res.render('admin');
 });
 
