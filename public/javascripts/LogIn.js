@@ -45,7 +45,7 @@ function handleCredentialResponse(response) {
     let popup = document.getElementById("myPopup");
 
     if (responsePayload.email.includes('edu.huddinge.se')) {
-        enableBtn();
+        
         email = responsePayload.email;
         popup.style.display = "none";
 
@@ -67,6 +67,7 @@ function handleCredentialResponse(response) {
         body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
     }).then(response => response.json()).then(data => {
         VoteStatus = data;
+        enableBtn();
     });
 }
 

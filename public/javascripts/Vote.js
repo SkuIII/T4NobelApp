@@ -11,9 +11,9 @@ const divVoteClick = (event) => {
 
     const Category = temp[0];
     const Nominated = temp[1];
-    console.log(vote)
+    console.log(vote);
     vote.forEach((element, elementCounter) => {
-        console.log(elementCounter + '--------------------------------------------------')
+        console.log(elementCounter + '--------------------------------------------------');
         if (VoteStatus == 'ToVote' && Category == element.CategoryVoted) {
             element.NominatedVoted = Nominated;
             element.CheckVotes = 1;
@@ -21,11 +21,14 @@ const divVoteClick = (event) => {
 
 
         }
-        if (VoteStatus == 'Voted') {
-            console.log('Du har redan röstat i ' + element.CategoryVoted)
-        }
-    });
 
+    });
+    if (VoteStatus == 'Voted') {
+
+        
+
+
+    }
     let counter = 0;
 
     vote.forEach(Vote => {
@@ -64,12 +67,21 @@ const btnConfirmClick = () => {
 
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('btn btn-primary disabled');
-    try {
-        do {
-            showBtn[0].className = 'btn btn-primary';
-        } while (typeof showBtn !== 'undefined');
+    if (VoteStatus == 'ToVote') {
 
-    } catch (error) {
-        //  console.log(error)
+        try {
+            do {
+                showBtn[0].className = 'btn btn-primary';
+            } while (typeof showBtn !== 'undefined');
+
+        } catch (error) {
+            //  console.log(error)
+        }
+    }else{
+        const alreadyVoted = document.createElement('div');
+        alreadyVoted.textContent = 'Du har redan röstat!';
+        alreadyVoted.className = 'alert alert-warning text-center h4';
+        document.getElementById('header').appendChild(alreadyVoted);
     }
+
 };

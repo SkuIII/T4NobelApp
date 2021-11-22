@@ -4,7 +4,6 @@
 
 let NominatedInfo = [];
 let CategoryInfo = [];
-
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
 const fetchNominatedInfo = fetch(
@@ -52,7 +51,7 @@ const Load = (res) => {
 
                 // console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
 
-                var newCol = document.createElement('div');
+                const newCol = document.createElement('div');
                 newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
                 newCol.id = counterCategory + '+' + counterNominated;
                 row.appendChild(newCol);
