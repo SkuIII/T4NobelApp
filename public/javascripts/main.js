@@ -30,93 +30,13 @@ const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchVotingI
 allData.then((res) => Load(res));
 
 const Load = (res) => {
-
-    
     // All data recieved from each base
     const NominatedInfo = res[0];
     const CategoryInfo = res[1];
     const VotingInfo = res[2];
-    // const StudentInfo = res[2];
 
-    //Number of students that have voted
-    console.log(VotingInfo);
-    console.log(VotingInfo[3].record.fields.Number);
-    console.log(VotingInfo[4].record.fields.Number);
-    console.log(VotingInfo[5].record.fields.Number);
+    const rowHome = 'row p-0 mb-4 mx-0 justify-content-center'
 
-    //Max student
-    console.log(VotingInfo[0].record.fields.Number);
-    console.log(VotingInfo[1].record.fields.Number);
-    console.log(VotingInfo[2].record.fields.Number);
-
-    const rowDefault = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover';
-    const rowSelected = 'row p-0 border-phat justify-content-center mb-4 mx-0 shadow-lg p-4 mb-4 row-hover row-selected';
-    const rowHome = 'row p-0 justify-content-center mb-4 mx-0 rowCSS'
-
-    //Javascript for votingPage
-    const votePage = () => {
-        //BS5 classes for th
-        
-        // Looping through nominated people by category
-        CategoryInfo.forEach((Category, counterCategory) => {
-
-        console.log(Category.record.fields.Category);
-
-        //Creates headline
-        const content = document.getElementById('content');
-
-        var h1 = document.createElement('h1');
-        h1.textContent = Category.record.fields.Category;
-        h1.className = 'text-center pt-5';
-        content.appendChild(h1);
-
-        //rows
-        var row = document.createElement('div');
-        row.className = 'row justify-content-center'
-        row.id = Category.record.fields.Category + '.Row';
-        content.appendChild(row);
-
-
-        NominatedInfo.forEach(Nominated => {
-            if (Nominated.record.fields.Category == Category.record.fields.Category){
-                // console.log(Nominated.record.fields.Picture[0].url);
-
-                console.log('Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated);
-
-                
-                var rowNominated = document.createElement('div');
-                rowNominated.className = rowDefault;
-                rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
-                rowNominated.addEventListener('click', divVoteClick);
-                row.appendChild(rowNominated);
-
-                var img = document.createElement('img');
-                img.className = 'col-auto p-0 rounded-3 img-size align-self-center';
-                img.src =  Nominated.record.fields.Picture[0].url;
-                rowNominated.appendChild(img);
-
-                var info = document.createElement('div');
-                info.className = 'col-9 text-center m-0';
-                info.id = Nominated.record.fields.Nominated + '.Info';
-                rowNominated.appendChild(info);
-
-                var name = document.createElement('h3');
-                name.className = 'text-center';
-                name.textContent = Nominated.record.fields.Nominated;
-                info.appendChild(name);
-                
-                var bio = document.createElement('p');
-                bio.className = 'text-start';
-                bio.textContent = Nominated.record.fields.Bio;
-                info.appendChild(bio);
-            }
-        });
-
-       
-
-        });
-    }
-    
     const homePage = () => {
 
         //Rounding function for percentage
@@ -159,15 +79,8 @@ const Load = (res) => {
             progressBar.style.width = `${roundedPercentage}%`;
             progress.appendChild(progressBar);
             
+            //Adds text-percent inside the progressbar
             progressBar.innerHTML = roundedPercentage  + '%';
-            // var barPercent = roundedPercentage  + '%';
-            // barPercent.className = 'fw-bold';
-            // progressBar.innerHTML = barPercent;
-            
-            
-
-
-            
         }
 
         //HÄR JOHAN
@@ -195,20 +108,14 @@ const Load = (res) => {
                     // console.log(Nominated.record.fields.Picture[0].url);
     
                     console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
-    
-                    
-                    // var rowNominated = document.createElement('div');
-                    // rowNominated.className = rowHome;
-                    // rowNominated.id = 'Category' + (counterCategory + 1) + ',' + Nominated.record.fields.Nominated;
-                    // row.appendChild(rowNominated);
 
                     var newCol = document.createElement('div');
-                    newCol.className = 'col-sm-3 border-phatHome mx-3 p-0';
+                    newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
                     newCol.id = counterCategory + '+' + counterNominated;
                     row.appendChild(newCol);
     
                     var img = document.createElement('img');
-                    img.className = ' p-0 rounded-3 img-size img-fluid align-content-self';
+                    img.className = ' p-0 rounded-3 img-size img-fluid mx-auto d-block';
                     img.src =  Nominated.record.fields.Picture[0].url;
                     newCol.appendChild(img);
     
@@ -223,46 +130,42 @@ const Load = (res) => {
                     info.appendChild(name);
 
                     const ClickMe = document.createElement('p');
-                    ClickMe.className = 'ClickMeCss'
-                    ClickMe.textContent = 'Show more';
+                    ClickMe.className = 'ClickMeCss pointer';
+                    ClickMe.textContent = 'Visa mer';
                     ClickMe.name = counterCategory + '+' + counterNominated;
                     ClickMe.addEventListener('click', showBio);
                     name.appendChild(ClickMe);
                     
                     var bio = document.createElement('p');
-                    bio.className = 'text-start bio-Overflow ';
+                    bio.className = 'text-start bio-Overflow';
                     bio.textContent = Nominated.record.fields.Bio;
                     info.appendChild(bio);
 
                     const btnVote = document.createElement('button');
                     btnVote.textContent = 'Rösta';
+                    btnVote.className = 'btn btn-primary';
                     btnVote.addEventListener('click', divVoteClick);
-                    btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated
+                    btnVote.id = 'Category' + (counterCategory + 1) + "," + Nominated.record.fields.Nominated;
                     newCol.appendChild(btnVote);
                 }
             });
         });
         
     };
-    if(document.getElementById('headline').textContent == 'Rösta'){
-        votePage();
-    }else if(document.getElementById('headline').textContent == 'ÖSTRAS ALTERNATIVA NOBEL PRIS'){
-        homePage();
-    };
-
+    homePage();
     document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick);
 
 }
 const showBio = (sender) =>{
     const ID = sender.target.name;
     const anka = document.getElementById(ID);
-    if (anka.className == 'col-sm-3 border-phatHome mx-3 p-0') {
-        anka.className = 'col-sm-3 border-phatHome-hover mx-3 p-0';
-        sender.target.textContent = 'Show less';
+    if (anka.className == 'col-sm-3 border-phatHome mx-3 p-0 text-center') {
+        anka.className = 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center';
+        sender.target.textContent = 'Visa mindre';
     }
-    else if(anka.className == 'col-sm-3 border-phatHome-hover mx-3 p-0'){ 
-        anka.className = 'col-sm-3 border-phatHome mx-3 p-0';
-        sender.target.textContent = 'Show more';
+    else if(anka.className == 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center'){ 
+        anka.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
+        sender.target.textContent = 'Visa mer';
     }
 
    
