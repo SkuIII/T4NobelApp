@@ -41,7 +41,7 @@ const btnConfirmClick = () => {
     
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('btn btn-primary disabled');
-    console.log(taljoxe);
+    
     do {
         showBtn[0].className = 'btn btn-primary';
     } while (typeof showBtn !== 'undefined' );
