@@ -2,9 +2,22 @@
 
 console.log('LogIn.js is alive!')
 
+const fetchCategory = fetch(
+    '/data/Categories'
+).then(res => res.json()).then(Categories => {
+    Categories.forEach((element, elementCounter) => {
+        vote.push({ CategoryVoted: 'Category' + (elementCounter + 1), NominatedVoted: null });
+    });
+});
+
+// Promise.all() does several fetch requests parallel
+
+
+
+
 let email;
-let UserVoteData;
-let data;
+let VoteStatus;
+let Categories;
 
 window.onload = function() {
     google.accounts.id.initialize({
@@ -52,14 +65,9 @@ function handleCredentialResponse(response) {
             'Content-Type': 'application/json'
         },
         body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
-    }).then(response => response.json()).then(data => UserVoteData = data).then(() =>
-        UserVoteData.forEach((data, dataCount) => {
-            vote.push({
-                CategoryVoted: 'Category' + (dataCount + 1),
-                NominatedVoted: data
-            });
-        })
-    );
+    }).then(response => response.json()).then(data => {
+        VoteStatus = data;
+    });
 }
 
 function decodeJwtResponse(token) {

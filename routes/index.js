@@ -33,37 +33,24 @@ router.get('/pelikan', function(req, res, next) {
 });
 
 router.post('/VoteLogin', function(req, res, next) {
-    let UserCategories = [];
-
-    let Category1 = '';
-    let Category2 = '';
-    let Category3 = '';
-
+    let VoteStatus;
     const response = JSON.stringify(req.body);
     const User = JSON.parse(response);
 
     base('Students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 if (User.email == record.fields.Email) {
-
-                    Category1 = record.fields.Category1;
-                    Category2 = record.fields.Category2;
-                    Category3 = record.fields.Category3;
-
-                    UserCategories = [Category1, Category2, Category3];
-
-                    UserCategories.forEach((element, elementCounter) => {
-                        if (typeof element === 'undefined') {
-                            element = 'Empty';
-                            UserCategories[elementCounter] = 'Empty'
-                        }
-                    })
-                    res.send(UserCategories);
+                    if (record.fields.VoteStatus == 'ToVote') {
+                        VoteStatus = 'ToVote';
+                    } else {
+                        VoteStatus = 'Voted';
+                    }
                 }
             });
             fetchNextPage();
         },
         function done(err) {
+            res.send(JSON.stringify(VoteStatus));
             if (err) {
                 console.error(err);
                 return;
@@ -81,61 +68,85 @@ router.post('/Vote', function(req, res, next) {
     const response = JSON.stringify(req.body);
     const Votes = JSON.parse(response);
 
-    base('Students').select().eachPage(function page(records, fetchNextPage) {
-            records.forEach(record => {
-                Votes.vote.forEach(element => {
-                    if (record.fields.Email == Votes.email) {
-                        base('Students').update([{
-                            "id": record.id,
-                            "fields": {
-                                "VoteStatus": "Voted",
-                                [element.CategoryVoted]: element.NominatedVoted,
-                            }
-                        }], function(err, records) {
-                            if (err) {
-                                console.error(err);
-                                return;
-                            }
-                        });
-                        base('votinginfo').select().eachPage(function page(records, fetchNextPage) {
-                                records.forEach((recordVotingInfo, recordVotingInfoCounter) => {
-                                    if (recordVotingInfo.fields.Name == 'CounterVotedYear' + (recordVotingInfoCounter - 2)) {
-                                        let CounterVoted = recordVotingInfo.fields.Number;
-                                        CounterVoted++;
-                                        if (record.fields.Year == (recordVotingInfoCounter - 2)) {
-                                            base('VotingInfo').update([{
-                                                "id": recordVotingInfo.id,
-                                                "fields": {
-                                                    "Number": CounterVoted,
-                                                }
-                                            }], function(err, records) {
-                                                if (err) {
-                                                    console.error(err);
-                                                    return;
-                                                }
-                                            });
-                                        }
-                                    }
-                                });
-                                fetchNextPage();
-                            },
-                            function done(err) {
+    let NominatedArray = [];
+
+    base('Nominated').select().eachPage(function page(records, fetchNextPage) {
+        records.forEach(function(record) {
+            Votes.vote.forEach(element => {
+                if (record.fields.Nominated == element.NominatedVoted) {
+                    NominatedArray.push(record.id);
+                }
+            })
+        });
+        fetchNextPage();
+
+    }, function done(err) {
+
+        UpdateVote();
+        if (err) {
+            console.error(err);
+            return;
+        }
+    });
+
+
+    const UpdateVote = () => {
+        base('Students').select().eachPage(function page(records, fetchNextPage) {
+                records.forEach(record => {
+                    Votes.vote.forEach(element => {
+                        if (record.fields.Email == Votes.email) {
+                            base('Students').update([{
+                                "id": record.id,
+                                "fields": {
+                                    "VoteStatus": "Voted",
+                                    "VotedFor": NominatedArray
+                                }
+                            }], function(err, records) {
                                 if (err) {
                                     console.error(err);
                                     return;
                                 }
                             });
-                    }
-                })
+                            base('votinginfo').select().eachPage(function page(records, fetchNextPage) {
+                                    records.forEach((recordVotingInfo, recordVotingInfoCounter) => {
+                                        if (recordVotingInfo.fields.Name == 'CounterVotedYear' + (recordVotingInfoCounter - 2)) {
+                                            let CounterVoted = recordVotingInfo.fields.Number;
+                                            CounterVoted++;
+                                            if (record.fields.Year == (recordVotingInfoCounter - 2)) {
+                                                base('VotingInfo').update([{
+                                                    "id": recordVotingInfo.id,
+                                                    "fields": {
+                                                        "Number": CounterVoted,
+                                                    }
+                                                }], function(err, records) {
+                                                    if (err) {
+                                                        console.error(err);
+                                                        return;
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
+                                    fetchNextPage();
+                                },
+                                function done(err) {
+                                    if (err) {
+                                        console.error(err);
+                                        return;
+                                    }
+                                });
+                        }
+                    })
+                });
+                fetchNextPage();
+            },
+            function done(err) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
             });
-            fetchNextPage();
-        },
-        function done(err) {
-            if (err) {
-                console.error(err);
-                return;
-            }
-        });
+    }
 
     res.render('Vote', {
         title: 'T4NobelApp'
