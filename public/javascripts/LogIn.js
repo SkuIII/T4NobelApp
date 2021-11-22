@@ -45,7 +45,7 @@ function handleCredentialResponse(response) {
     let popup = document.getElementById("myPopup");
 
     if (responsePayload.email.includes('edu.huddinge.se')) {
-
+        enableBtn();
         email = responsePayload.email;
         popup.style.display = "none";
 
@@ -54,7 +54,7 @@ function handleCredentialResponse(response) {
 
         popup.classList.toggle("show");
         popup.textContent = ("Du måste välja din " +
-            "edu mail för att din röst ska registreras");
+            "edu mail för att din röst ska registreras.");
     }
 
     const url = document.URL + 'Login';
