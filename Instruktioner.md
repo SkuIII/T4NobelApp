@@ -1,6 +1,6 @@
 ## Instruktioner
 
-1. Gå in på länken https://shrouded-wave-16183.herokuapp.com/pelikan
+1. Gå in på länken https://shrouded-wave-16183.herokuapp.com/
 2. Logga in med en edu.huddinge mail (högst upp i höger hörn)
 3. Läs om varje nominerad och klicka på "show more"
 4. Klicka på rösta längst ner på den nominerade, en i varje kategori
