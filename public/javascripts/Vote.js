@@ -68,7 +68,7 @@ const btnConfirmClick = () => {
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('btn btn-primary disabled');
     if (VoteStatus == 'ToVote') {
-
+        
         try {
             do {
                 showBtn[0].className = 'btn btn-primary';
@@ -80,8 +80,15 @@ const enableBtn = () => {
     }else{
         const alreadyVoted = document.createElement('div');
         alreadyVoted.textContent = 'Du har redan röstat!';
-        alreadyVoted.className = 'alert alert-warning text-center h4';
+        alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
         document.getElementById('header').appendChild(alreadyVoted);
+
+        const alertClose = document.createElement('button');
+        alertClose.className = 'btn-close';
+        alertClose.type = 'button';
+        alertClose.setAttribute('data-bs-dismiss', 'alert');
+        alreadyVoted.appendChild(alertClose);
+        
     }
 
 };
