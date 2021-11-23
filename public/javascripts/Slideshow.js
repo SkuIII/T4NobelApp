@@ -35,6 +35,7 @@ const LoadNominatedInfo = (res) => {
         h1.className = 'ism-caption ism-caption-0';
         document.getElementById(Nominee.record.fields.Nominated).appendChild(h1);
         
+        
     });
 
     const slide = document.createElement('script');         //Makes the javascript to read in after
