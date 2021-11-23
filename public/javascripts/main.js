@@ -62,7 +62,7 @@ const Load = (res) => {
                 newCol.appendChild(img);
 
                 var info = document.createElement('div');
-                info.className = 'text-center m-0';
+                info.className = 'text-center m-0 p-2';
                 info.id = Nominated.record.fields.Nominated + '.Info';
                 newCol.appendChild(info);
 
