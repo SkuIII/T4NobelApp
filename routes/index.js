@@ -16,7 +16,7 @@ router.get('/leaderboard', function(req, res, next) { // Routen för stora skär
     res.render('workingFolder/leaderboardBig');
 });
 
-router.post('/VoteLogin', function(req, res, next) { // receive user   Returns vote status
+router.post('/VoteLogin', function(req, res, next) { // Receives user, returns vote status
     let VoteStatus;
     const response = JSON.stringify(req.body);
     const User = JSON.parse(response);
@@ -93,7 +93,7 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
                             });
                             base('votinginfo').select().eachPage(function page(records, fetchNextPage) {
                                     records.forEach((recordVotingInfo, recordVotingInfoCounter) => {
-                                        if (recordVotingInfo.fields.Name == 'CounterVotedYear' + (recordVotingInfoCounter - 2)) {
+                                        if (recordVotingInfo.fields.Name == 'AmountStudentsVotedYear' + (recordVotingInfoCounter - 2)) {
                                             let CounterVoted = recordVotingInfo.fields.Number;
                                             CounterVoted++;
                                             if (record.fields.Year == (recordVotingInfoCounter - 2)) {
@@ -135,40 +135,44 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
     res.send();
 });
 
-router.get('/admin', function(req, res, next) { // Is for Admin controls
+router.get('/admin', function(req, res, next) { // Used for admin controls
     res.render('admin');
 });
 
-// CounterYearX starts at -1 because airtable has an extra record per year
-let CounterYear1 = -1;
-let CounterYear2 = -1;
-let CounterYear3 = -1;
-let CounterVotedYear1 = 0;
-let CounterVotedYear2 = 0;
-let CounterVotedYear3 = 0;
-
-router.post('/admin', function(req, res, next) {
-    let ArrayCounter = [];
+router.post('/admin', function(req, res, next) { // When button on admin apge is pressed
+    // YearsArray will hold which years correspond to which grade
+    let YearsArray = [];
 
     let YearOne;
     let YearTwo;
     let YearThree;
 
+    // AmountStudentsYearX starts at -1 because Airtable has an extra record per year
+    let AmountStudentsYear1 = -1;
+    let AmountStudentsYear2 = -1;
+    let AmountStudentsYear3 = -1;
+
+    let AmountStudentsVotedYear1 = 0;
+    let AmountStudentsVotedYear2 = 0;
+    let AmountStudentsVotedYear3 = 0;
+
+    // This is to find out which year corresponds to which grade
+    // The first three records in Students table are used to find this out
     base('Students').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 if (record.fields.Name.includes('1')) {
-                    ArrayCounter.push(
+                    YearsArray.push(
                         record.fields.Class
                     )
                 } else
                 if (record.fields.Name.includes('2')) {
-                    ArrayCounter.push(
+                    YearsArray.push(
                         record.fields.Class
                     )
 
                 } else
                 if (record.fields.Name.includes('3')) {
-                    ArrayCounter.push(
+                    YearsArray.push(
                         record.fields.Class
                     )
                 }
@@ -176,11 +180,12 @@ router.post('/admin', function(req, res, next) {
             fetchNextPage();
         },
         function done(err) {
-            ArrayCounter.sort();
+            YearsArray.sort();
 
-            YearOne = ArrayCounter[2]
-            YearTwo = ArrayCounter[1]
-            YearThree = ArrayCounter[0]
+            // The highest number in the array always corresponds to the first grade, so on
+            YearOne = YearsArray[2]
+            YearTwo = YearsArray[1]
+            YearThree = YearsArray[0]
 
             updateYear();
 
@@ -190,11 +195,12 @@ router.post('/admin', function(req, res, next) {
             }
         });
 
+    // updateYear updates Students table to list all students with correct year
     const updateYear = () => {
         base('Students').select().eachPage(function page(records, fetchNextPage) {
                 records.forEach(record => {
                     if (record.fields.Class.includes(YearThree)) {
-                        CounterYear3++;
+                        AmountStudentsYear3++;
                         base('Students').update([{
                             "id": record.id,
                             "fields": {
@@ -206,12 +212,9 @@ router.post('/admin', function(req, res, next) {
                                 return;
                             }
                         });
-                        if (record.fields.VoteStatus == 'Voted') {
-                            CounterVotedYear3++;
-                        }
                     }
                     if (record.fields.Class.includes(YearTwo)) {
-                        CounterYear2++;
+                        AmountStudentsYear2++;
                         base('Students').update([{
                             "id": record.id,
                             "fields": {
@@ -223,12 +226,9 @@ router.post('/admin', function(req, res, next) {
                                 return;
                             }
                         });
-                        if (record.fields.VoteStatus == 'Voted') {
-                            CounterVotedYear2++;
-                        }
                     }
                     if (record.fields.Class.includes(YearOne)) {
-                        CounterYear1++;
+                        AmountStudentsYear1++;
                         base('Students').update([{
                             "id": record.id,
                             "fields": {
@@ -240,32 +240,30 @@ router.post('/admin', function(req, res, next) {
                                 return;
                             }
                         });
-                        if (record.fields.VoteStatus == 'Voted') {
-                            CounterVotedYear1++;
-                        }
                     }
                 });
                 fetchNextPage();
 
             },
             function done(err) {
-                console.log(`Yearone=${CounterYear1} Yeartwo=${CounterYear2} Yearthree=${CounterYear3} YearVotedone=${CounterVotedYear1} YearVotedtwo=${CounterVotedYear2} YearVotedthree=${CounterVotedYear3}`)
-                let CounterYears = [CounterYear1, CounterYear2, CounterYear3];
-                WriteYear(CounterYears);
+                let AmountStudentsArray = [AmountStudentsYear1, AmountStudentsYear2, AmountStudentsYear3];
+                WriteYear(AmountStudentsArray);
+
                 if (err) {
                     console.error(err);
                     return;
                 }
             });
 
-        const WriteYear = (CounterYears) => {
-            base('votinginfo').select().eachPage(function page(records, fetchNextPage) {
+        // WriteYear updates VotingInfo table with correct amount of students in each year
+        const WriteYear = (AmountStudentsArray) => {
+            base('VotingInfo').select().eachPage(function page(records, fetchNextPage) {
                     records.forEach((recordVotingInfo, recordVotingInfoCounter) => {
-                        if (recordVotingInfo.fields.Name == 'CounterYear' + (recordVotingInfoCounter + 1)) {
+                        if (recordVotingInfo.fields.Name == 'AmountStudentsYear' + (recordVotingInfoCounter + 1)) {
                             base('VotingInfo').update([{
                                 "id": recordVotingInfo.id,
                                 "fields": {
-                                    'Number': CounterYears[recordVotingInfoCounter]
+                                    'Number': AmountStudentsArray[recordVotingInfoCounter]
                                 }
                             }], function(err, records) {
                                 if (err) {
@@ -278,7 +276,9 @@ router.post('/admin', function(req, res, next) {
                     fetchNextPage();
                 },
                 function done(err) {
+
                     res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
+
                     if (err) {
                         console.error(err);
                         return;
