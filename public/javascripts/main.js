@@ -50,9 +50,7 @@ const Load = (res) => {
                 // console.log(Nominated.record.fields.Picture[0].url);
 
                 // console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
-
-
-
+                
                 const newCol = document.createElement('div');
                 newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
                 newCol.id = counterCategory + '+' + counterNominated;
