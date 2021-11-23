@@ -53,26 +53,69 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
     const Votes = JSON.parse(response);
 
     let NominatedArray = [];
+    let NominatedVotesArray = [];
 
     base('Nominated').select().eachPage(function page(records, fetchNextPage) {
-        records.forEach(function(record) {
-            Votes.vote.forEach(element => {
-                if (record.fields.Nominated == element.NominatedVoted) {
+        records.forEach(record => {
+            Votes.vote.forEach(vote => {
+                if (record.fields.Nominated == vote.NominatedVoted) {
                     NominatedArray.push(record.id);
                 }
+            })
+            NominatedVotesArray.push({
+                "Nominated": record.fields.Nominated,
+                amountVotes: record.fields.AmountVotes
             })
         });
         fetchNextPage();
 
     }, function done(err) {
-
-        UpdateVote();
+        AmountVotesNominated();
         if (err) {
             console.error(err);
             return;
         }
     });
 
+    const AmountVotesNominated = () => {
+        NominatedVotesArray.forEach(NominatedVote => {
+            Votes.vote.forEach(Vote => {
+                if (NominatedVote.Nominated == Vote.NominatedVoted) {
+                    NominatedVote.amountVotes++;
+                    const UpdateVotesNominated = () => {
+                        base('Nominated').select().eachPage(function page(records, fetchNextPage) {
+                            records.forEach(record => {
+                                if (record.fields.Nominated == NominatedVote.Nominated) {
+                                    base('Nominated').update([{
+                                        "id": record.id,
+                                        "fields": {
+                                            "AmountVotes": NominatedVote.amountVotes,
+                                        }
+                                    }], function(err, records) {
+                                        if (err) {
+                                            console.error(err);
+                                            return;
+                                        }
+                                    });
+                                }
+
+                            });
+                            fetchNextPage();
+
+                        }, function done(err) {
+                            console.log(NominatedVotesArray)
+                            UpdateVote();
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+                        });
+                    }
+                    UpdateVotesNominated();
+                }
+            });
+        })
+    }
 
     const UpdateVote = () => {
         base('Students').select().eachPage(function page(records, fetchNextPage) {
@@ -151,10 +194,6 @@ router.post('/admin', function(req, res, next) { // When button on admin apge is
     let AmountStudentsYear1 = -1;
     let AmountStudentsYear2 = -1;
     let AmountStudentsYear3 = -1;
-
-    let AmountStudentsVotedYear1 = 0;
-    let AmountStudentsVotedYear2 = 0;
-    let AmountStudentsVotedYear3 = 0;
 
     // This is to find out which year corresponds to which grade
     // The first three records in Students table are used to find this out
