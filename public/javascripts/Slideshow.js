@@ -33,7 +33,9 @@ const LoadNominatedInfo = (res) => {
 
         let h1 = document.createElement('h1');
         h1.className = 'ism-caption ism-caption-0';
+        h1.textContent = Nominee.record.fields.Nominated;
         document.getElementById(Nominee.record.fields.Nominated).appendChild(h1);
+        
         
     });
 
