@@ -824,3 +824,11 @@ p.ism-badge a.ism-link:hover {
     color: #fff; background-color: rgba(0, 0, 0, 0.70);
 }
 
+/*
+    Subject to change
+    Might have to adjust images to same size to prevent stretch
+*/
+img{
+    height: 100%;
+    width: 100%;
+}
