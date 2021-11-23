@@ -54,6 +54,8 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
 
     let NominatedArray = [];
     let NominatedVotesArray = [];
+    let CategoryArray = [];
+    // let WinnerCategoryArray = [];
 
     base('Nominated').select().eachPage(function page(records, fetchNextPage) {
         records.forEach(record => {
@@ -71,6 +73,7 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
 
     }, function done(err) {
         AmountVotesNominated();
+        UpdateVote();
         if (err) {
             console.error(err);
             return;
@@ -78,13 +81,19 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
     });
 
     const AmountVotesNominated = () => {
+
         NominatedVotesArray.forEach(NominatedVote => {
+
             Votes.vote.forEach(Vote => {
+
                 if (NominatedVote.Nominated == Vote.NominatedVoted) {
                     NominatedVote.amountVotes++;
+
                     const UpdateVotesNominated = () => {
+
                         base('Nominated').select().eachPage(function page(records, fetchNextPage) {
                             records.forEach(record => {
+
                                 if (record.fields.Nominated == NominatedVote.Nominated) {
                                     base('Nominated').update([{
                                         "id": record.id,
@@ -103,8 +112,6 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
                             fetchNextPage();
 
                         }, function done(err) {
-                            console.log(NominatedVotesArray)
-                            UpdateVote();
                             if (err) {
                                 console.error(err);
                                 return;
@@ -168,11 +175,85 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
                 fetchNextPage();
             },
             function done(err) {
+                CreateCategoryArray();
                 if (err) {
                     console.error(err);
                     return;
                 }
             });
+
+    }
+
+    CreateCategoryArray = () => {
+        base('categories').select().eachPage(function page(records, fetchNextPage) {
+            records.forEach(record => {
+                CategoryArray.push({ "Category": record.fields.Category })
+            });
+            fetchNextPage();
+
+        }, function done(err) {
+            UpdateWinner();
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+    }
+
+    const UpdateWinner = () => {
+
+        CategoryArray.forEach(Category => {
+            let WinnerCategoryArray = [];
+
+            base('Nominated').select().eachPage(function page(records, fetchNextPage) {
+                records.forEach(record => {
+
+                    if (record.fields.Category == Category.Category) {
+                        WinnerCategoryArray.push({ "Nominated": record.fields.Nominated, "Category": record.fields.Category, "AmountVotes": record.fields.AmountVotes })
+                    }
+                });
+                fetchNextPage();
+
+            }, function done(err) {
+                WinnerCategoryArray.sort((firstItem, secondItem) => secondItem.AmountVotes - firstItem.AmountVotes);
+
+                UpdateWinnerCategory(WinnerCategoryArray);
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+            });
+        });
+
+        const UpdateWinnerCategory = (WinnerCategoryArray) => {
+
+            base('Categories').select().eachPage(function page(records, fetchNextPage) {
+                records.forEach(record => {
+
+                    if (record.fields.Category == WinnerCategoryArray[0].Category) {
+
+                        base('Categories').update([{
+                            "id": record.id,
+                            "fields": {
+                                "Winner": WinnerCategoryArray[0].Nominated,
+                            }
+                        }], function(err, records) {
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+                        });
+                    }
+                });
+                fetchNextPage();
+
+            }, function done(err) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+            });
+        }
     }
 
     res.send();
