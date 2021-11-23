@@ -40,16 +40,18 @@ const Load = (res) => {
 
         //rows
         var row = document.createElement('div');
-        row.className =  rowHome;
+        row.className = rowHome;
         row.id = Category.record.fields.Category + '.Row';
         content.appendChild(row);
 
 
         NominatedInfo.forEach((Nominated, counterNominated) => {
-            if (Nominated.record.fields.Category == Category.record.fields.Category){
+            if (Nominated.record.fields.Category == Category.record.fields.Category) {
                 // console.log(Nominated.record.fields.Picture[0].url);
 
                 // console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
+
+
 
                 const newCol = document.createElement('div');
                 newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
@@ -58,7 +60,7 @@ const Load = (res) => {
 
                 var img = document.createElement('img');
                 img.className = ' p-0 rounded-3 img-size img-fluid mx-auto d-block';
-                img.src =  Nominated.record.fields.Picture[0].url;
+                img.src = Nominated.record.fields.Picture[0].url;
                 newCol.appendChild(img);
 
                 var info = document.createElement('div');
@@ -77,11 +79,21 @@ const Load = (res) => {
                 ClickMe.name = counterCategory + '+' + counterNominated;
                 ClickMe.addEventListener('click', showBio);
                 name.appendChild(ClickMe);
-                
-                var bio = document.createElement('p');
-                bio.className = 'text-start bio-Overflow';
-                bio.textContent = Nominated.record.fields.Bio;
-                info.appendChild(bio);
+
+                let bio = document.createElement('p');
+                bio.className = 'text-start';
+                const BioArray = Nominated.record.fields.Bio.split('\n\n');
+                BioArray.forEach(element => {
+                    bio.innerHTML += element;
+                   
+                    info.appendChild(bio);
+                    const break1 = document.createElement('br');
+                    const break2 = document.createElement('br');
+                    bio.appendChild(break1);
+                    bio.appendChild(break2);
+
+                });
+
 
                 const btnVote = document.createElement('button');
                 btnVote.textContent = 'Rösta';
@@ -94,17 +106,16 @@ const Load = (res) => {
     });
 
     document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick);
-    
+
 }
 
-const showBio = (sender) =>{
+const showBio = (sender) => {
     const ID = sender.target.name;
     const anka = document.getElementById(ID);
     if (anka.className == 'col-sm-3 border-phatHome mx-3 p-0 text-center') {
         anka.className = 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center';
         sender.target.textContent = 'Visa mindre';
-    }
-    else if(anka.className == 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center'){ 
+    } else if (anka.className == 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center') {
         anka.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
         sender.target.textContent = 'Visa mera';
     }
