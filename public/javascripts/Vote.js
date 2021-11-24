@@ -38,11 +38,13 @@ const divVoteClick = (event) => {
                     votedFor.textContent = 'Du har röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted;
                     votedFor.className = 'text-secondary m-0 fw-bold';
                     document.getElementById('votedFor').appendChild(votedFor);
-                    document.getElementById('votedFor').appendChild(acceptChoice);
+                    document.getElementById('votedFor').appendChild(acceptDiv);
+                   
                 });
                 document.getElementById('warning').style.display = "block";
                 document.getElementById('warning2').style.display = "block";
                 document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
+                 
             }
         }
     })
@@ -56,11 +58,15 @@ const divVoteClick = (event) => {
 }
 
 const acceptingChoice = () => {
-    //console.log('anka' + element.checked);
     const agree = document.getElementById('agree');
-    if(agree == true){
-       
+    
+    if(agree.checked){
+        document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
+    }else{
+        document.getElementById('confirm-btn').className = ' disabled btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
     }
+    
+        
    
 }
 
