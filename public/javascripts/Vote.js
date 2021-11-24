@@ -64,11 +64,20 @@ const btnConfirmClick = () => {
         body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
     });
 }
-
+const alertClose = document.createElement('button');
+        alertClose.className = 'btn-close';
+        alertClose.type = 'button';
+        alertClose.setAttribute('data-bs-dismiss', 'alert');
+        
+        
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('btn btn-primary disabled');
     if (VoteStatus == 'ToVote') {
-        
+        const aboutVote = document.createElement('div');
+        aboutVote.textContent = 'Du måste rösta på alla kategorier för att skicka rösten';
+        aboutVote.className = 'alert alert-success alert-dismissible text-center h4 fade show';
+        document.getElementById('header').appendChild(aboutVote);
+        aboutVote.appendChild(alertClose);
         try {
             do {
                 showBtn[0].className = 'btn btn-primary';
@@ -82,12 +91,8 @@ const enableBtn = () => {
         alreadyVoted.textContent = 'Du har redan röstat!';
         alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
         document.getElementById('header').appendChild(alreadyVoted);
-
-        const alertClose = document.createElement('button');
-        alertClose.className = 'btn-close';
-        alertClose.type = 'button';
-        alertClose.setAttribute('data-bs-dismiss', 'alert');
         alreadyVoted.appendChild(alertClose);
+        
         
     }
 
