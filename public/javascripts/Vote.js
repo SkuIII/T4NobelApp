@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 let vote = [];
 
 console.log('Vote.js is alive!');
@@ -23,12 +25,7 @@ const divVoteClick = (event) => {
         }
 
     });
-    if (VoteStatus == 'Voted') {
 
-        
-
-
-    }
     let counter = 0;
 
     vote.forEach(Vote => {
@@ -41,14 +38,34 @@ const divVoteClick = (event) => {
                     votedFor.textContent = 'Du har röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted;
                     votedFor.className = 'text-secondary m-0 fw-bold';
                     document.getElementById('votedFor').appendChild(votedFor);
+                    document.getElementById('votedFor').appendChild(acceptChoice);
                 });
                 document.getElementById('warning').style.display = "block";
                 document.getElementById('warning2').style.display = "block";
-                document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
+                 document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
             }
         }
     })
+
+    let btns = document.getElementsByClassName(event.target.getAttribute('category'));
+    for (let i = 0; i < btns.length; i++) {
+        const element = btns[i];
+        element.classList.remove('btn-success');
+        console.log('Färjändring');
+    }
+    event.target.classList.add('btn-success');
+    console.log(btns);
 }
+
+const acceptingChoice = () => {
+    //console.log('anka' + element.checked);
+    const agree = document.getElementById('agree');
+    if(agree == true){
+       
+    }
+   
+}
+
 
 const btnConfirmClick = () => {
     const url = document.URL.split('/');
@@ -65,11 +82,11 @@ const btnConfirmClick = () => {
     });
 }
 const alertClose = document.createElement('button');
-        alertClose.className = 'btn-close';
-        alertClose.type = 'button';
-        alertClose.setAttribute('data-bs-dismiss', 'alert');
-        
-        
+alertClose.className = 'btn-close';
+alertClose.type = 'button';
+alertClose.setAttribute('data-bs-dismiss', 'alert');
+
+
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('btn btn-primary disabled');
     if (VoteStatus == 'ToVote') {
@@ -86,14 +103,14 @@ const enableBtn = () => {
         } catch (error) {
             //  console.log(error)
         }
-    }else{
+    } else {
         const alreadyVoted = document.createElement('div');
         alreadyVoted.textContent = 'Du har redan röstat!';
         alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
         document.getElementById('header').appendChild(alreadyVoted);
         alreadyVoted.appendChild(alertClose);
-        
-        
+
+
     }
 
 };
