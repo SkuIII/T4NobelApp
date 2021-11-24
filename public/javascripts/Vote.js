@@ -42,19 +42,17 @@ const divVoteClick = (event) => {
                 });
                 document.getElementById('warning').style.display = "block";
                 document.getElementById('warning2').style.display = "block";
-                 document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
+                document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
             }
         }
     })
 
-    let btns = document.getElementsByClassName(event.target.getAttribute('category'));
+    let btns = document.getElementsByClassName('Aktivism');
     for (let i = 0; i < btns.length; i++) {
         const element = btns[i];
         element.classList.remove('btn-success');
-        console.log('Färjändring');
     }
     event.target.classList.add('btn-success');
-    console.log(btns);
 }
 
 const acceptingChoice = () => {
@@ -97,7 +95,7 @@ const enableBtn = () => {
         aboutVote.appendChild(alertClose);
         try {
             do {
-                showBtn[0].className = 'btn btn-primary';
+                showBtn[0].classList.remove('disabled');
             } while (typeof showBtn !== 'undefined');
 
         } catch (error) {
