@@ -107,12 +107,21 @@ const Load = (res) => {
     document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick);
 
 }
+const acceptDiv = document.createElement('div');
+
+let acceptingText = document.createElement('p');
+acceptingText.textContent = 'Accepterar du dina val?';
+acceptDiv.appendChild(acceptingText);
+
 let acceptChoice = document.createElement('input');
 acceptChoice.type = 'checkbox';
-acceptChoice.id = 'agree'
+acceptChoice.id = 'agree';
 acceptChoice.className = 'form-check-input';
-acceptChoice.value = 'accepting';
 acceptChoice.addEventListener('change', acceptingChoice);
+acceptingText.appendChild(acceptChoice);
+
+
+
 
 
 const showBio = (sender) => {
