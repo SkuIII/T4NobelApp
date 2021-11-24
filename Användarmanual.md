@@ -18,6 +18,9 @@
     - Det går bara att rösta på **EN** i varje kategori.
     - **Det går INTE att ändra sin röst när man har sjickat iväg den.**
 
+## För att nollställa alla röster
+1. I Airtable gå till tabellen Students och sät allas VoteStatus till ToVote samt töm VoteFor kolumnen.
+2. I Airtable gå till tabellen Nominated och sätt alla celler i kolumnen AmountVotes har värdet 0.
+
 ## För att återställa progressbar
 1. I Airtable gå till taballen Voting Info och ändra alla AmountStudentsVotedYear till 0.
-

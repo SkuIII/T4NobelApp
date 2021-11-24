@@ -42,18 +42,29 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
 
-    let popup = document.getElementById("myPopup");
+    // let popup = document.getElementById("myPopup");
 
     if (responsePayload.email.includes('edu.huddinge.se')) {
         
         email = responsePayload.email;
-        popup.style.display = "none";
+        // popup.style.display = "none";
 
     } else {
 
-        popup.classList.add("show");
-        popup.textContent = ("Du måste välja din " +
-            "edu mail för att din röst ska registreras.");
+        // popup.classList.add("show");
+        // popup.textContent = ("Du måste välja din " +
+        //     "edu mail för att din röst ska registreras.");
+        const alreadyVoted = document.createElement('div');
+        alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
+        alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
+        document.getElementById('header').appendChild(alreadyVoted);
+
+        const alertClose = document.createElement('button');
+        alertClose.className = 'btn-close';
+        alertClose.type = 'button';
+        alertClose.setAttribute('data-bs-dismiss', 'alert');
+        alreadyVoted.appendChild(alertClose);
+        
     }
 
     const url = document.URL.split('/');

@@ -50,7 +50,7 @@ const Load = (res) => {
                 // console.log(Nominated.record.fields.Picture[0].url);
 
                 // console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
-                
+
                 const newCol = document.createElement('div');
                 newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
                 newCol.id = counterCategory + '+' + counterNominated;
@@ -95,7 +95,8 @@ const Load = (res) => {
 
                 const btnVote = document.createElement('button');
                 btnVote.textContent = 'Rösta';
-                btnVote.className = 'btn btn-primary disabled';
+                const duck = 'btn btn-primary disabled ' + Category.record.fields.Category;
+                btnVote.className = duck;
                 btnVote.addEventListener('click', divVoteClick);
                 btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
                 newCol.appendChild(btnVote);
@@ -106,6 +107,22 @@ const Load = (res) => {
     document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick);
 
 }
+const acceptDiv = document.createElement('div');
+
+let acceptingText = document.createElement('p');
+acceptingText.textContent = 'Accepterar du dina val?';
+acceptDiv.appendChild(acceptingText);
+
+let acceptChoice = document.createElement('input');
+acceptChoice.type = 'checkbox';
+acceptChoice.id = 'agree';
+acceptChoice.className = 'form-check-input';
+acceptChoice.addEventListener('change', acceptingChoice);
+acceptingText.appendChild(acceptChoice);
+
+
+
+
 
 const showBio = (sender) => {
     const ID = sender.target.name;

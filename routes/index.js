@@ -3,7 +3,7 @@ var router = express.Router();
 const Airtable = require('airtable');
 
 const base = new Airtable({
-    apiKey: 'keyt0M8PAWLcKo6Na'
+    apiKey: 'keyAlLLzNbI6dhsd1'
 }).base('app4x1UwZKFrNZnBU');
 
 router.get('/', function(req, res, next) { // Huvudsidan
