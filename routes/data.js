@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const Airtable = require('airtable');
+require('dotenv').config();
 
 const base = new Airtable({
-    apiKey: 'keyt0M8PAWLcKo6Na'
+    apiKey: process.env.MYAPIKEY
 }).base('app4x1UwZKFrNZnBU');
 
 router.get('/NominatedInfo', function(req, res, next) {
