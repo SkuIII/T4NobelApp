@@ -73,7 +73,7 @@ const Load = (res) => {
 
                 const ClickMe = document.createElement('p');
                 ClickMe.className = 'ClickMeCss pointer';
-                ClickMe.textContent = 'Visa mer';
+                ClickMe.textContent = 'VISA MERA / RÖSTA';
                 ClickMe.name = counterCategory + '+' + counterNominated;
                 ClickMe.addEventListener('click', showBio);
                 name.appendChild(ClickMe);
@@ -128,9 +128,9 @@ const showBio = (sender) => {
     const anka = document.getElementById(ID);
     if (anka.className == 'col-sm-3 border-phatHome mx-3 p-0 text-center') {
         anka.className = 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center';
-        sender.target.textContent = 'Visa mindre';
+        sender.target.textContent = 'VISA MINDRE';
     } else if (anka.className == 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center') {
         anka.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
-        sender.target.textContent = 'Visa mera';
+        sender.target.textContent = 'VISA MERA / RÖSTA';
     }
 }

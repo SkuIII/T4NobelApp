@@ -43,7 +43,7 @@ const divVoteClick = (event) => {
                 });
                 document.getElementById('warning').style.display = "block";
                 document.getElementById('warning2').style.display = "block";
-                document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
+               
                  
             }
         }
@@ -84,6 +84,10 @@ const btnConfirmClick = () => {
         },
         body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
     });
+    document.getElementById('confirm-btn').className = 'btn btn-primary fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
+    document.getElementById('confirm-btn').textContent = 'Tack för din röst';
+    setInterval(function(){logoutIndication();}, 3000);
+    
 }
 const alertClose = document.createElement('button');
 alertClose.className = 'btn-close';
