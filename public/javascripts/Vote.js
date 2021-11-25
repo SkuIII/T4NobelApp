@@ -86,7 +86,7 @@ const btnConfirmClick = () => {
     });
     document.getElementById('confirm-btn').className = 'btn btn-primary fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
     document.getElementById('confirm-btn').textContent = 'Tack för din röst';
-    setInterval(function(){logoutIndication();}, 3000);
+    setInterval( () => {logoutIndication();}, 3000);
     
 }
 const alertClose = document.createElement('button');
