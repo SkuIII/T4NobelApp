@@ -1,5 +1,4 @@
 'use strict'
-
 console.log('the big screen site is online'); //testing if the site is online
 
 const fetchNominatedInfo = fetch(
@@ -10,14 +9,9 @@ fetchNominatedInfo.then((res) => LoadNominatedInfo(res));
 
 const LoadNominatedInfo = (res) => {
 
-    // const ol = document.createElement('ol');
-    // ol.id = 'ol';
-    // document.getElementById('my-slider').appendChild(ol);
-    
+    var RefreshAmount = 0; // has to start at 0
+
     const NominatedInfo = res;
-    // console.log(NominatedInfo);
-    // console.log(NominatedInfo[0].record.fields.Nominated);
-    // console.log(NominatedInfo[0].record.fields.Picture[0].url);
 
     NominatedInfo.forEach(Nominee => { 
         let p = null;                                                         //Makes a new slide for every nominee in the airtable
@@ -34,18 +28,26 @@ const LoadNominatedInfo = (res) => {
         document.getElementById(Nominee.record.fields.Nominated).appendChild(img);
 
         let h1 = document.createElement('h1');
-        let h11 = document.createElement('h1');
         h1.className = 'ism-caption ism-caption-0';
         h1.textContent = Nominee.record.fields.Nominated;
         document.getElementById(Nominee.record.fields.Nominated).appendChild(h1);
 
-
+        RefreshAmount = RefreshAmount + 5;          //adds 5 seconds for each slide
     });
 
 
+    const refresh = document.createElement('meta');
+    refresh.httpEquiv = 'refresh';
+    refresh.content = RefreshAmount;
+    console.log(RefreshAmount);
+    document.getElementById('refresh').appendChild(refresh);  
+
   const slide = document.createElement('script');         //Makes the javascript to read in after
   slide.src = 'javascripts/ism-2.2.min.js';                //the javascript for html and airtable info is collected       
-  document.getElementById('content').appendChild(slide);          
-    
+  document.getElementById('content').appendChild(slide); 
+  
+  
 
+        
 };
+
