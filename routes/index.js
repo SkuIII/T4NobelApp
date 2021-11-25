@@ -141,24 +141,26 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
                                     return;
                                 }
                             });
-                            base('votinginfo').select().eachPage(function page(records, fetchNextPage) {
+                            base('VotingInfo2').select().eachPage(function page(records, fetchNextPage) {
                                     records.forEach((recordVotingInfo, recordVotingInfoCounter) => {
-                                        if (recordVotingInfo.fields.Name == 'AmountStudentsVotedYear' + (recordVotingInfoCounter - 2)) {
-                                            let CounterVoted = recordVotingInfo.fields.Number;
+
+                                        if (recordVotingInfo.fields.Name.includes(record.fields.Year)) {
+
+                                            let CounterVoted = recordVotingInfo.fields.Voted;
                                             CounterVoted++;
-                                            if (record.fields.Year == (recordVotingInfoCounter - 2)) {
-                                                base('VotingInfo').update([{
-                                                    "id": recordVotingInfo.id,
-                                                    "fields": {
-                                                        "Number": CounterVoted,
-                                                    }
-                                                }], function(err, records) {
-                                                    if (err) {
-                                                        console.error(err);
-                                                        return;
-                                                    }
-                                                });
-                                            }
+
+                                            base('VotingInfo2').update([{
+                                                "id": recordVotingInfo.id,
+                                                "fields": {
+                                                    "Voted": CounterVoted,
+                                                }
+                                            }], function(err, records) {
+                                                if (err) {
+                                                    console.error(err);
+                                                    return;
+                                                }
+                                            });
+
                                         }
                                     });
                                     fetchNextPage();
@@ -187,7 +189,9 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
     CreateCategoryArray = () => {
         base('categories').select().eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
-                CategoryArray.push({ "Category": record.fields.Category })
+                CategoryArray.push({
+                    "Category": record.fields.Category
+                })
             });
             fetchNextPage();
 
@@ -209,7 +213,11 @@ router.post('/Vote', function(req, res, next) { // Receives the vote and sends i
                 records.forEach(record => {
 
                     if (record.fields.Category == Category.Category) {
-                        WinnerCategoryArray.push({ "Nominated": record.fields.Nominated, "Category": record.fields.Category, "AmountVotes": record.fields.AmountVotes })
+                        WinnerCategoryArray.push({
+                            "Nominated": record.fields.Nominated,
+                            "Category": record.fields.Category,
+                            "AmountVotes": record.fields.AmountVotes
+                        })
                     }
                 });
                 fetchNextPage();
@@ -263,96 +271,44 @@ router.get('/admin', function(req, res, next) { // Used for admin controls
     res.render('admin');
 });
 
-router.post('/admin', function(req, res, next) { // When button on admin apge is pressed
+router.post('/admin', function(req, res, next) { // When button on admin page is pressed
     // YearsArray will hold which years correspond to which grade
-    let YearsArray = [];
+    let ParticipantArray = [];
 
-    let YearOne;
-    let YearTwo;
-    let YearThree;
 
-    // AmountStudentsYearX starts at -1 because Airtable has an extra record per year
-    let AmountStudentsYear1 = -1;
-    let AmountStudentsYear2 = -1;
-    let AmountStudentsYear3 = -1;
-
-    // This is to find out which year corresponds to which grade
-    // The first three records in Students table are used to find this out
     base('Students').select().eachPage(function page(records, fetchNextPage) {
-            records.forEach(record => {
-                if (record.fields.Name.includes('1')) {
-                    YearsArray.push(
-                        record.fields.Class
-                    )
-                } else
-                if (record.fields.Name.includes('2')) {
-                    YearsArray.push(
-                        record.fields.Class
-                    )
-
-                } else
-                if (record.fields.Name.includes('3')) {
-                    YearsArray.push(
-                        record.fields.Class
-                    )
-                }
-            });
-            fetchNextPage();
-        },
-        function done(err) {
-            YearsArray.sort();
-
-            // The highest number in the array always corresponds to the first grade, so on
-            YearOne = YearsArray[2]
-            YearTwo = YearsArray[1]
-            YearThree = YearsArray[0]
-
-            updateYear();
-
-            if (err) {
-                console.error(err);
-                return;
+        records.forEach(record => {
+            if (typeof record.fields.Email == 'undefined') {
+                ParticipantArray.push({
+                    "Name": record.fields.Name,
+                    "Class": record.fields.Class,
+                    "Year": record.fields.Year,
+                    "Amount": -1
+                })
             }
         });
+        fetchNextPage();
 
-    // updateYear updates Students table to list all students with correct year
-    const updateYear = () => {
-        base('Students').select().eachPage(function page(records, fetchNextPage) {
+    }, function done(err) {
+        console.log(ParticipantArray)
+        UpdateYear()
+
+        if (err) {
+            console.error(err);
+            return;
+        }
+    });
+
+    let UpdateYear = async() => {
+        ParticipantArray.forEach(element => {
+            base('Students').select().eachPage(function page(records, fetchNextPage) {
                 records.forEach(record => {
-                    if (record.fields.Class.includes(YearThree)) {
-                        AmountStudentsYear3++;
+                    if (record.fields.Class.includes(element.Class)) {
+                        element.Amount++;
                         base('Students').update([{
                             "id": record.id,
                             "fields": {
-                                "Year": 3,
-                            }
-                        }], function(err, records) {
-                            if (err) {
-                                console.error(err);
-                                return;
-                            }
-                        });
-                    }
-                    if (record.fields.Class.includes(YearTwo)) {
-                        AmountStudentsYear2++;
-                        base('Students').update([{
-                            "id": record.id,
-                            "fields": {
-                                "Year": 2,
-                            }
-                        }], function(err, records) {
-                            if (err) {
-                                console.error(err);
-                                return;
-                            }
-                        });
-                    }
-                    if (record.fields.Class.includes(YearOne)) {
-                        AmountStudentsYear1++;
-                        base('Students').update([{
-                            "id": record.id,
-                            "fields": {
-                                "Year": 1,
+                                "Year": element.Year,
                             }
                         }], function(err, records) {
                             if (err) {
@@ -364,48 +320,47 @@ router.post('/admin', function(req, res, next) { // When button on admin apge is
                 });
                 fetchNextPage();
 
-            },
-            function done(err) {
-                let AmountStudentsArray = [AmountStudentsYear1, AmountStudentsYear2, AmountStudentsYear3];
-                WriteYear(AmountStudentsArray);
-
+            }, function done(err) {
+                WriteYear();
                 if (err) {
                     console.error(err);
                     return;
                 }
             });
+        })
+    }
 
-        // WriteYear updates VotingInfo table with correct amount of students in each year
-        const WriteYear = (AmountStudentsArray) => {
-            base('VotingInfo').select().eachPage(function page(records, fetchNextPage) {
-                    records.forEach((recordVotingInfo, recordVotingInfoCounter) => {
-                        if (recordVotingInfo.fields.Name == 'AmountStudentsYear' + (recordVotingInfoCounter + 1)) {
-                            base('VotingInfo').update([{
-                                "id": recordVotingInfo.id,
-                                "fields": {
-                                    'Number': AmountStudentsArray[recordVotingInfoCounter]
-                                }
-                            }], function(err, records) {
-                                if (err) {
-                                    console.error(err);
-                                    return;
-                                }
-                            });
-                        }
-                    });
-                    fetchNextPage();
-                },
-                function done(err) {
-
-                    res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
-
-                    if (err) {
-                        console.error(err);
-                        return;
+    let WriteYear = async() => {
+        ParticipantArray.forEach(element => {
+            base('VotingInfo2').select().eachPage(function page(records, fetchNextPage) {
+                records.forEach(record => {
+                    if (record.fields.Name.includes(element.Name)) {
+                        base('VotingInfo2').update([{
+                            "id": record.id,
+                            "fields": {
+                                "Amount": element.Amount,
+                            }
+                        }], function(err, records) {
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+                        });
                     }
                 });
-        }
+                fetchNextPage();
+
+            }, function done(err) {
+                console.log(ParticipantArray)
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+            });
+        })
     }
+    res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
+
 });
 
 module.exports = router;
