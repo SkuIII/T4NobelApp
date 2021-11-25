@@ -74,21 +74,31 @@ html
     link(href="http://fonts.googleapis.com/css?family=Open+Sans|Raleway")
     
     script(src="javascripts/Slideshow.js")
+    link(rel='stylesheet' href='stylesheets/test.css')
+    script(src="javascripts/ProgressBars.js") 
+    
     
     
 
 block Header
     div(id = "header")
-        div(class="header container-fluid " style="background-color:  #ff8000;")
+        div(class="header container-fluid " style="background-color:  #ff8000; color:#fff;")
             div(class="row justify-content-center")
                 div(class="col-auto")
-                    h1(id = "headline" class = "p-2") ÖSTRAS ALTERNATIVA NOBEL PRIS
+                    h1(id = "headline" class = "p-2") ÖSTRAS ALTERNATIVA NOBELPRIS
 
 block karusell
-    div(class="container" id = "content")
-        div( class="ism-slider" data-play_type="loop" data-image_fx="zoomrotate" data-radio_type="thumbnail" id="my-slider")
-            ol(id = "ol")
+    div(class="container mb-5" id = "content")
+            div( class="ism-slider" data-play_type="loop" data-image_fx="zoomrotate" data-radio_type="thumbnail" id="my-slider")
+                ol(id = "ol")
+
+
+block Progress 
+    div(class="container mt-5")
+        div(id="progressBarContainer" class = "container-sm mt-2")
+        
                 
 
-meta(http-equiv='refresh' content='60')
-          
+div(id="refresh")
+
+        

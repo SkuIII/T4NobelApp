@@ -14,15 +14,18 @@ const logoutIndication = () => {
     location.reload();
 }
 
-const Anka = ()=> {
+const Anka = () => {
     const you = document.createElement('img');
     you.id = 'profile';
     you.classList.add('pointer');
     you.style.borderRadius = '50%';
     you.style.height = '100px';
     you.classList.add('p-3');
-    you.addEventListener('click', logoutIndication);
-    document.getElementById('logout').appendChild(you);
+    you.setAttribute('type', 'button');
+    you.setAttribute('data-bs-toggle', 'dropdown');
+    you.setAttribute('aria-expanded', 'false');
+    document.getElementById('btnloggout').addEventListener('click', logoutIndication);
+    document.getElementById('logout').prepend(you);
     document.getElementById('logout').hidden = true;
 }
 
