@@ -22,9 +22,11 @@ html
 block Header
     div(id = "header")
         div(class="header container-fluid " style="background-color:  #ff8000;")
-            div(class="row justify-content-end")
+            div(class="row justify-content-center" )
                 div(class="col-auto")
-                    div(id='login')
+                    h1(id = "headline" class="text-center mx-2 pt-3 text-light") ÖSTRAS ALTERNATIVA NOBELPRIS
+                div(class="col-auto")
+                    div(id='login' class= "text-end")
                         div( id="g_id_onload" 
                                 data-client_id="623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com" 
                                 data-context="signin" 
@@ -32,17 +34,20 @@ block Header
                                 data-ux_mode="popup" 
                     
                                 data-callback="handleCredentialResponse")
-                        div(class="p-3")
+                        div(class="p-3 ")
                             div(class="g_id_signin" data-type="standard") <!-- Maybe unnecessary since one tap is enabled-->
                             //- div(class="popup")
                             //-     span(class="popuptext" id="myPopup")
-                    div(id="logout")
+                    div(id="logout" class="btn-group" role="group")
+                        ul(class="dropdown-menu" aria-labelledby="logout")
+                            li
+                                a(id="btnloggout" class="dropdown-item") Logga ut
 
        
 
 block Progress 
     div(id="progressBarContainer" class = "container-sm")
-        h1(id = "headline" class="text-center mx-2 pt-3") ÖSTRAS ALTERNATIVA NOBELPRIS
+        h2(id = "headline" class="text-center mx-2 pt-3") Rösta nu!
         
 
 //-kategorier
