@@ -36,7 +36,10 @@ block Header
                             div(class="g_id_signin" data-type="standard") <!-- Maybe unnecessary since one tap is enabled-->
                             //- div(class="popup")
                             //-     span(class="popuptext" id="myPopup")
-                    div(id="logout")
+                    div(id="logout" class="btn-group" role="group")
+                        ul(class="dropdown-menu" aria-labelledby="logout")
+                            li
+                                a(id="btnloggout" class="dropdown-item") Logga ut
 
        
 
