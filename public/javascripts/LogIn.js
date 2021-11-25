@@ -10,10 +10,24 @@ const fetchCategory = fetch(
     });
 });
 
+const logoutIndication = () => {
+    location.reload();
+}
+
+const Anka = ()=> {
+    const you = document.createElement('img');
+    you.id = 'profile';
+    you.classList.add('pointer');
+    you.style.borderRadius = '50%';
+    you.style.height = '100px';
+    you.classList.add('p-3');
+    you.addEventListener('click', logoutIndication);
+    document.getElementById('logout').appendChild(you);
+    document.getElementById('logout').hidden = true;
+}
+
+
 // Promise.all() does several fetch requests parallel
-
-
-
 
 let email;
 let VoteStatus;
@@ -24,6 +38,7 @@ window.onload = function() {
         client_id: "623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com",
         callback: handleCredentialResponse
     });
+    Anka();
 }
 
 function handleCredentialResponse(response) {
@@ -42,18 +57,30 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
 
-    let popup = document.getElementById("myPopup");
+    // let popup = document.getElementById("myPopup");
 
     if (responsePayload.email.includes('edu.huddinge.se')) {
         
         email = responsePayload.email;
-        popup.style.display = "none";
+        // popup.style.display = "none";
+        loginIndication(responsePayload.picture);
 
     } else {
 
-        popup.classList.add("show");
-        popup.textContent = ("Du måste välja din " +
-            "edu mail för att din röst ska registreras.");
+        // popup.classList.add("show");
+        // popup.textContent = ("Du måste välja din " +
+        //     "edu mail för att din röst ska registreras.");
+        const alreadyVoted = document.createElement('div');
+        alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
+        alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
+        document.getElementById('header').appendChild(alreadyVoted);
+
+        const alertClose = document.createElement('button');
+        alertClose.className = 'btn-close';
+        alertClose.type = 'button';
+        alertClose.setAttribute('data-bs-dismiss', 'alert');
+        alreadyVoted.appendChild(alertClose);
+        
     }
 
     const url = document.URL.split('/');
@@ -81,3 +108,10 @@ function decodeJwtResponse(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 };
+
+const loginIndication = (picture) => {
+    document.getElementById('login').hidden = true;
+    document.getElementById('logout').hidden = false;
+    document.getElementById('profile').src = picture;
+}
+

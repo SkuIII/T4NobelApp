@@ -25,17 +25,18 @@ block Header
             div(class="row justify-content-end")
                 div(class="col-auto")
                     div(id='login')
-                    div( id="g_id_onload" 
-                            data-client_id="623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com" 
-                            data-context="signin" 
-                            data-auto_prompt="false" 
-                            data-ux_mode="popup" 
-                  
-                            data-callback="handleCredentialResponse")
-                    div(class = "p-3")
-                        div(class="g_id_signin" data-type="standard") <!-- Maybe unnecessary since one tap is enabled-->
-                        div(class="popup")
-                            span(class="popuptext" id="myPopup")
+                        div( id="g_id_onload" 
+                                data-client_id="623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com" 
+                                data-context="signin" 
+                                data-auto_prompt="true" 
+                                data-ux_mode="popup" 
+                    
+                                data-callback="handleCredentialResponse")
+                        div(class="p-3")
+                            div(class="g_id_signin" data-type="standard") <!-- Maybe unnecessary since one tap is enabled-->
+                            //- div(class="popup")
+                            //-     span(class="popuptext" id="myPopup")
+                    div(id="logout")
 
        
 

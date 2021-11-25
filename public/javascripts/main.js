@@ -95,8 +95,7 @@ const Load = (res) => {
 
                 const btnVote = document.createElement('button');
                 btnVote.textContent = 'Rösta';
-                const duck = 'btn btn-primary disabled ' + Category.record.fields.Category;
-                btnVote.className = duck;
+                btnVote.className = 'btn btn-primary disabled ' + Category.record.fields.Category;
                 btnVote.addEventListener('click', divVoteClick);
                 btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
                 newCol.appendChild(btnVote);

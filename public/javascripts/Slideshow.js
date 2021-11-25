@@ -19,9 +19,11 @@ const LoadNominatedInfo = (res) => {
     // console.log(NominatedInfo[0].record.fields.Nominated);
     // console.log(NominatedInfo[0].record.fields.Picture[0].url);
 
-    NominatedInfo.forEach(Nominee => {                  //Makes a new slide for every nominee in the airtable
+    NominatedInfo.forEach(Nominee => { 
+        let p = null;                                                         //Makes a new slide for every nominee in the airtable
         console.log(Nominee.record.fields.Nominated);       //fetch nominees name from airtable
-        console.log(Nominee.record.fields.Picture[0].url);  //fetch nominees picture from airtable
+        console.log(Nominee.record.fields.Picture[0].url);  
+        console.log(Nominee.record.fields.Intro);                          
 
         let li = document.createElement('li');           
         li.id = Nominee.record.fields.Nominated;        //makes every slide with different id. 
@@ -32,15 +34,18 @@ const LoadNominatedInfo = (res) => {
         document.getElementById(Nominee.record.fields.Nominated).appendChild(img);
 
         let h1 = document.createElement('h1');
+        let h11 = document.createElement('h1');
         h1.className = 'ism-caption ism-caption-0';
         h1.textContent = Nominee.record.fields.Nominated;
         document.getElementById(Nominee.record.fields.Nominated).appendChild(h1);
-        
-        
+
+
     });
 
-    const slide = document.createElement('script');         //Makes the javascript to read in after
-    slide.src = 'javascripts/ism-2.2.min.js';                //the javascript for html and airtable info is collected       
-    document.getElementById('content').appendChild(slide);          
+
+  const slide = document.createElement('script');         //Makes the javascript to read in after
+  slide.src = 'javascripts/ism-2.2.min.js';                //the javascript for html and airtable info is collected       
+  document.getElementById('content').appendChild(slide);          
     
-}
+
+};
