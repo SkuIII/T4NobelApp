@@ -97,7 +97,12 @@ function handleCredentialResponse(response) {
         body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
     }).then(response => response.json()).then(data => {
         VoteStatus = data;
-        enableBtn();
+        if(VoteStatus = 'Empty'){
+            NotInDataBase();
+        }else{
+            enableBtn();
+        }
+      
     });
 }
 

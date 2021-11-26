@@ -30,6 +30,8 @@ router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote s
                     } else {
                         VoteStatus = 'Voted';
                     }
+                }else{
+                    VoteStatus= 'Empty'
                 }
             });
             fetchNextPage();
