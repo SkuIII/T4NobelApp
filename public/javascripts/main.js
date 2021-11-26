@@ -52,7 +52,7 @@ const Load = (res) => {
 
                 // Creates Cols
                 const newCol = document.createElement('div');
-                newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
+                newCol.className = 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center';
                 newCol.id = counterCategory + '+' + counterNominated;
                 row.appendChild(newCol);
 
