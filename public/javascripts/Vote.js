@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 let vote = [];
 
 console.log('Vote.js is alive!');
@@ -39,12 +37,12 @@ const divVoteClick = (event) => {
                     votedFor.className = 'text-secondary m-0 fw-bold';
                     document.getElementById('votedFor').appendChild(votedFor);
                     document.getElementById('votedFor').appendChild(acceptDiv);
-                   
+
                 });
                 document.getElementById('warning').style.display = "block";
                 document.getElementById('warning2').style.display = "block";
-               
-                 
+
+
             }
         }
     })
@@ -59,15 +57,15 @@ const divVoteClick = (event) => {
 
 const acceptingChoice = () => {
     const agree = document.getElementById('agree');
-    
-    if(agree.checked){
+
+    if (agree.checked) {
         document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
-    }else{
+    } else {
         document.getElementById('confirm-btn').className = ' disabled btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
     }
-    
-        
-   
+
+
+
 }
 
 
@@ -86,11 +84,11 @@ const btnConfirmClick = () => {
     });
     document.getElementById('confirm-btn').className = 'btn btn-primary fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
     document.getElementById('confirm-btn').textContent = 'Tack för din röst';
-    setInterval( () => {
-        window.scrollTo(0,0);
+    setInterval(() => {
+        window.scrollTo(0, 0);
         logoutIndication();
     }, 3000);
-    
+
 }
 const alertClose = document.createElement('button');
 alertClose.className = 'btn-close';

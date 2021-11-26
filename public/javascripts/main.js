@@ -48,29 +48,33 @@ const Load = (res) => {
         NominatedInfo.forEach((Nominated, counterNominated) => {
             if (Nominated.record.fields.Category == Category.record.fields.Category) {
                 // console.log(Nominated.record.fields.Picture[0].url);
-
                 // console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
 
+                // Creates Cols
                 const newCol = document.createElement('div');
                 newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
                 newCol.id = counterCategory + '+' + counterNominated;
                 row.appendChild(newCol);
 
+                //Adding img of nominee
                 var img = document.createElement('img');
                 img.className = ' p-0 rounded-3 img-size img-fluid mx-auto d-block';
                 img.src = Nominated.record.fields.Picture[0].url;
                 newCol.appendChild(img);
 
+                //Adding info to the cols
                 var info = document.createElement('div');
                 info.className = 'text-center m-0 p-2';
                 info.id = Nominated.record.fields.Nominated + '.Info';
                 newCol.appendChild(info);
 
+                //Adding the nominee name
                 var name = document.createElement('h3');
                 name.className = 'text-center';
                 name.textContent = Nominated.record.fields.Nominated;
                 info.appendChild(name);
 
+                //Adds a click funtion to the show more text
                 const ClickMe = document.createElement('p');
                 ClickMe.className = 'ClickMeCss pointer';
                 ClickMe.textContent = 'VISA MERA / RÖSTA';
@@ -78,6 +82,7 @@ const Load = (res) => {
                 ClickMe.addEventListener('click', showBio);
                 name.appendChild(ClickMe);
 
+                //Adding the bio 
                 let bio = document.createElement('p');
                 bio.className = 'text-start';
                 const BioArray = Nominated.record.fields.Bio.split('\n\n');
@@ -92,7 +97,7 @@ const Load = (res) => {
 
                 });
 
-
+                //The vote btn in the col
                 const btnVote = document.createElement('button');
                 btnVote.textContent = 'Rösta';
                 btnVote.className = 'btn btn-primary disabled ' + Category.record.fields.Category;
@@ -106,12 +111,13 @@ const Load = (res) => {
     document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick);
 
 }
+// Creates a div for checkbox
 const acceptDiv = document.createElement('div');
-
+//checkbox text
 let acceptingText = document.createElement('p');
 acceptingText.textContent = 'Accepterar du dina val?';
 acceptDiv.appendChild(acceptingText);
-
+//Checkbox
 let acceptChoice = document.createElement('input');
 acceptChoice.type = 'checkbox';
 acceptChoice.id = 'agree';
