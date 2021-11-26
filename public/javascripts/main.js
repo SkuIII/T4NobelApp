@@ -113,7 +113,10 @@ const Load = (res) => {
 }
 // Creates a div for checkbox
 const acceptDiv = document.createElement('div');
-
+//checkbox text
+let acceptingText = document.createElement('p');
+acceptingText.textContent = 'Accepterar du dina val?';
+acceptDiv.appendChild(acceptingText);
 //Checkbox
 let acceptChoice = document.createElement('input');
 acceptChoice.type = 'checkbox';
@@ -122,10 +125,7 @@ acceptChoice.className = 'form-check-input';
 acceptChoice.addEventListener('change', acceptingChoice);
 acceptingText.appendChild(acceptChoice);
 
-//checkbox text
-let acceptingText = document.createElement('p');
-acceptingText.textContent = 'Accepterar du dina val?';
-acceptDiv.appendChild(acceptingText);
+
 
 
 
