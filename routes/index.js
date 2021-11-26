@@ -1,3 +1,4 @@
+'use strict';
 var express = require('express');
 var router = express.Router();
 const Airtable = require('airtable');
@@ -18,7 +19,7 @@ router.get('/leaderboard', (req, res, next) => { // Routen för stora skärmen
 });
 
 router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote status
-    let VoteStatus;
+    let VoteStatus = 'Empty';
     const response = JSON.stringify(req.body);
     const User = JSON.parse(response);
 
@@ -30,13 +31,14 @@ router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote s
                     } else {
                         VoteStatus = 'Voted';
                     }
-                }else{
-                    VoteStatus= 'Empty'
+               
                 }
+               
             });
             fetchNextPage();
         },
         done = (err) => {
+            console.log(VoteStatus);
             res.send(JSON.stringify(VoteStatus));
             if (err) {
                 console.error(err);
