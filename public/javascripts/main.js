@@ -100,7 +100,7 @@ const Load = (res) => {
                 //The vote btn in the col
                 const btnVote = document.createElement('button');
                 btnVote.textContent = 'Rösta';
-                btnVote.className = 'btn btn-primary disabled ' + Category.record.fields.Category;
+                btnVote.className = 'vote btn btn-secondary disabled ' + Category.record.fields.Category;
                 btnVote.addEventListener('click', divVoteClick);
                 btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
                 newCol.appendChild(btnVote);

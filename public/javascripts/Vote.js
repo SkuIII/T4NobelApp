@@ -47,7 +47,7 @@ const divVoteClick = (event) => {
         }
     })
 
-    let btns = document.getElementsByClassName('Aktivism');
+    let btns = document.getElementsByClassName(Category);
     for (let i = 0; i < btns.length; i++) {
         const element = btns[i];
         element.classList.remove('btn-success');
@@ -88,16 +88,16 @@ const btnConfirmClick = () => {
         window.scrollTo(0, 0);
         logoutIndication();
     }, 3000);
-
 }
+
 const alertClose = document.createElement('button');
 alertClose.className = 'btn-close';
 alertClose.type = 'button';
 alertClose.setAttribute('data-bs-dismiss', 'alert');
 
-
+let showBtn;
 const enableBtn = () => {
-    let showBtn = document.getElementsByClassName('btn btn-primary disabled');
+    showBtn = document.getElementsByClassName('vote');
     if (VoteStatus == 'ToVote') {
         const aboutVote = document.createElement('div');
         aboutVote.textContent = 'Du måste rösta på alla kategorier för att skicka rösten';
@@ -105,12 +105,16 @@ const enableBtn = () => {
         document.getElementById('header').appendChild(aboutVote);
         aboutVote.appendChild(alertClose);
         try {
-            do {
-                showBtn[0].classList.remove('disabled');
-            } while (typeof showBtn !== 'undefined');
+            console.log(showBtn);
+            for (let i = 0; i < showBtn.length; i++) {
+                showBtn[i].classList.add('btn-primary');
+                showBtn[i].classList.remove('btn-secondary');
+                showBtn[i].classList.remove('disabled');
+                
+            }
 
         } catch (error) {
-            //  console.log(error)
+            //console.log(error)
         }
     } else {
         const alreadyVoted = document.createElement('div');
