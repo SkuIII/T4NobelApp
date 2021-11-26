@@ -2,7 +2,7 @@
 console.log('the big screen site is online'); //testing if the site is online
 
 const fetchNominatedInfo = fetch(
-    '/data/NominatedInfo'
+    '/data/Nominated'
 ).then((res) => res.json());
 
 fetchNominatedInfo.then((res) => LoadNominatedInfo(res));
