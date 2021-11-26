@@ -6,18 +6,18 @@ const base = new Airtable({
     apiKey: 'keyAlLLzNbI6dhsd1'
 }).base('app4x1UwZKFrNZnBU');
 
-router.get('/NominatedInfo', function(req, res, next) {
+router.get('/Nominated', (req, res, next) => {
     let recordArray = [];
 
-    base('nominated').select().eachPage(function page(records, fetchNextPage) {
-        records.forEach(function(record) {
+    base('Nominated').select().eachPage(page = (records, fetchNextPage) => {
+        records.forEach(record => {
             recordArray.push({
                 "record": record._rawJson
             });
         });
         fetchNextPage();
 
-    }, function done(err) {
+    }, done = (err) => {
         res.send(recordArray);
 
         if (err) {
@@ -27,18 +27,18 @@ router.get('/NominatedInfo', function(req, res, next) {
     });
 });
 
-router.get('/Categories', function(req, res, next) {
+router.get('/Categories', (req, res, next) => {
     let recordArray = [];
 
-    base('categories').select().eachPage(function page(records, fetchNextPage) {
-        records.forEach(function(record) {
+    base('categories').select().eachPage(page = (records, fetchNextPage) => {
+        records.forEach(record => {
             recordArray.push({
                 "record": record._rawJson
             });
         });
         fetchNextPage();
 
-    }, function done(err) {
+    }, done = (err) => {
         res.send(recordArray);
 
         if (err) {
@@ -48,18 +48,18 @@ router.get('/Categories', function(req, res, next) {
     });
 });
 
-router.get('/Students', function(req, res, next) {
+router.get('/Participants', (req, res, next) => {
     let recordArray = [];
 
-    base('Students').select().eachPage(function page(records, fetchNextPage) {
-        records.forEach(function(record) {
+    base('Participants').select().eachPage(page = (records, fetchNextPage) => {
+        records.forEach((record) => {
             recordArray.push({
                 "record": record._rawJson
             });
         });
         fetchNextPage();
 
-    }, function done(err) {
+    }, done = (err) => {
         res.send(recordArray);
 
         if (err) {
@@ -69,18 +69,18 @@ router.get('/Students', function(req, res, next) {
     });
 });
 
-router.get('/VotingInfo', function(req, res, next) {
+router.get('/ParticipantsVotingInfo', (req, res, next) => {
     let recordArray = [];
 
-    base('VotingInfo').select().eachPage(function page(records, fetchNextPage) {
-        records.forEach(function(record) {
+    base('ParticipantsVotingInfo').select().eachPage(page = (records, fetchNextPage) => {
+        records.forEach(record => {
             recordArray.push({
                 "record": record._rawJson
             });
         });
         fetchNextPage();
 
-    }, function done(err) {
+    }, done = (err) => {
         res.send(recordArray);
 
         if (err) {

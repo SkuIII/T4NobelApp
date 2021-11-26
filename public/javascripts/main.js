@@ -7,7 +7,7 @@ let CategoryInfo = [];
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
 const fetchNominatedInfo = fetch(
-    '/data/NominatedInfo'
+    '/data/Nominated'
 ).then((res) => res.json());
 
 const fetchCategoryInfo = fetch(
@@ -83,7 +83,7 @@ const Load = (res) => {
                 const BioArray = Nominated.record.fields.Bio.split('\n\n');
                 BioArray.forEach(element => {
                     bio.innerHTML += element;
-                   
+
                     info.appendChild(bio);
                     const break1 = document.createElement('br');
                     const break2 = document.createElement('br');

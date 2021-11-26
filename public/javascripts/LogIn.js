@@ -36,7 +36,7 @@ let email;
 let VoteStatus;
 let Categories;
 
-window.onload = function() {
+window.onload = () => {
     google.accounts.id.initialize({
         client_id: "623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com",
         callback: handleCredentialResponse
@@ -63,7 +63,7 @@ function handleCredentialResponse(response) {
     // let popup = document.getElementById("myPopup");
 
     if (responsePayload.email.includes('edu.huddinge.se')) {
-        
+
         email = responsePayload.email;
         // popup.style.display = "none";
         loginIndication(responsePayload.picture);
@@ -83,7 +83,7 @@ function handleCredentialResponse(response) {
         alertClose.type = 'button';
         alertClose.setAttribute('data-bs-dismiss', 'alert');
         alreadyVoted.appendChild(alertClose);
-        
+
     }
 
     const url = document.URL.split('/');
@@ -101,12 +101,12 @@ function handleCredentialResponse(response) {
     });
 }
 
-function decodeJwtResponse(token) {
+const decodeJwtResponse = (token) => {
     // Decodes JWT
 
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     return JSON.parse(jsonPayload);
@@ -117,4 +117,3 @@ const loginIndication = (picture) => {
     document.getElementById('logout').hidden = false;
     document.getElementById('profile').src = picture;
 }
-
