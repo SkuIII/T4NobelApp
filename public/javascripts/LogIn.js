@@ -68,6 +68,25 @@ function handleCredentialResponse(response) {
         // popup.style.display = "none";
         loginIndication(responsePayload.picture);
 
+        const url = document.URL.split('/');
+        const urlSend = `${url[0]}//${url[2]}/VoteLogin`;
+    
+        fetch(urlSend, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
+        }).then(response => response.json()).then(data => {
+            VoteStatus = data;
+            if(VoteStatus == 'Empty'){
+                NotInDataBase();
+            }else{
+                enableBtn();
+            }
+          
+        });
+
     } else {
 
         // popup.classList.add("show");
@@ -86,19 +105,7 @@ function handleCredentialResponse(response) {
 
     }
 
-    const url = document.URL.split('/');
-    const urlSend = `${url[0]}//${url[2]}/VoteLogin`;
 
-    fetch(urlSend, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
-    }).then(response => response.json()).then(data => {
-        VoteStatus = data;
-        enableBtn();
-    });
 }
 
 const decodeJwtResponse = (token) => {

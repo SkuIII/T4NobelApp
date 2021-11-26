@@ -1,5 +1,6 @@
-const express = require('express');
-const router = express.Router();
+'use strict';
+var express = require('express');
+var router = express.Router();
 const Airtable = require('airtable');
 const enviorment = require('dotenv').config();
 
@@ -20,9 +21,8 @@ router.get('/leaderboard', (req, res, next) => {
     res.render('workingFolder/leaderboardBig');
 });
 
-// Receives user, returns vote status
-router.post('/VoteLogin', (req, res, next) => {
-    let VoteStatus;
+router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote status
+    let VoteStatus = 'Empty';
 
     // req.body contains the email of the logged in user in JSON format
     const User = req.body;
@@ -36,11 +36,14 @@ router.post('/VoteLogin', (req, res, next) => {
                     } else {
                         VoteStatus = 'Voted';
                     }
+
                 }
+
             });
             fetchNextPage();
         },
         done = (err) => {
+            console.log(VoteStatus);
             res.send(JSON.stringify(VoteStatus));
 
             if (err) {

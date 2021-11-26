@@ -52,7 +52,7 @@ const Load = (res) => {
 
                     // Creates Cols
                     const newCol = document.createElement('div');
-                    newCol.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
+                    newCol.className = 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center';
                     newCol.id = counterCategory + '+' + counterNominated;
                     row.appendChild(newCol);
 
@@ -132,11 +132,11 @@ acceptingText.appendChild(acceptChoice);
 const showBio = (sender) => {
     const ID = sender.target.name;
     const anka = document.getElementById(ID);
-    if (anka.className == 'col-sm-3 border-phatHome mx-3 p-0 text-center') {
-        anka.className = 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center';
+    if (anka.className == 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center') {
+        anka.className = 'col-sm-3 border-phatHome-hover mx-3 my-2 p-0 text-center';
         sender.target.textContent = 'VISA MINDRE';
-    } else if (anka.className == 'col-sm-3 border-phatHome-hover mx-3 p-0 text-center') {
-        anka.className = 'col-sm-3 border-phatHome mx-3 p-0 text-center';
+    } else if (anka.className == 'col-sm-3 border-phatHome-hover mx-3 my-2 p-0 text-center') {
+        anka.className = 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center';
         sender.target.textContent = 'VISA MERA / RÖSTA';
     }
 }
