@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const Airtable = require('airtable');
 const enviorment = require('dotenv').config();
-console.log(process.env);
 
 const base = new Airtable({
     apiKey: process.env.API_KEY
