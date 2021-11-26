@@ -95,7 +95,13 @@ alertClose.className = 'btn-close';
 alertClose.type = 'button';
 alertClose.setAttribute('data-bs-dismiss', 'alert');
 
-
+const NotInDataBase = () => {
+    const NotInDataBase = document.createElement('div');
+    NotInDataBase.textContent = 'Din edu mail finnns inte i systemet, gå till Te4 eller kontakta Carina Envall';
+    NotInDataBase.className = 'alert alert-danger alert-dismissible text-center h4 fade show';
+    document.getElementById('header').appendChild(NotInDataBase);
+    NotInDataBase.appendChild(alertClose);
+}
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('btn btn-primary disabled');
     if (VoteStatus == 'ToVote') {
