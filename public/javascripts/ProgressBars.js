@@ -48,16 +48,17 @@ const participantsVotingInfoLoaded = (res) => {
         // rowName.className = 'row';
         // document.getElementById('progressBarContainer').appendChild(rowName);
 
-        //Creates the progress bar headline
-        let classYear = document.createElement('label');
-        classYear.className = 'col-6 fw-bold fs-4 p-2 pb-0';
-        classYear.textContent = vote.record.fields.Headline;
-        document.getElementById('row' + temp).appendChild(classYear);
-
         //Creates the colummn where the progressbar will reside
         let colProgress = document.createElement('div');
-        colProgress.className = 'col-6 p-2 pt-0';
+        colProgress.className = 'col-sm p-2 pt-0';
         document.getElementById('row' + temp).appendChild(colProgress);
+        //Creates the progress bar headline
+        let classYear = document.createElement('label');
+        classYear.className = 'col-12 fw-bold fs-4 p-2 pb-0';
+        classYear.textContent = vote.record.fields.Headline;
+        colProgress.appendChild(classYear);
+
+        
 
         //Creates the progressbar (the gray area that shows how long the progress is)
         let progress = document.createElement('div');
@@ -76,43 +77,5 @@ const participantsVotingInfoLoaded = (res) => {
         progressBar.innerHTML = roundedPercentage + '%';
         
     });
-
-    //Creates progressbar row, headline (ex. Åk 2), the actual progress in the bar and lastly the percentage shown in the progress
-    // for (let i = 0; i < 3; i++) {
-    //     let fullPercent = (voteYears[i] / maxVotesYears[i]) * 100;
-    //     let roundedPercentage = round(fullPercent, 1);
-
-    //     //Creates the progress Row
-    //     let rowName = document.createElement('div');
-    //     rowName.className = 'row';
-    //     document.getElementById('progressBarContainer').appendChild(rowName);
-
-    //     //Creates the progress bar headline
-    //     let classYear = document.createElement('label');
-    //     classYear.className = 'fw-bold fs-4 p-2 pb-0';
-    //     classYear.textContent = 'Åk ' + (i + 1);
-    //     rowName.appendChild(classYear);
-
-    //     //Creates the colummn where the progressbar will reside
-    //     let colProgress = document.createElement('div');
-    //     colProgress.className = 'col-12 p-2 pt-0';
-    //     rowName.appendChild(colProgress);
-
-    //     //Creates the progressbar (the gray area that shows how long the progress is)
-    //     let progress = document.createElement('div');
-    //     progress.className = 'progress';
-    //     progress.style.height = '50px';
-    //     progress.style.width = '100%';
-    //     colProgress.appendChild(progress);
-
-    //     //Creates the actual progress inside the progressbar and gives it a color depending on the Year
-    //     let progressBar = document.createElement('div');
-    //     progressBar.className = 'progress-bar progress-bar-striped progress-bar-animated fw-bold fs-5 text ' + progressBarColor[i];
-    //     progressBar.style.width = `${roundedPercentage}%`;
-    //     progress.appendChild(progressBar);
-
-    //     //Adds the percent-text inside the progress
-    //     progressBar.innerHTML = roundedPercentage + '%';
-    // }
 
 }
