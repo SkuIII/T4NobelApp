@@ -2,7 +2,9 @@
 var express = require('express');
 var router = express.Router();
 const Airtable = require('airtable');
-const { render } = require('pug');
+const {
+    render
+} = require('pug');
 const enviorment = require('dotenv').config();
 
 // Connection to Airtable (APIKEY hidden with .env)
@@ -16,16 +18,44 @@ router.get('/', (req, res, next) => {
         title: 'T4NobelApp'
     });
 });
+router.get('/winner', (req, res, next) => {
+    res.render('workingFolder/winner', {
+        title: 'T4NobelApp'
+    });
+});
 
 // Route for showcase page
 router.get('/leaderboard', (req, res, next) => {
-    const done = new Date(2021, 10, 29, 12, 20);
-    const now = new Date() 
-    if (now.getTime() < done.getTime()) {
-        res.render('workingFolder/leaderboardBig');
-    } else {
-        res.render('workingFolder/winner');
-    }
+
+    const CountdownsArray = [];
+
+    base('Countdowns').select().eachPage(page = (records, fetchNextPage) => {
+            records.forEach(record => {
+                CountdownsArray.push({
+                    "Name": record.fields.Name,
+                    "Year": record.fields.Year,
+                    "Month": record.fields.Month,
+                    "Day": record.fields.Day,
+                    "Hour": record.fields.Hour,
+                    "Mintue": record.fields.Mintue,
+                    "Second": record.fields.Second
+                })
+
+            });
+            fetchNextPage();
+        },
+        done = (err) => {
+            console.log(CountdownsArray)
+
+
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+
+    res.render('workingFolder/leaderboardBig');
+
 });
 
 router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote status
