@@ -1,56 +1,3 @@
-//- extends leaderLayout
-
-
-//- block Header
-//-     div(id = "header")
-//-         div(class="header container-fluid " style="background-color:  #ff8000;")
-//-             div(class="row justify-content-center")
-//-                 div(class="col-auto")
-//-                     h1(id = "headline" class = "p-2") ÖSTRA ALT. NOBEL PRIS
-//- block karusell
-//-     div(class="container" id = "content")
-//-         div(id="my-slider" class="ism-slider" data-play_type="loop" data-image_fx="zoomrotate" data-radio_type="thumbnail")
-//-             ol(id = "ol")
-//-                 li
-//-                     img(src="images/image1.jpg")
-//-                     div(class="ism-caption ism-caption-0") Greta Thunberg
-//-                 li
-//-                     img(src="images/image2.jpg")
-//-                     div(class="ism-caption ism-caption-0") Keith Gill
-//-                 li
-//-                     img(src="images/image2.jpg")
-//-                     div(class="ism-caption ism-caption-0") Alexandra Ocasio-Cortez
-//-                 li
-//-                     img(src="images/image2.jpg")
-//-                     div(class="ism-caption ism-caption-0") Elon Musk
-//-                 li
-//-                     img(src="images/image1.jpg")
-//-                     div(class="ism-caption ism-caption-0") Suzie Freeman
-//-                 li
-//-                     img(src="images/image2.jpg")
-//-                     div(class="ism-caption ism-caption-0") Boyan Slat
-//-                 li
-//-                     img(src="images/image1.jpg")
-//-                     div(class="ism-caption ism-caption-0") Satoshi Nakamoto
-//-                 li
-//-                     img(src="images/image2.jpg")
-//-                     div(class="ism-caption ism-caption-0") Kevin Mccoy
-//-                 li
-//-                     img(src="images/image9.jpg")
-//-                     div(class="ism-caption ism-caption-0") Jesse Powell
-
-//- block Login
-//-     div(id = "contentt" class = "container-sm mw-75 justify-content-center")
-//-         h1(class="text-center mx-2") Leaderboard
-//-         meta(http-equiv='refresh' content='10')
-//-         img(class = "col-3 border border-primary display-6 pb-0 img-fluid" src = "https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png")
-//-         img(class = "col-3 border border-primary display-6 pb-0 img-fluid" src = "https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png")
-//-         img(class = "col-3 border border-primary display-6 pb-0 img-fluid" src = "https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png")
-//-         img(class = "col-3 border border-primary display-6 pb-0 img-fluid" src = "https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png")
-//-         img(class = "col-3 border border-primary display-6 pb-0 img-fluid" src = "https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png")
-//-         img(class = "col-3 border border-primary display-6 pb-0 img-fluid" src = "https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png")
-//-         img(class = "col-3 border border-primary display-6 pb-0 img-fluid" src = "https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png")
-//-         img(class = "col-3 border border-primary display-6 pb-0 img-fluid" src = "https://dl.airtable.com/.attachments/36014f6e2f08fa506ead8fa7b55c02b5/05d16d37/bild_2021-11-12_100959.png")
 
 doctype html
 html
@@ -74,6 +21,7 @@ html
     link(href="http://fonts.googleapis.com/css?family=Open+Sans|Raleway")
     
     script(src="javascripts/Slideshow.js")
+    script(src="javascripts/Countdown.js")
     link(rel='stylesheet' href='stylesheets/test.css')
     script(src="javascripts/ProgressBars.js") 
     
@@ -85,20 +33,27 @@ block Header
         div(class="header container-fluid " style="background-color:  #ff8000; color:#fff;")
             div(class="row justify-content-center")
                 div(class="col-auto")
-                    h1(id = "headline" class = "p-2") ÖSTRAS ALTERNATIVA NOBELPRIS
+                    h1(id = "headline" class = "p-1") ÖSTRAS ALTERNATIVA NOBELPRIS
 
 block karusell
-    div(class="container mb-5" id = "content")
+    div(class="container mb-3" id = "content")
             div( class="ism-slider" data-play_type="loop" data-image_fx="zoomrotate" data-radio_type="thumbnail" id="my-slider")
                 ol(id = "ol")
 
 
-block Progress 
-    div(class="container mt-5")
+block Progress
+    div(class ="container-fluid")
+        div(class="row justify-content-center")
+            div(id="count" class="col-auto h2")
+    div(class="container")
         div(id="progressBarContainer" class = "container-sm mt-2")
+
+
         
-                
 
+//- Qr Code and refresh function. Located in Slideshow.js 
+
+div(id="qrcode")                         
 div(id="refresh")
-
+div(id="test") Skanna här
         
