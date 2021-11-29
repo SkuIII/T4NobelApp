@@ -1065,11 +1065,18 @@ img{
     box-shadow: 1px 2px 10px 5px;
     margin-bottom:5px;
 }
+
 /* might have to change the size */
-#test img{
+#qrcode{
     float: right;
     height:175px;   
-    width:auto;
+    width: auto;
     margin-bottom: 0.09%;
     margin-right: 0.1%;
+    
 }
+#test{
+    float: right;
+    font-size: 30px;
+}
+
