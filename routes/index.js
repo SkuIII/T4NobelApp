@@ -28,32 +28,71 @@ router.get('/winner', (req, res, next) => {
 router.get('/leaderboard', (req, res, next) => {
 
     const CountdownsArray = [];
+    const CurrentTime = new Date();
 
-    base('Countdowns').select().eachPage(page = (records, fetchNextPage) => {
-            records.forEach(record => {
-                CountdownsArray.push({
-                    "Name": record.fields.Name,
-                    "Year": record.fields.Year,
-                    "Month": record.fields.Month,
-                    "Day": record.fields.Day,
-                    "Hour": record.fields.Hour,
-                    "Mintue": record.fields.Mintue,
-                    "Second": record.fields.Second
-                })
+    const getPhases = (callback) => {
+        base('Countdowns').select().eachPage(page = (records, fetchNextPage) => {
+                records.forEach(record => {
+                    CountdownsArray.push({
+                        "Name": record.fields.Name,
+                        "Date": new Date(record.fields.Date)
+                    })
+                    console.log(record.fields.Name)
+                });
 
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
+            },
+            function done(err) {
+                console.log(CountdownsArray)
+                callback();
+
+                if (err) {
+                    console.error(err);
+                    return;
+                }
             });
-            fetchNextPage();
-        },
-        done = (err) => {
-            console.log(CountdownsArray)
+    }
 
 
-            if (err) {
-                console.error(err);
-                return;
-            }
-        });
 
+    const Countdowns = () => {
+
+        console.log(CountdownsArray[0].Date.getTime())
+        console.log(CountdownsArray[1].Date)
+        console.log(CountdownsArray[2].Date)
+        console.log(CurrentTime)
+
+        const time1 = CountdownsArray[0].Date.getTime();
+        const time2 = CountdownsArray[1].Date.getTime();
+        const time3 = CountdownsArray[2].Date.getTime();
+
+        console.log((time1 < CurrentTime.getTime()));
+        console.log((time2 < CurrentTime.getTime()));
+        if (time1 < CurrentTime.getTime()) {
+            console.log('hej1')
+            console.log(CountdownsArray[0].Name)
+
+        } else
+
+        if (time2 < CurrentTime) {
+            console.log('hej2')
+            console.log(CountdownsArray[1].Name)
+
+        } else
+
+        {
+            console.log('hej3')
+            console.log(CountdownsArray[2].Name)
+
+        }
+    }
+
+    getPhases(Countdowns);
     res.render('workingFolder/leaderboardBig');
 
 });
@@ -77,7 +116,12 @@ router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote s
                 }
 
             });
-            fetchNextPage();
+            try {
+                fetchNextPage();
+
+            } catch (error) {
+                console.log(error)
+            }
         },
         done = (err) => {
             console.log(VoteStatus);
@@ -117,7 +161,12 @@ router.post('/Vote', (req, res, next) => {
                 "AmountVotes": record.fields.AmountVotes
             })
         });
-        fetchNextPage();
+        try {
+            fetchNextPage();
+
+        } catch (error) {
+            console.log(error)
+        }
 
     }, done = (err) => {
         AmountVotesNominated();
@@ -160,7 +209,12 @@ router.post('/Vote', (req, res, next) => {
                                 }
 
                             });
-                            fetchNextPage();
+                            try {
+                                fetchNextPage();
+
+                            } catch (error) {
+                                console.log(error)
+                            }
 
                         }, done = (err) => {
 
@@ -229,7 +283,12 @@ router.post('/Vote', (req, res, next) => {
 
                                     }
                                 });
-                                fetchNextPage();
+                                try {
+                                    fetchNextPage();
+
+                                } catch (error) {
+                                    console.log(error)
+                                }
                             },
                             done = (err) => {
 
@@ -240,7 +299,12 @@ router.post('/Vote', (req, res, next) => {
                             });
                     }
                 });
-                fetchNextPage();
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
             },
             done = (err) => {
                 CreateCategoryArray();
@@ -263,7 +327,12 @@ router.post('/Vote', (req, res, next) => {
                     "Category": record.fields.Category
                 })
             });
-            fetchNextPage();
+            try {
+                fetchNextPage();
+
+            } catch (error) {
+                console.log(error)
+            }
 
         }, done = (err) => {
             UpdateWinner();
@@ -296,7 +365,12 @@ router.post('/Vote', (req, res, next) => {
                         })
                     }
                 });
-                fetchNextPage();
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
 
             }, done = (err) => {
                 // Sorting the array based on amount of votes
@@ -343,7 +417,12 @@ router.post('/Vote', (req, res, next) => {
                         });
                     }
                 });
-                fetchNextPage();
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
 
             }, done = (err) => {
 
@@ -377,7 +456,12 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
             })
 
         });
-        fetchNextPage();
+        try {
+            fetchNextPage();
+
+        } catch (error) {
+            console.log(error)
+        }
 
     }, done = (err) => {
         UpdateYear()
@@ -414,7 +498,12 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
                         });
                     }
                 });
-                fetchNextPage();
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
 
             }, done = (err) => {
                 WriteYear();
@@ -450,7 +539,12 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
                         });
                     }
                 });
-                fetchNextPage();
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
 
             }, done = (err) => {
                 if (err) {
