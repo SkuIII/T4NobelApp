@@ -21,6 +21,7 @@ html
     link(href="http://fonts.googleapis.com/css?family=Open+Sans|Raleway")
     
     script(src="javascripts/Slideshow.js")
+    script(src="javascripts/Countdown.js")
     link(rel='stylesheet' href='stylesheets/test.css')
     script(src="javascripts/ProgressBars.js") 
     
@@ -40,9 +41,14 @@ block karusell
                 ol(id = "ol")
 
 
-block Progress 
+block Progress
+    div(class ="container-fluid")
+        div(class="row justify-content-center")
+            div(id="count" class="col-auto h2")
     div(class="container mt-5")
         div(id="progressBarContainer" class = "container-sm mt-2")
+
+
         
 
 //- Qr Code and refresh function. Located in Slideshow.js 
