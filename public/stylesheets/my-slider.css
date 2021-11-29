@@ -1068,15 +1068,21 @@ img{
 
 /* might have to change the size */
 #qrcode{
-    float: right;
     height:175px;   
     width: auto;
     margin-bottom: 0.09%;
     margin-right: 0.1%;
+    position: relative;
+    float: right;
+
     
 }
 #test{
-    float: right;
     font-size: 30px;
+}
+
+.try{
+    position:absolute;
+    z-index:20;
 }
 
