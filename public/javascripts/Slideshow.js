@@ -5,16 +5,29 @@ const fetchNominatedInfo = fetch(
     '/data/Nominated'
 ).then((res) => res.json());
 
-fetchNominatedInfo.then((res) => LoadNominatedInfo(res));
+const fetchqr = fetch(
+    '/data/qr'
+).then((res) => res.json());
+
+
+const allData = Promise.all([fetchNominatedInfo, fetchqr]);
+
+allData.then((res) => LoadNominatedInfo(res));
 
 const LoadNominatedInfo = (res) => {
-
+    
     var RefreshAmount = 0; // has to start at 0
+    
+    const NominatedInfo = res[0];
+    const qr = res[1];
+    console.log(qr[0].record.fields.Picture[0].url)
 
-    const NominatedInfo = res;
+    let img = document.createElement('img');
+    img.src = qr[0].record.fields.Picture[0].url; //makes every slide with different picture
+    document.getElementById('test').appendChild(img);
 
-    NominatedInfo.forEach(Nominee => {
-        let p = null; //Makes a new slide for every nominee in the airtable
+
+    NominatedInfo.forEach(Nominee => { //Makes a new slide for every nominee in the airtable
         console.log(Nominee.record.fields.Nominated); //fetch nominees name from airtable
         console.log(Nominee.record.fields.Picture[0].url);
         console.log(Nominee.record.fields.Intro);
@@ -34,7 +47,7 @@ const LoadNominatedInfo = (res) => {
 
         RefreshAmount = RefreshAmount + 5; //adds 5 seconds for each slide
     });
-
+    
 
     const refresh = document.createElement('meta');
     refresh.httpEquiv = 'refresh';
@@ -45,8 +58,5 @@ const LoadNominatedInfo = (res) => {
     const slide = document.createElement('script'); //Makes the javascript to read in after
     slide.src = 'javascripts/ism-2.2.min.js'; //the javascript for html and airtable info is collected       
     document.getElementById('content').appendChild(slide);
-
-
-
 
 };
