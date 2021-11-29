@@ -21,7 +21,7 @@ router.get('/', (req, res, next) => {
 router.get('/leaderboard', (req, res, next) => {
     const done = new Date(2021, 10, 29, 12, 20);
     const now = new Date() 
-    if (now.getTime() > done.getTime()) {
+    if (now.getTime() < done.getTime()) {
         res.render('workingFolder/leaderboardBig');
     } else {
         res.render('workingFolder/winner');
