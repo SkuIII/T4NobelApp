@@ -1,7 +1,8 @@
-'use strict';
+// 'use strict';
 var express = require('express');
 var router = express.Router();
 const Airtable = require('airtable');
+const { render } = require('pug');
 const enviorment = require('dotenv').config();
 
 // Connection to Airtable (APIKEY hidden with .env)
@@ -18,7 +19,13 @@ router.get('/', (req, res, next) => {
 
 // Route for showcase page
 router.get('/leaderboard', (req, res, next) => {
-    res.render('workingFolder/leaderboardBig');
+    const done = new Date(2021, 10, 29, 12, 20);
+    const now = new Date() 
+    if (now.getTime() > done.getTime()) {
+        res.render('workingFolder/leaderboardBig');
+    } else {
+        res.render('workingFolder/winner');
+    }
 });
 
 router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote status
