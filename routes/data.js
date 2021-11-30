@@ -102,5 +102,86 @@ router.get('/qr', (req, res, next) => {
     });
 });
 
+router.get('/Countdowns', (req, res, next) => {
+    let recordArray = [];
+
+    const CountdownsArray = [];
+    let CurrentPhase;
+    const CurrentTime = new Date();
+
+    const getPhases = (callback) => {
+        base('Countdowns').select().eachPage(page = (records, fetchNextPage) => {
+                records.forEach(record => {
+                    CountdownsArray.push({
+                        "Name": record.fields.Name,
+                        "Date": new Date(record.fields.Date),
+                    })
+                    console.log(record.fields.Name)
+                });
+
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
+            },
+            function done(err) {
+                console.log(CountdownsArray)
+                callback();
+
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+            });
+    }
+
+    const Countdowns = () => {
+
+        if (CountdownsArray[0].Date.getTime() < CurrentTime.getTime()) {
+            console.log('hej0')
+            console.log(CountdownsArray[0].Name)
+            CurrentPhase = {
+                "Name": CountdownsArray[0].Name,
+                "Date": CountdownsArray[0].Date,
+                "Phase": 0
+            };
+            res.send(CurrentPhase)
+
+        } else if (CountdownsArray[1].Date.getTime() < CurrentTime.getTime()) {
+            console.log('hej1')
+            console.log(CountdownsArray[1].Name)
+            CurrentPhase = {
+                "Name": CountdownsArray[1].Name,
+                "Date": CountdownsArray[1].Date,
+                "Phase": 1
+            };
+            res.send(CurrentPhase)
+
+        } else
+        if (CountdownsArray[2].Date.getTime() < CurrentTime.getTime()) {
+            console.log('hej2')
+            console.log(CountdownsArray[2].Name)
+            CurrentPhase = {
+                "Name": CountdownsArray[2].Name,
+                "Date": CountdownsArray[2].Date,
+                "Phase": 2
+            };
+            res.send(CurrentPhase)
+
+        } else {
+            CurrentPhase = {
+                "Name": "",
+                "Date": "",
+                "Phase": 4
+            };
+            res.send(CurrentPhase)
+        }
+    }
+
+    getPhases(Countdowns);
+});
+
 
 module.exports = router;
