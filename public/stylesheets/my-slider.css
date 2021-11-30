@@ -1057,7 +1057,7 @@ img{
 }
 
 #my-slider{
-    width: 70%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     border-radius: 1em;
@@ -1073,13 +1073,14 @@ img{
     margin-bottom: 0.09%;
     position: relative;
     float: right;
-    margin-top: 255px;
-    box-shadow: 1px 2px 2px 1px;
+    margin-top: 175px;
+   
 }
 
 #txt{
     font-size:40px;
     text-align: center;
+    margin-top: 20px;
 }
 
 #info{
@@ -1089,4 +1090,18 @@ img{
 #progressBarContainer{
     position:absolute;
 }
+
+#nobelpris, #nobelpris2{
+    width:70%;
+    margin-top:60px;
+}
+
+.h4 {
+    font-size: 30px;
+    margin-left: 6px;
+
+}
+
+
+
 

@@ -36,9 +36,16 @@ block Header
                     h1(id = "headline" class = "p-1") ÖSTRAS ALTERNATIVA NOBELPRIS
 
 block karusell
-    div(class="container mb-3" id = "content")
-            div( class="ism-slider" data-play_type="loop" data-image_fx="zoomrotate" data-radio_type="thumbnail" id="my-slider")
-                ol(id = "ol")
+    div(class="container-fluid mb-3" id = "content")
+        div(class="row")
+            div(class="col-3")
+                div(id="nobelpris" class="mx-auto")
+            div(class="col-6")
+                div( class="ism-slider" data-play_type="loop" data-image_fx="zoomrotate" data-radio_type="thumbnail" id="my-slider")
+                    ol(id = "ol")
+            div(class="col-3")
+                div(id="nobelpris2" class="mx-auto")
+            
 
 
 
@@ -56,6 +63,7 @@ block Progress
 //- Qr Code and refresh function. Located in Slideshow.js
 
 div(id="qrcode")
- div(id="inf")  
+    p(class="h4") Rösta här
 div(id="refresh")
+    
 
