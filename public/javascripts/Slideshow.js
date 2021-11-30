@@ -51,6 +51,7 @@ const LoadNominatedInfo = (res) => {
         RefreshAmount = RefreshAmount + 5; // Adds 5 seconds for each slide to the refresh function
     });
     
+    
 
     const refresh = document.createElement('meta');
     refresh.httpEquiv = 'refresh';
