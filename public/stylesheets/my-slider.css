@@ -1071,18 +1071,22 @@ img{
     height:175px;   
     width: auto;
     margin-bottom: 0.09%;
-    margin-right: 0.1%;
     position: relative;
     float: right;
-
-    
-}
-#test{
-    font-size: 30px;
+    margin-top: 255px;
+    box-shadow: 1px 2px 2px 1px;
 }
 
-.try{
+#txt{
+    font-size:40px;
+    text-align: center;
+}
+
+#info{
+    font-size: 10px;
+}
+
+#progressBarContainer{
     position:absolute;
-    z-index:20;
 }
 
