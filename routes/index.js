@@ -17,6 +17,12 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/winner', (req, res, next) => {
+    res.render('workingFolder/winner', {
+        title: 'T4NobelApp'
+    });
+});
+
 // Route for showcase page
 router.get('/leaderboard', (req, res, next) => {
     const done = new Date(2021, 10, 29, 12, 20);
