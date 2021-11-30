@@ -20,8 +20,24 @@
 
 // var phase = 2;
 
-let phase = 3;
+const fetchPhase = fetch(
+    '/data/Countdowns'
+).then((res) => res.json());
 
+// let phase = 3;
+
+// const data = Promise(fetchPhase);
+
+fetchPhase.then((res) => phaseLoad(res));
+
+let phase = [];
+
+const phaseLoad = (res) => {
+    phase = res;
+    console.log(res.Phase);
+}
+
+// console.log(phase);
 
 const loginLeader = () => {
 
@@ -29,7 +45,7 @@ const loginLeader = () => {
 
     // loginLeaderData.then((res) => LoadLoginLeader(res));
 
-    if(phase == 1){
+    if(phase == 0 || phase == 3){
 
         console.log('Phase 1 SUCESSFULL');
         // var googleLogin = document.getElementById('login');
@@ -50,7 +66,7 @@ const loginLeader = () => {
         // document.getElementsByTagName('head')[0].appendChild(script1);
         // // document.getElementsByTagName('head')[0].appendChild(script2);
 
-    }else if(phase == 3){
+    }else if(phase == 1){
         document.getElementById('login').hidden = true;
         document.getElementById('headline').textContent = 'Rösterna räknas!';
     }
