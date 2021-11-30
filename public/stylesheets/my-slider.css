@@ -1057,7 +1057,7 @@ img{
 }
 
 #my-slider{
-    width: 70%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     border-radius: 1em;
@@ -1071,18 +1071,37 @@ img{
     height:175px;   
     width: auto;
     margin-bottom: 0.09%;
-    margin-right: 0.1%;
     position: relative;
     float: right;
-
-    
-}
-#test{
-    font-size: 30px;
+    margin-top: 175px;
+   
 }
 
-.try{
+#txt{
+    font-size:40px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#info{
+    font-size: 10px;
+}
+
+#progressBarContainer{
     position:absolute;
-    z-index:20;
 }
+
+#nobelpris, #nobelpris2{
+    width:70%;
+    margin-top:60px;
+}
+
+.h4 {
+    font-size: 30px;
+    margin-left: 6px;
+
+}
+
+
+
 

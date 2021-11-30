@@ -26,7 +26,13 @@ const LoadNominatedInfo = (res) => {
     let img = document.createElement('img');
     img.src = qr[0].record.fields.Picture[0].url; // Makes every slide with different picture
     document.getElementById('qrcode').appendChild(img);
-
+    let img2 = document.createElement('img');
+    img2.src = qr[1].record.fields.Picture[0].url;
+    document.getElementById('nobelpris').appendChild(img2);
+    let img3 = document.createElement('img');
+    img3.src = qr[1].record.fields.Picture[0].url;
+    document.getElementById('nobelpris2').appendChild(img3);
+    
 
     NominatedInfo.forEach(Nominee => { // Makes a new slide for every nominee in the airtable
 
@@ -50,6 +56,7 @@ const LoadNominatedInfo = (res) => {
 
         RefreshAmount = RefreshAmount + 5; // Adds 5 seconds for each slide to the refresh function
     });
+    
     
 
     const refresh = document.createElement('meta');
