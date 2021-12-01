@@ -2,14 +2,14 @@
 
 <h1>Körschema 1: Röstningsförsök </h1>
 
-#Innan röstningen(fas 1)
+<u>Innan röstningen(fas 1)</u>
 
-#Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com
+<b>Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b>
 #Kolla om du kan rösta
 
-#Under röstnigen(fas 2)
+<u>Under röstnigen(fas 2)</u>
 
-#Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com
+<b>Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b>
 #Testa visa mer knapparna 
 #Kolla om du kan rösta
 #Logga in med fel edu mail
@@ -17,9 +17,9 @@
 #Försök att rösta nu
 #Skicka in dina röster längst ner på sidan
 
-#Efter röstnigen(fas 3)
+<u>Efter röstnigen(fas 3)</u>
 
-#Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com
+<b>Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b>
 #Kolla om du kan rösta
 
 <h1>Körschema 2:  </h1> 
