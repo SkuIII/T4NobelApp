@@ -16,7 +16,6 @@ const base = new Airtable({
 router.get('/', (req, res, next) => {
 
     const CountdownsArray = [];
-    let CurrentPhase;
     const CurrentTime = new Date();
 
     const getPhases = (callback) => {
@@ -26,7 +25,6 @@ router.get('/', (req, res, next) => {
                         "Name": record.fields.Name,
                         "Date": new Date(record.fields.Date),
                     })
-                    console.log(record.fields.Name)
                 });
 
                 try {
@@ -37,7 +35,6 @@ router.get('/', (req, res, next) => {
                 }
             },
             function done(err) {
-                console.log(CountdownsArray)
                 callback();
 
                 if (err) {
@@ -71,7 +68,7 @@ router.get('/winner', (req, res, next) => {
 
 // Route for showcase page
 router.get('/leaderboard', (req, res, next) => {
-    
+
     const CountdownsArray = [];
     let CurrentPhase;
     const CurrentTime = new Date();
@@ -83,7 +80,6 @@ router.get('/leaderboard', (req, res, next) => {
                         "Name": record.fields.Name,
                         "Date": new Date(record.fields.Date),
                     })
-                    console.log(record.fields.Name)
                 });
 
                 try {
@@ -94,7 +90,6 @@ router.get('/leaderboard', (req, res, next) => {
                 }
             },
             function done(err) {
-                console.log(CountdownsArray)
                 callback();
 
                 if (err) {
@@ -397,12 +392,6 @@ router.post('/Vote', (req, res, next) => {
 
             }, done = (err) => {
                 // Sorting the array based on amount of votes
-
-
-
-                // OSCAR LEFT THE PLAZA HERE, ALL COMMENTS UNDERNEATH ARE NOT CONFIRMED
-
-
 
                 WinnerCategoryArray.sort((firstItem, secondItem) => secondItem.AmountVotes - firstItem.AmountVotes);
 

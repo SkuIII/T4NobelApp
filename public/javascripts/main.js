@@ -1,6 +1,6 @@
 'use strict';
 
-// console.log('main.js is alive!');
+console.log('main.js is alive!');
 
 let NominatedInfo = [];
 let CategoryInfo = [];
@@ -28,8 +28,6 @@ const Load = (res) => {
 
         CategoryInfo.forEach((Category, counterCategory) => {
 
-            // console.log(Category.record.fields.Category);
-
             //Creates headline
             const content = document.getElementById('content');
 
@@ -44,11 +42,8 @@ const Load = (res) => {
             row.id = Category.record.fields.Category + '.Row';
             content.appendChild(row);
 
-
             NominatedInfo.forEach((Nominated, counterNominated) => {
                 if (Nominated.record.fields.Category == Category.record.fields.Category) {
-                    // console.log(Nominated.record.fields.Picture[0].url);
-                    // console.log('Category' + (counterCategory + 1) + "-" + Nominated.record.fields.Nominated);
 
                     // Creates Cols
                     const newCol = document.createElement('div');
@@ -100,7 +95,7 @@ const Load = (res) => {
                     //The vote btn in the col
                     const btnVote = document.createElement('button');
                     btnVote.textContent = 'Rösta';
-                    btnVote.className = 'vote btn btn-primary disabled ' + Category.record.fields.Category;
+                    btnVote.className = 'vote btn btn-primary disabled voteButton ' + Category.record.fields.Category;
                     btnVote.addEventListener('click', divVoteClick);
                     btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
                     newCol.appendChild(btnVote);
@@ -124,10 +119,6 @@ acceptChoice.id = 'agree';
 acceptChoice.className = 'form-check-input';
 acceptChoice.addEventListener('change', acceptingChoice);
 acceptingText.appendChild(acceptChoice);
-
-
-
-
 
 const showBio = (sender) => {
     const ID = sender.target.name;
