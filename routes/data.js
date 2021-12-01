@@ -169,43 +169,49 @@ router.get('/Countdowns', (req, res, next) => {
         const Countdowns = () => {
 
             if (CountdownsArray[0].Date.getTime() < CurrentTime.getTime()) {
-                console.log('hej0')
-                console.log(CountdownsArray[0].Name)
                 CurrentPhase = {
-                    "Name": CountdownsArray[0].Name,
-                    "Date": CountdownsArray[0].Date,
+                    "Name": "",
+                    "Date": "",
                     "Phase": 0
                 };
                 res.send(CurrentPhase)
 
             } else if (CountdownsArray[1].Date.getTime() < CurrentTime.getTime()) {
                 console.log('hej1')
-                console.log(CountdownsArray[1].Name)
+                console.log(CountdownsArray[0].Name)
                 CurrentPhase = {
-                    "Name": CountdownsArray[1].Name,
-                    "Date": CountdownsArray[1].Date,
+                    "Name": CountdownsArray[0].Name,
+                    "Date": CountdownsArray[0].Date,
                     "Phase": 1
                 };
                 res.send(CurrentPhase)
 
+
+
             } else
             if (CountdownsArray[2].Date.getTime() < CurrentTime.getTime()) {
                 console.log('hej2')
-                console.log(CountdownsArray[2].Name)
+                console.log(CountdownsArray[1].Name)
                 CurrentPhase = {
-                    "Name": CountdownsArray[2].Name,
-                    "Date": CountdownsArray[2].Date,
+                    "Name": CountdownsArray[1].Name,
+                    "Date": CountdownsArray[1].Date,
                     "Phase": 2
                 };
                 res.send(CurrentPhase)
 
+
+
             } else {
+                console.log('hej3')
+                console.log(CountdownsArray[2].Name)
                 CurrentPhase = {
-                    "Name": "",
-                    "Date": "",
+                    "Name": CountdownsArray[2].Name,
+                    "Date": CountdownsArray[2].Date,
                     "Phase": 3
                 };
                 res.send(CurrentPhase)
+
+
             }
         }
 

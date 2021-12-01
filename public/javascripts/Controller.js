@@ -7,11 +7,15 @@ const fetchPhase = fetch(
 fetchPhase.then((res) => phaseLoad(res));
 
 let phase;
+let date;
+let nameName;
 
 const phaseLoad = (res) => {
     phase = res.Phase;
+    date = res.Date;
+    nameName = res.Name;
     console.log(res.Phase);
-    loginLeader();
+    countdownFunc(date, nameName);
 }
 
 const loginLeader = () => {
@@ -20,53 +24,53 @@ const loginLeader = () => {
 
     // loginLeaderData.then((res) => LoadLoginLeader(res));
 
-    if(phase == 0 || phase == 3){
+    if (phase == 0 || phase == 3) {
 
-        console.log('Phase 1 SUCESSFULL');
-        // var googleLogin = document.getElementById('login');
-        // document.getElementById('login').hidden = true;
+        console.log('Phase 1 or 3 SUCESSFULL');
+        var googleLogin = document.getElementById('login');
+        document.getElementById('login').hidden = true;
 
-    }else if(phase == 2){
+    } else if (phase == 2) {
 
-        // console.log('Phase 2 SUCESSFULL');
+        console.log('Phase 2 SUCESSFULL');
         document.getElementById('login').hidden = false;
 
-    }else if(phase == 1){
+    } else if (phase == 1) {
         document.getElementById('headline').textContent = 'Rösterna räknas!';
     }
 
 }
 
-// const leaderboardBig = () => {
-//     if(phase == 1){
-    
-//     }else if(phase == 2){
-    
-//     }else if(phase == 3){
-    
-//     }
-// }
+const leaderboardBig = () => {
+    if (phase == 1) {
 
-// const winner = () => {
-//     if(phase == 1){
-    
-//     }else if(phase == 2){
-    
-//     }else if(phase == 3){
-    
-//     }
-// }
+    } else if (phase == 2) {
 
-// const pugUrl = document.URL.split('/');
-// const urlPage = `${pugUrl[0]}//${pugUrl[2]}/${pugUrl[3]}`;
+    } else if (phase == 3) {
 
-// if(pugUrl[3] == ''){
-//     console.log('INDEX');
-//     loginLeader();
-// } else if (pugUrl[3] == 'leaderboard'){
-//     console.log('LEADERBOARD');
-//     leaderboardBig();
-// } else if (pugUrl[3] == 'winner'){
-//     console.log('WINNER');
-//     winner();
-// }
+    }
+}
+
+const winner = () => {
+    if (phase == 1) {
+
+    } else if (phase == 2) {
+
+    } else if (phase == 3) {
+
+    }
+}
+
+const pugUrl = document.URL.split('/');
+const urlPage = `${pugUrl[0]}//${pugUrl[2]}/${pugUrl[3]}`;
+
+if (pugUrl[3] == '') {
+    console.log('INDEX');
+    loginLeader();
+} else if (pugUrl[3] == 'leaderboard') {
+    console.log('LEADERBOARD');
+    leaderboardBig();
+} else if (pugUrl[3] == 'winner') {
+    console.log('WINNER');
+    winner();
+}
