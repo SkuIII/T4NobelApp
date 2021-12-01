@@ -1,5 +1,7 @@
 'use strict';
 
+console.log('Controller.js is alive')
+
 const fetchPhase = fetch(
     '/data/Countdowns'
 ).then((res) => res.json());
@@ -14,40 +16,56 @@ const phaseLoad = (res) => {
     phase = res.Phase;
     date = res.Date;
     nameName = res.Name;
+
     console.log(res.Phase);
+
     countdownFunc(date, nameName);
+    yesMan();
 }
 
 const loginLeader = () => {
 
-    // const loginLeaderData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchParticipantsVotingInfo]);
+    if (phase == 3) {
 
-    // loginLeaderData.then((res) => LoadLoginLeader(res));
-
-    if (phase == 0 || phase == 3) {
-
-        console.log('Phase 1 or 3 SUCESSFULL');
-        var googleLogin = document.getElementById('login');
         document.getElementById('login').hidden = true;
+        document.getElementById('progressBarContainer').hidden = true;
+        document.getElementById('buttonAccept').hidden = true;
 
-    } else if (phase == 2) {
+        for (let i = 0; i < 9; i++) {
+            document.getElementsByClassName('voteButton')[i].hidden = true;
+        }
+        document.getElementsByClassName('voteButton').hidden = true;
 
-        console.log('Phase 2 SUCESSFULL');
+    } else
+    if (phase == 2) {
+
         document.getElementById('login').hidden = false;
 
-    } else if (phase == 1) {
-        document.getElementById('headline').textContent = 'Rösterna räknas!';
-    }
+        console.log('Phase 2 SUCESSFULL');
+    } else
+    if (phase == 1) {
 
+        document.getElementById('progressBarContainer').hidden = true;
+        document.getElementById('headline').hidden = true;
+    }
 }
 
 const leaderboardBig = () => {
+    if (phase == 3) {
+
+        document.getElementById('progressBarContainer').hidden = true;
+        document.getElementById('countRow').className = 'row justify-content-center text-center display-1';
+
+    } else
+    if (phase == 2) {
+
+        document.getElementById('headline2').textContent = 'Valdeltagande';
+
+    } else
     if (phase == 1) {
 
-    } else if (phase == 2) {
-
-    } else if (phase == 3) {
-
+        document.getElementById('headline2').textContent = '';
+        document.getElementById('refreshPage').content = '';
     }
 }
 
@@ -61,16 +79,18 @@ const winner = () => {
     }
 }
 
-const pugUrl = document.URL.split('/');
-const urlPage = `${pugUrl[0]}//${pugUrl[2]}/${pugUrl[3]}`;
+const yesMan = () => {
+    const pugUrl = document.URL.split('/');
+    const urlPage = `${pugUrl[0]}//${pugUrl[2]}/${pugUrl[3]}`;
 
-if (pugUrl[3] == '') {
-    console.log('INDEX');
-    loginLeader();
-} else if (pugUrl[3] == 'leaderboard') {
-    console.log('LEADERBOARD');
-    leaderboardBig();
-} else if (pugUrl[3] == 'winner') {
-    console.log('WINNER');
-    winner();
+    if (pugUrl[3] == '') {
+        console.log('INDEX');
+        loginLeader();
+    } else if (pugUrl[3] == 'leaderboard') {
+        console.log('LEADERBOARD');
+        leaderboardBig();
+    } else if (pugUrl[3] == 'winner') {
+        console.log('WINNER');
+        winner();
+    }
 }
