@@ -1,7 +1,5 @@
 # Körschema
 
-[<h[1>K]([url]([url]([url](url))))örschema 1: Röstningsförsök </h1>](url)
-
 ## Innan röstningen(fas 1) 
 
 #### Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
@@ -22,14 +20,7 @@
 #### Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
 #### Kolla om du kan rösta
 
-[<h1>Körschema 2:  </h1> 
  
-<h1>Körschema 3:  </h1> 
-
-<h1>Körschema 4:  </h1> 
-
-<h1>Körschema 5:  </h1> 
-](u[rl)]([url]([url]([url](url))))
 
 
 
