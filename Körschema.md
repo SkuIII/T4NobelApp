@@ -2,12 +2,12 @@
 
 <h1>Körschema 1: Röstningsförsök </h1>
 
-<u>Innan röstningen(fas 1)</u>
+## Innan röstningen(fas 1) 
 
-<p><b>Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b></p>
-#Kolla om du kan rösta
+### Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b></p>
+### Kolla om du kan rösta
 
-<p><u>Under röstnigen(fas 2)</u></p>
+## Under röstnigen(fas 2)
 
 <b>Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b>
 ### Testa visa mer knapparna 
