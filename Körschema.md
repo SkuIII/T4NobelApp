@@ -29,6 +29,7 @@
 
 ## När rösterna räknats(fas 0)
 
+#### Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
 #### Kolla om de du röstade på vann
 
  
