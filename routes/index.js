@@ -377,36 +377,38 @@ router.get('/admin', (req, res, next) => { // Used for admin controls
 router.post('/admin', (req, res, next) => { // When button on admin page is pressed
     let ParticipantArray = [];
 
-    base('Participants').select().eachPage(page = (records, fetchNextPage) => {
-        records.forEach(record => {
+    const GetParticipants = () => {
+        base('Participants').select().eachPage(page = (records, fetchNextPage) => {
+            records.forEach(record => {
 
-            // Pushes all important info of each particpant group to ParticipantArray
-            ParticipantArray.push({
-                "Name": record.fields.Name,
-                "Class": record.fields.Class,
-                "Year": record.fields.Year,
-                "Amount": 0
-            })
+                // Pushes all important info of each particpant group to ParticipantArray
+                ParticipantArray.push({
+                    "Name": record.fields.Name,
+                    "Class": record.fields.Class,
+                    "Year": record.fields.Year,
+                    "Amount": 0
+                })
 
+            });
+            try {
+                fetchNextPage();
+
+            } catch (error) {
+                console.log(error)
+            }
+
+        }, done = (err) => {
+            UpdateYear(WriteYear)
+
+            if (err) {
+                console.error(err);
+                return;
+            }
         });
-        try {
-            fetchNextPage();
-
-        } catch (error) {
-            console.log(error)
-        }
-
-    }, done = (err) => {
-        UpdateYear()
-
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
+    }
 
     // Updates Year field in Participants table and counts the amount of participants in each Year
-    let UpdateYear = async() => {
+    let UpdateYear = (callback) => {
         ParticipantArray.forEach(element => {
 
             base('Participants').select().eachPage(page = (records, fetchNextPage) => {
@@ -439,17 +441,17 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
                 }
 
             }, done = (err) => {
-                WriteYear();
                 if (err) {
                     console.error(err);
                     return;
                 }
             });
         })
+        callback();
     }
 
     // Writes in ParticipantsVotingInfo the amount of participants in each year
-    let WriteYear = async() => {
+    let WriteYear = () => {
 
         ParticipantArray.forEach(element => {
 
@@ -488,6 +490,7 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
         })
     }
 
+    GetParticipants();
     res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
 });
 
