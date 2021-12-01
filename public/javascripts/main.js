@@ -129,6 +129,11 @@ const showBio = (sender) => {
         sender.target.textContent = 'VISA MINDRE';
     } else if (anka.className == 'col-sm-3 border-phatHome-hover mx-3 my-2 p-0 text-center') {
         anka.className = 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center';
-        sender.target.textContent = 'VISA MERA / RÖSTA';
+        if(phase == 2){
+            sender.target.textContent = 'VISA MERA / RÖSTA';
+        }else{
+            sender.target.textContent = 'VISA MERA';
+        }
+        
     }
 }

@@ -40,6 +40,7 @@ const Load = (res) => {
                 // Creates Cols for each winner
                 const newCol = document.createElement('div');
                 newCol.className = 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center';
+                newCol.innerHTML = winner.record.fields.Category;
                 row.appendChild(newCol);
 
                 //Adds image of each winner
@@ -50,7 +51,7 @@ const Load = (res) => {
 
                 //Adds the name of each winner
                 var h1 = document.createElement('h3');
-                h1.textContent = winner.record.fields.Winner;
+                h1.innerHTML = winner.record.fields.Winner;
                 h1.className = 'text-center pt-0';
                 newCol.appendChild(h1);
 
