@@ -7,6 +7,8 @@ console.log('Vote.js is alive!');
 const divVoteClick = (event) => {
     const id = event.target.id;
 
+    console.log(VoteStatus)
+
     let temp = id.split(',');
 
     const Category = temp[0];

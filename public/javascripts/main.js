@@ -4,6 +4,7 @@ console.log('main.js is alive!');
 
 let NominatedInfo = [];
 let CategoryInfo = [];
+
 // 3 fetch requests, 3 different endpoints/paths
 // Converting to JSON using the json() method
 const fetchNominatedInfo = fetch(
@@ -81,6 +82,7 @@ const Load = (res) => {
                     let bio = document.createElement('p');
                     bio.className = 'text-start';
                     const BioArray = Nominated.record.fields.Bio.split('\n\n');
+
                     BioArray.forEach(element => {
                         bio.innerHTML += element;
 
@@ -89,12 +91,11 @@ const Load = (res) => {
                         const break2 = document.createElement('br');
                         bio.appendChild(break1);
                         bio.appendChild(break2);
-
                     });
 
                     //The vote btn in the col
                     const btnVote = document.createElement('button');
-                    btnVote.textContent = 'Rösta';
+                    btnVote.textContent = 'Logga in för att rösta';
                     btnVote.className = 'vote btn btn-primary disabled voteButton ' + Category.record.fields.Category;
                     btnVote.addEventListener('click', divVoteClick);
                     btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;

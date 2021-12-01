@@ -379,7 +379,8 @@ router.post('/Vote', (req, res, next) => {
                         WinnerCategoryArray.push({
                             "Nominated": record.fields.Nominated,
                             "Category": record.fields.Category,
-                            "AmountVotes": record.fields.AmountVotes
+                            "AmountVotes": record.fields.AmountVotes,
+                            "Bio": record.fields.Bio
                         })
                     }
                 });
@@ -413,11 +414,14 @@ router.post('/Vote', (req, res, next) => {
                     // Since all of the categories are the same "0" can be used
                     if (record.fields.Category == WinnerCategoryArray[0].Category) {
 
+                        const BioArray = WinnerCategoryArray[0].Bio.split('\n\n');
+
                         // Updates Categories with thhe name of the nominee with the most votes 
                         base('Categories').update([{
                             "id": record.id,
                             "fields": {
                                 "Winner": WinnerCategoryArray[0].Nominated,
+                                "WinnerBio": BioArray[2]
                             }
 
                         }], (err, records) => {

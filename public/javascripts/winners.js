@@ -22,22 +22,20 @@ const Load = (res) => {
     const nominatedInfo = res[2];
 
     const content = document.getElementById('content')
-    
+
     var h11 = document.createElement('h1');
     h11.textContent = 'Vinnarna är!';
     h11.className = 'text-center p-3';
     content.appendChild(h11);
-
 
     var row = document.createElement('div');
     row.className = 'row p-0 mb-4 mx-0 justify-content-center';
     content.appendChild(row);
 
     Category.forEach(winner => {
-        
 
         nominatedInfo.forEach(nominated => {
-            if(winner.record.fields.Winner == nominated.record.fields.Nominated){
+            if (winner.record.fields.Winner == nominated.record.fields.Nominated) {
 
                 // Creates Cols for each winner
                 const newCol = document.createElement('div');
@@ -57,13 +55,10 @@ const Load = (res) => {
                 newCol.appendChild(h1);
 
                 var p = document.createElement('p');
-                p.textContent = nominated.record.fields.Intro;
+                p.innerHTML = winner.record.fields.WinnerBio;
                 p.className = 'text-center pt-0';
                 newCol.appendChild(p);
             }
         });
     });
-
-
-
 };
