@@ -115,6 +115,7 @@ const enableBtn = () => {
                 showBtn[i].classList.add('btn-primary');
                 showBtn[i].classList.remove('btn-secondary');
                 showBtn[i].classList.remove('disabled');
+                showBtn[i].textContent = 'Rösta';
             }
         } catch (error) {
             //console.log(error)
