@@ -2,6 +2,10 @@
 
 console.log('LogIn.js is alive!')
 
+let email;
+let VoteStatus;
+let Categories;
+
 const fetchCategory = fetch(
     '/data/Categories'
 ).then(res => res.json()).then(Categories => {
@@ -28,13 +32,6 @@ const Anka = () => {
     document.getElementById('logout').prepend(you);
     document.getElementById('logout').hidden = true;
 }
-
-
-// Promise.all() does several fetch requests parallel
-
-let email;
-let VoteStatus;
-let Categories;
 
 window.onload = () => {
     google.accounts.id.initialize({
@@ -70,7 +67,7 @@ function handleCredentialResponse(response) {
 
         const url = document.URL.split('/');
         const urlSend = `${url[0]}//${url[2]}/VoteLogin`;
-    
+
         fetch(urlSend, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc
             headers: {
@@ -79,38 +76,28 @@ function handleCredentialResponse(response) {
             body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
         }).then(response => response.json()).then(data => {
             VoteStatus = data;
-            if(VoteStatus == 'Empty'){
+            if (VoteStatus == 'Empty') {
                 NotInDataBase();
-            }else{
+            } else {
                 enableBtn();
             }
-          
         });
-
     } else {
-
-        // popup.classList.add("show");
-        // popup.textContent = ("Du måste välja din " +
-        //     "edu mail för att din röst ska registreras.");
         const alreadyVoted = document.createElement('div');
         alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
         alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
-        document.getElementById('header').appendChild(alreadyVoted);
+        document.getElementById('Header').appendChild(alreadyVoted);
 
         const alertClose = document.createElement('button');
         alertClose.className = 'btn-close';
         alertClose.type = 'button';
         alertClose.setAttribute('data-bs-dismiss', 'alert');
         alreadyVoted.appendChild(alertClose);
-
     }
-
-
 }
 
+// Decodes JWT
 const decodeJwtResponse = (token) => {
-    // Decodes JWT
-
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
