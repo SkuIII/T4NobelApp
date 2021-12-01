@@ -4,10 +4,10 @@
 
 <u>Innan röstningen(fas 1)</u>
 
-<b>Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b>
+<p><b>Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b></p>
 #Kolla om du kan rösta
 
-<u>Under röstnigen(fas 2)</u>
+<p><u>Under röstnigen(fas 2)</u></p>
 
 <b>Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com</b>
 #Testa visa mer knapparna 
