@@ -263,7 +263,8 @@ router.post('/Vote', (req, res, next) => {
                             "id": record.id,
                             "fields": {
                                 "VoteStatus": "Voted",
-                                "VotedFor": NominatedArray
+                                "VotedFor": NominatedArray,
+                                "WhenVoted": new Date().getTime()
                             }
 
                         }], (err, records) => {
