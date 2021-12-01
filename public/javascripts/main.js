@@ -59,7 +59,7 @@ const Load = (res) => {
                     //Adding img of nominee
                     var img = document.createElement('img');
                     img.className = ' p-0 rounded-3 img-size img-fluid mx-auto d-block';
-                    img.src = Nominated.record.fields.Picture[0].url;
+                    img.src = Nominated.record.fields.Picture[1].url;
                     newCol.appendChild(img);
 
                     //Adding info to the cols
