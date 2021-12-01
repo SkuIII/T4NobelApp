@@ -18,15 +18,16 @@ html
    
 
     script(src="https://accounts.google.com/gsi/client" async defer)
+    script(src = "javascripts/Controller.js" async defer)
 
 block Header
-    div(id = "header")
+    div(id = "Header")
         div(class="header container-fluid " style="background-color:  #ff8000;")
             div(class="row justify-content-center" )
                 div(class="col-auto")
-                    h1(id = "headline" class="text-center mx-2 pt-3 text-light") ÖSTRAS ALTERNATIVA NOBELPRIS
+                    h1(id = "Headline" class="text-center mx-2 pt-3 text-light") ÖSTRAS ALTERNATIVA NOBELPRIS
                 div(class="col-auto")
-                    div(id='login' class= "text-end")
+                    div(id='login' class= "text-end" hidden)
                         div( id="g_id_onload" 
                                 data-client_id="623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com" 
                                 data-context="signin" 

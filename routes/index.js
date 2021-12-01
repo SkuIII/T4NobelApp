@@ -14,20 +14,110 @@ const base = new Airtable({
 
 // Main Page
 router.get('/', (req, res, next) => {
-    res.render('workingFolder/loginLeader', {
-        title: 'T4NobelApp'
-    });
+
+    const CountdownsArray = [];
+    let CurrentPhase;
+    const CurrentTime = new Date();
+
+    const getPhases = (callback) => {
+        base('Countdowns').select().eachPage(page = (records, fetchNextPage) => {
+                records.forEach(record => {
+                    CountdownsArray.push({
+                        "Name": record.fields.Name,
+                        "Date": new Date(record.fields.Date),
+                    })
+                    console.log(record.fields.Name)
+                });
+
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
+            },
+            function done(err) {
+                console.log(CountdownsArray)
+                callback();
+
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+            });
+    }
+
+    const Countdowns = () => {
+
+        if (CountdownsArray[0].Date.getTime() < CurrentTime.getTime()) {
+            res.render('workingFolder/winner', {
+                title: 'TE4NobelApp'
+            });
+        } else {
+            res.render('workingFolder/loginLeader', {
+                title: 'TE4NobelApp'
+            });
+        }
+    }
+
+    getPhases(Countdowns);
 });
 
 router.get('/winner', (req, res, next) => {
     res.render('workingFolder/winner', {
-        title: 'T4NobelApp'
+        title: 'TE4NobelApp'
     });
 });
 
 // Route for showcase page
 router.get('/leaderboard', (req, res, next) => {
-    res.render('workingFolder/leaderboardBig');
+    
+    const CountdownsArray = [];
+    let CurrentPhase;
+    const CurrentTime = new Date();
+
+    const getPhases = (callback) => {
+        base('Countdowns').select().eachPage(page = (records, fetchNextPage) => {
+                records.forEach(record => {
+                    CountdownsArray.push({
+                        "Name": record.fields.Name,
+                        "Date": new Date(record.fields.Date),
+                    })
+                    console.log(record.fields.Name)
+                });
+
+                try {
+                    fetchNextPage();
+
+                } catch (error) {
+                    console.log(error)
+                }
+            },
+            function done(err) {
+                console.log(CountdownsArray)
+                callback();
+
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+            });
+    }
+
+    const Countdowns = () => {
+
+        if (CountdownsArray[0].Date.getTime() < CurrentTime.getTime()) {
+            res.render('workingFolder/winner', {
+                title: 'TE4NobelApp'
+            });
+        } else {
+            res.render('workingFolder/leaderboardBig', {
+                title: 'TE4NobelApp'
+            });
+        }
+    }
+
+    getPhases(Countdowns);
 });
 
 router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote status

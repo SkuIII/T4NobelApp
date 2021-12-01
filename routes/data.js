@@ -203,7 +203,7 @@ router.get('/Countdowns', (req, res, next) => {
                 CurrentPhase = {
                     "Name": "",
                     "Date": "",
-                    "Phase": 4
+                    "Phase": 3
                 };
                 res.send(CurrentPhase)
             }
