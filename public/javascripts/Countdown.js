@@ -32,17 +32,12 @@ const countdownFunc = (date, nameName) => {
         let distance = countDownDate - now;
 
         let CountdownArray = [{
-                "Days": Math.floor(distance / (1000 * 60 * 60 * 24)),
-                "Hours": Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                "Minutes": Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-                "Seconds": Math.floor((distance % (1000 * 60)) / 1000)
-            }]
-            // let CountdownArray = [
-            //     { "Days": Math.floor(distance / (1000 * 60 * 60 * 24)) },
-            //     { "Hours": Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) },
-            //     { "Minutes": Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) },
-            //     { "Seconds": Math.floor((distance % (1000 * 60)) / 1000) }
-            // ]
+            "Days": Math.floor(distance / (1000 * 60 * 60 * 24)),
+            "Hours": Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            "Minutes": Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+            "Seconds": Math.floor((distance % (1000 * 60)) / 1000)
+        }]
+
         if (CountdownArray[0].Days != 0) {
             document.getElementById("count").innerHTML += CountdownArray[0].Days + "d ";
         }
@@ -55,23 +50,6 @@ const countdownFunc = (date, nameName) => {
         if (CountdownArray[0].Seconds != 0) {
             document.getElementById("count").innerHTML += CountdownArray[0].Seconds + "s ";
         }
-
-        // if (CountdownArray[0].Days == 0) {
-        //     location.reload();
-        // }
-        // if (CountdownArray[0].Hours == 0) {
-        //     location.reload();
-        // }
-        // if (CountdownArray[0].Minutes == 0) {
-        //     location.reload();
-        // }
-        // if (CountdownArray[0].Seconds == 0) {
-        //     location.reload();
-        // }
-
-        // // Output the result in an element with id="demo"
-        // document.getElementById("count").innerHTML = nameName + "<br> " + CountdownArray[0].Days + "d " + CountdownArray[0].Hours + "t " +
-        //     CountdownArray[0].Minutes + "m " + CountdownArray[0].Seconds + "s ";
 
         const pugUrl = document.URL.split('/');
 

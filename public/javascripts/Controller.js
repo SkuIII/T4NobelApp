@@ -29,20 +29,20 @@ const loginLeader = () => {
 
         document.getElementById('login').hidden = true;
         document.getElementById('progressBarContainer').hidden = true;
-        document.getElementById('buttonAccept').hidden = true;
+        document.getElementById('confirm-btn').hidden = true;
 
         let ShowMoreText = document.getElementsByClassName('ClickMeCss');
 
         for (let i = 0; i < ShowMoreText.length; i++) {
             ShowMoreText[i].textContent = 'VISA MER';
-            
+
         }
-         let VoteBtn = document.getElementsByClassName('voteButton');
+        let VoteBtn = document.getElementsByClassName('voteButton');
         for (let i = 0; i < VoteBtn.length; i++) {
             VoteBtn[i].hidden = true;
         }
 
-      
+
 
     } else
     if (phase == 2) {
@@ -56,8 +56,13 @@ const loginLeader = () => {
 
         for (let i = 0; i < ShowMoreText.length; i++) {
             ShowMoreText[i].textContent = 'VISA MER';
-            
+
         }
+        let VoteBtn = document.getElementsByClassName('voteButton');
+        for (let i = 0; i < VoteBtn.length; i++) {
+            VoteBtn[i].hidden = true;
+        }
+        document.getElementById('confirm-btn').hidden = true;
 
         document.getElementById('progressBarContainer').hidden = true;
         document.getElementById('headline').hidden = true;
