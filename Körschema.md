@@ -3,18 +3,17 @@
 ## Innan röstningen(fas 3) 
 
 1. Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
-3. INLOGGNING?? Undersök ifall logga knappen finns
+3. INLOGGNING: Undersök ifall logga knappen finns
 4. Läs på om en valfri kandidat, tryck på visa mer knappen 
 5. Längst ner om kandidaten finns en röstaknapp, prova att rösta, det ska inte fungera. (Är det tydligt varför?)
 
 ## Röstningen är öppen (Under röstningen(fas 2))
 
 1. Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
-2. INLOGGNING? ja/nej?
-3. Testa visa mer knapparna 
-4. Kolla om du kan rösta
-5. Logga in med fel mail
-6. Logga in med rätt mail(din edu mail)
+2. Testa visa mer knapparna
+3. Kolla om du kan rösta
+5. INLOGGNING: Logga in med fel mail
+6. INLOGGNING: Logga in med rätt mail(din edu mail)
 7. Klicka på visa mer knapparna
 8. Försök att rösta nu
 9. Skicka in dina röster längst ner på sidan
