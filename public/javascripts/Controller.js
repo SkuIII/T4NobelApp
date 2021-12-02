@@ -42,8 +42,6 @@ const loginLeader = () => {
             VoteBtn[i].hidden = true;
         }
 
-
-
     } else
     if (phase == 2) {
 
@@ -65,6 +63,7 @@ const loginLeader = () => {
         document.getElementById('confirm-btn').hidden = true;
 
         document.getElementById('progressBarContainer').hidden = true;
+
         document.getElementById('headline').hidden = true;
     }
 }
@@ -84,7 +83,6 @@ const leaderboardBig = () => {
     if (phase == 1) {
 
         document.getElementById('headline2').textContent = '';
-        document.getElementById('refreshPage').content = '';
     }
 }
 

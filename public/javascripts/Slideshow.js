@@ -69,12 +69,6 @@ const LoadNominatedInfo = (res) => {
         RefreshAmount = RefreshAmount + 5; // Adds 5 seconds for each slide to the refresh function
     });
 
-    const refresh = document.createElement('meta');
-    refresh.id = 'refreshPage'
-    refresh.httpEquiv = 'refresh';
-    refresh.content = RefreshAmount;
-    document.getElementById('refresh').appendChild(refresh); // Appends refresh data to id "refresh" in pug file
-
     const slide = document.createElement('script'); //Makes the javascript to read in after
     slide.src = 'javascripts/ism-2.2.min.js'; // The javascript for html and airtable info is collected
     document.getElementById('content').appendChild(slide);
