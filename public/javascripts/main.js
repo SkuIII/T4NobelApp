@@ -31,14 +31,22 @@ const Load = (res) => {
         CategoryInfo = res[1];
         const Favicon = res[2];
 
-        function setFavicons(favImg){
-            let headTitle = document.querySelector('head');
-            let setFavicon = document.createElement('link');
-            setFavicon.setAttribute('rel','shortcut icon');
-            setFavicon.setAttribute('href',favImg);
-            headTitle.appendChild(setFavicon);
-        }
-        setFavicons(Favicon[0].record.fields.Attachments[0].url)
+        // function setFavicons(favImg) {
+        //     let headTitle = document.querySelector('head');
+        //     let setFavicon = document.createElement('link');
+        //     setFavicon.setAttribute('rel', 'shortcut icon');
+        //     setFavicon.setAttribute('href', favImg);
+        //     headTitle.appendChild(setFavicon);
+        // }
+        // setFavicons(Favicon[0].record.fields.Attachments[0].url)
+
+        (function() {
+            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = Favicon[0].record.fields.Attachments[0].url;
+            document.getElementsByTagName('head')[0].appendChild(link);
+        })();
 
         const rowHome = 'row p-0 mb-4 mx-0 justify-content-center'
 
@@ -144,11 +152,11 @@ const showBio = (sender) => {
         sender.target.textContent = 'VISA MINDRE';
     } else if (anka.className == 'col-sm-3 border-phatHome-hover mx-3 my-2 p-0 text-center') {
         anka.className = 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center';
-        if(phase == 2){
+        if (phase == 2) {
             sender.target.textContent = 'VISA MERA / RÖSTA';
-        }else{
+        } else {
             sender.target.textContent = 'VISA MERA';
         }
-        
+
     }
 }

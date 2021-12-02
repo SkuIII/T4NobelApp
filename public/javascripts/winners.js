@@ -16,7 +16,7 @@ const fetchFavicon = fetch(
     '/data/Favicon'
 ).then((res) => res.json());
 
-const allData = Promise.all([fetchParticipantsVotingInfo, fetchCategories, fetchNominatedInfo,fetchFavicon]);
+const allData = Promise.all([fetchParticipantsVotingInfo, fetchCategories, fetchNominatedInfo, fetchFavicon]);
 
 allData.then((res) => Load(res));
 
@@ -26,15 +26,22 @@ const Load = (res) => {
     const nominatedInfo = res[2];
     const Favicon = res[3];
 
-    function setFavicons(favImg){
-        let headTitle = document.querySelector('head');
-        let setFavicon = document.createElement('link');
-        setFavicon.setAttribute('rel','shortcut icon');
-        setFavicon.setAttribute('href',favImg);
-        headTitle.appendChild(setFavicon);
-    }
-    setFavicons(Favicon[0].record.fields.Attachments[0].url)
+    // function setFavicons(favImg){
+    //     let headTitle = document.querySelector('head');
+    //     let setFavicon = document.createElement('link');
+    //     setFavicon.setAttribute('rel','shortcut icon');
+    //     setFavicon.setAttribute('href',favImg);
+    //     headTitle.appendChild(setFavicon);
+    // }
+    // setFavicons(Favicon[0].record.fields.Attachments[0].url)
 
+    (function() {
+        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = Favicon[0].record.fields.Attachments[0].url;
+        document.getElementsByTagName('head')[0].appendChild(link);
+    })();
     const content = document.getElementById('content')
 
     var h11 = document.createElement('h1');
