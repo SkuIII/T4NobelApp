@@ -12,7 +12,11 @@ const fetchNominatedInfo = fetch(
     '/data/Nominated'
 ).then((res) => res.json());
 
-const allData = Promise.all([fetchParticipantsVotingInfo, fetchCategories, fetchNominatedInfo]);
+const fetchFavicon = fetch(
+    '/data/Favicon'
+).then((res) => res.json());
+
+const allData = Promise.all([fetchParticipantsVotingInfo, fetchCategories, fetchNominatedInfo,fetchFavicon]);
 
 allData.then((res) => Load(res));
 
@@ -20,6 +24,16 @@ const Load = (res) => {
     const participantsVotingInfo = res[0];
     const Category = res[1];
     const nominatedInfo = res[2];
+    const Favicon = res[3];
+
+    function setFavicons(favImg){
+        let headTitle = document.querySelector('head');
+        let setFavicon = document.createElement('link');
+        setFavicon.setAttribute('rel','shortcut icon');
+        setFavicon.setAttribute('href',favImg);
+        headTitle.appendChild(setFavicon);
+    }
+    setFavicons(Favicon[0].record.fields.Attachments[0].url)
 
     const content = document.getElementById('content')
 

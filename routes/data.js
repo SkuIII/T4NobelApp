@@ -130,6 +130,38 @@ router.get('/QR', (req, res, next) => {
     }
 });
 
+router.get('/favicon', (req, res, next) => {
+
+    if (typeof req.headers.referer != 'undefined') {
+
+        let recordArray = [];
+
+        // Accessing Nominated table in Airtable
+        base('Favicon').select().eachPage(page = (records, fetchNextPage) => {
+            records.forEach(record => {
+                // Pushing record data into recordArray
+                recordArray.push({
+                    "record": record._rawJson
+                });
+            });
+            fetchNextPage();
+
+        }, done = (err) => {
+            // Once all records have been fetched
+            res.send(recordArray);
+
+            // If error occurs while fetching
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+    } else {
+        res.send('<h1>Unathourized Access</h1>')
+    }
+});
+
+
 router.get('/Countdowns', (req, res, next) => {
 
     if (typeof req.headers.referer != 'undefined') {

@@ -4,50 +4,34 @@ console.log('Slideshow.js is alive'); // Console log
 
 // Fetch requests
 const fetchNominatedInfo = fetch(
-    '/data/Nominated'
+    '/data/Nominated'                   //fetch information for  nominated from data
 ).then((res) => res.json());
 
-const fetchqr = fetch(
+const fetchqr = fetch(              //fetch information for qr code from data
     '/data/qr'
 ).then((res) => res.json());
 
 
-const allData = Promise.all([fetchNominatedInfo, fetchqr]);
+const allData = Promise.all([fetchNominatedInfo, fetchqr]);         //forces the fetch no matter what without it, the program wont move forward
 
-allData.then((res) => LoadNominatedInfo(res));
+allData.then((res) => LoadNominatedInfo(res));                     //loads nominated info that is fetched from the data
 
 const LoadNominatedInfo = (res) => {
 
     var RefreshAmount = 0; // Has to start at 0 (declared as integer)
 
-    const NominatedInfo = res[0];
-    const qr = res[1];
+    const NominatedInfo = res[0];                    //assigns variable to the nominated information that was fetched
+    const qr = res[1];                              //assigns variable to the qr information that was fetched
 
-    let rowQr = document.createElement('div');
-    rowQr.className = 'row justify-content-center';
-    rowQr.id = 'rowQr';
-    document.getElementById('qrcode').appendChild(rowQr);
+    let qrimg = document.createElement('img');                  //creates an image element
+    qrimg.src = qr[0].record.fields.Picture[0].url;             //sources the qr image into the element
+    document.getElementById('qrcode').appendChild(qrimg);          //appends it into the qrcode id
 
-    let colQr = document.createElement('div');
-    colQr.className = 'col-12'
-    colQr.id = 'colQr'
-    colQr.src = qr[0].record.fields.Picture[0].url;
-    document.getElementById('rowQr').appendChild(colQr);
+    let img2 = document.createElement('img');                   //creates an image element
+    img2.src = qr[1].record.fields.Picture[0].url;               //sources the qr image into the element
+    document.getElementById('nobelpris').appendChild(img2);         //appends it into the nobelpris id
 
-    let colQrImg = document.createElement('div');
-    colQrImg.className = 'align-self-center'
-    colQrImg.src = qr[0].record.fields.Picture[0].url;
-    document.getElementById('colQr').appendChild(colQrImg);
-
-    let qrimg = document.createElement('img');
-    qrimg.src = qr[0].record.fields.Picture[0].url;
-    document.getElementById('qrcode').appendChild(qrimg);
-
-    let img2 = document.createElement('img');
-    img2.src = qr[1].record.fields.Picture[0].url;
-    document.getElementById('nobelpris').appendChild(img2);
-
-    let img3 = document.createElement('img');
+    let img3 = document.createElement('img');                   //does exacly same thing as the three rows above
     img3.src = qr[1].record.fields.Picture[0].url;
     document.getElementById('nobelpris2').appendChild(img3);
 
