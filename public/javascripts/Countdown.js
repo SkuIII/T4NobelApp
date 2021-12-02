@@ -57,9 +57,11 @@ const countdownFunc = (date, nameName) => {
 
         if (pugUrl[3] == 'leaderboard') {
             // console.log('Seconds');
-            document.getElementById('count').className = 'col-auto display-1 fw-bold';
+            document.getElementById('count').className = 'col-auto display-3 fw-bold';
+        } else if (pugUrl[3] == '' && phase == 2) {
+            document.getElementById('count').className = 'col-auto pt-1';
         } else if (pugUrl[3] == '') {
-            document.getElementById('count').className = 'col-auto display-6 fw-bold pt-5';
+            document.getElementById('count').className = 'col-auto display-6 fw-bold pt-1';
         }
 
         if (distance < 0) {

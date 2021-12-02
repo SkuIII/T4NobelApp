@@ -73,6 +73,7 @@ const leaderboardBig = () => {
 
         document.getElementById('progressBarContainer').hidden = true;
         document.getElementById('countRow').className = 'row justify-content-center text-center display-1';
+        // document.getElementById('headline2').textContent = qr[0].record.fields.infoText;
 
     } else
     if (phase == 2) {
@@ -82,7 +83,6 @@ const leaderboardBig = () => {
     } else
     if (phase == 1) {
 
-        document.getElementById('headline2').textContent = '';
     }
 }
 

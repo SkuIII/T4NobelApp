@@ -73,4 +73,10 @@ const LoadNominatedInfo = (res) => {
     slide.src = 'javascripts/ism-2.2.min.js'; // The javascript for html and airtable info is collected
     document.getElementById('content').appendChild(slide);
 
+    if(phase == 3){
+        document.getElementById('headline2').innerHTML = qr[0].record.fields.infoText
+        console.log(qr[0].record.fields.infoText);
+
+    }
+
 };
