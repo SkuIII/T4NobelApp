@@ -31,23 +31,6 @@ const Load = (res) => {
         CategoryInfo = res[1];
         const Favicon = res[2];
 
-        // function setFavicons(favImg) {
-        //     let headTitle = document.querySelector('head');
-        //     let setFavicon = document.createElement('link');
-        //     setFavicon.setAttribute('rel', 'shortcut icon');
-        //     setFavicon.setAttribute('href', favImg);
-        //     headTitle.appendChild(setFavicon);
-        // }
-        // setFavicons(Favicon[0].record.fields.Attachments[0].url)
-
-        // (function() {
-        //     var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-        //     link.type = 'image/x-icon';
-        //     link.rel = 'shortcut icon';
-        //     link.href = Favicon[0].record.fields.Attachments[0].url;
-        //     document.getElementsByTagName('head')[0].appendChild(link);
-        // })();
-
         function setFavicons(favImg) {
             let headTitle = document.querySelector('head');
 
@@ -65,25 +48,6 @@ const Load = (res) => {
             });
         }
         setFavicons(Favicon[0].record.fields.Attachments[0].url);
-
-        function setAppleFavicons() {
-            let headTitle = document.querySelector('head');
-
-            let appleFavIcons = [
-                { sizes: '152x152', href: '../touch-icon-ipad.png' },
-                { sizes: '180x180', href: '../touch-icon-iphone-retina.png' },
-                { sizes: '167x167', href: '../touch-icon-ipad-retina.png' }
-            ]
-
-            appleFavIcons.forEach(function(appleFavIcon) {
-                let setAFavicon = document.createElement('link');
-                setAFavicon.setAttribute('rel', 'apple-touch-icon');
-                setAFavicon.setAttribute('sizes', appleFavIcon.sizes);
-                setAFavicon.setAttribute('href', appleFavIcon.href);
-                headTitle.appendChild(setAFavicon);
-            });
-        }
-        setAppleFavicons(Favicon[0].record.fields.Attachments[0].url);
 
         const rowHome = 'row p-0 mb-4 mx-0 justify-content-center'
 
