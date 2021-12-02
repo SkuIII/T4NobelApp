@@ -15,8 +15,13 @@ const fetchCategoryInfo = fetch(
     '/data/Categories'
 ).then((res) => res.json());
 
+const fetchFavicon = fetch(
+    '/data/Favicon'
+).then((res) => res.json());
+
+
 // Promise.all() does several fetch requests parallel
-const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo]);
+const allData = Promise.all([fetchNominatedInfo, fetchCategoryInfo, fetchFavicon]);
 
 allData.then((res) => Load(res));
 
@@ -24,6 +29,16 @@ const Load = (res) => {
         // All data recieved from each base
         NominatedInfo = res[0];
         CategoryInfo = res[1];
+        const Favicon = res[2];
+
+        function setFavicons(favImg){
+            let headTitle = document.querySelector('head');
+            let setFavicon = document.createElement('link');
+            setFavicon.setAttribute('rel','shortcut icon');
+            setFavicon.setAttribute('href',favImg);
+            headTitle.appendChild(setFavicon);
+        }
+        setFavicons(Favicon[0].record.fields.Attachments[0].url)
 
         const rowHome = 'row p-0 mb-4 mx-0 justify-content-center'
 
