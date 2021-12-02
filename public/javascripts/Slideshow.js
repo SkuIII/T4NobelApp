@@ -23,22 +23,6 @@ const LoadNominatedInfo = (res) => {
     const NominatedInfo = res[0];                    //assigns variable to the nominated information that was fetched
     const qr = res[1];                              //assigns variable to the qr information that was fetched
 
-    // let rowQr = document.createElement('div');
-    // rowQr.className = 'row justify-content-center';
-    // rowQr.id = 'rowQr';
-    // document.getElementById('qrcode').appendChild(rowQr);
-
-    // let colQr = document.createElement('div');
-    // colQr.className = 'col-12'
-    // colQr.id = 'colQr'
-    // colQr.src = qr[0].record.fields.Picture[0].url;
-    // document.getElementById('rowQr').appendChild(colQr);
-
-    // let colQrImg = document.createElement('div');
-    // colQrImg.className = 'align-self-center'
-    // colQrImg.src = qr[0].record.fields.Picture[0].url;
-    // document.getElementById('colQr').appendChild(colQrImg);
-
     let qrimg = document.createElement('img');                  //creates an image element
     qrimg.src = qr[0].record.fields.Picture[0].url;             //sources the qr image into the element
     document.getElementById('qrcode').appendChild(qrimg);          //appends it into the qrcode id
