@@ -31,14 +31,23 @@ const Load = (res) => {
         CategoryInfo = res[1];
         const Favicon = res[2];
 
-        function setFavicons(favImg){
+        function setFavicons(favImg) {
             let headTitle = document.querySelector('head');
-            let setFavicon = document.createElement('link');
-            setFavicon.setAttribute('rel','shortcut icon');
-            setFavicon.setAttribute('href',favImg);
-            headTitle.appendChild(setFavicon);
+
+            let favIcons = [
+                { rel: 'apple-touch-icon' },
+                { rel: 'apple-touch-startup-image' },
+                { rel: 'shortcut icon' }
+            ]
+
+            favIcons.forEach(function(favIcon) {
+                let setFavicon = document.createElement('link');
+                setFavicon.setAttribute('rel', favIcon.rel);
+                setFavicon.setAttribute('href', favImg);
+                headTitle.appendChild(setFavicon);
+            });
         }
-        setFavicons(Favicon[0].record.fields.Attachments[0].url)
+        setFavicons(Favicon[0].record.fields.Attachments[0].url);
 
         const rowHome = 'row p-0 mb-4 mx-0 justify-content-center'
 
@@ -144,11 +153,11 @@ const showBio = (sender) => {
         sender.target.textContent = 'VISA MINDRE';
     } else if (anka.className == 'col-sm-3 border-phatHome-hover mx-3 my-2 p-0 text-center') {
         anka.className = 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center';
-        if(phase == 2){
+        if (phase == 2) {
             sender.target.textContent = 'VISA MERA / RÖSTA';
-        }else{
+        } else {
             sender.target.textContent = 'VISA MERA';
         }
-        
+
     }
 }
