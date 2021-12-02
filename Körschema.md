@@ -20,17 +20,17 @@
 10. prova att logga in igen 
 11. prova att rösta igen
 
-## Efter röstnigen(fas 1) 
+## Röstningen är stängd (Efter röstnigen(fas 1))
 
-#### Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
-#### Kolla om du kan rösta
-#### prova mer knappen 
-#### kolla om det finns en logga in knapp
+1. Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
+2. Kolla om du kan rösta
+3. prova mer knappen 
+4. kolla om det finns en logga in knapp
 
 ## När rösterna räknats(fas 0)
 
-#### Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
-#### Kolla om de du röstade på vann
+1. Gå in på följande länk: https://shrouded-wave-16183.herokuapp.com 
+2. Kolla om de du röstade på vann
 
  
 
