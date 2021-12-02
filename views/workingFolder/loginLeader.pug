@@ -36,7 +36,7 @@ block Header
                     
                                 data-callback="handleCredentialResponse")
                         div(class="p-3 ")
-                            div(class="g_id_signin" data-type="standard") <!-- Maybe unnecessary since one tap is enabled-->
+                            div(class="g_id_signin" data-type="standard" data-theme="filled_blue") 
                             //- div(class="popup")
                             //-     span(class="popuptext" id="myPopup")
                     div(id="logout" class="btn-group" role="group")
@@ -62,7 +62,7 @@ block Nobel
                 h2(id = "warning" class="text-center display-6 m-0 text-danger fw-bold" style="display:none;") Varning! 
                 h5(id = "warning2" class="text-center m-0 text-danger fw-bold" style="display:none;" ) När du har klickat bekräftat kan du inte ändra svaret
                      div(id="votedFor")
-                button(id = "confirm-btn" type="button" class="disabled btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100" ) Bekräfta röstning 
+                button(id = "confirm-btn" type="button" class="disabled btn btn-secondary fw-bold btn-lg mb-5 p-3 justify-content-center w-100" ) Logga in för att rösta
                
 block Footer
     div(id = "footer")

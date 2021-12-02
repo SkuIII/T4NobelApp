@@ -40,6 +40,10 @@ const divVoteClick = (event) => {
                     document.getElementById('votedFor').appendChild(votedFor);
                     document.getElementById('votedFor').appendChild(acceptDiv);
 
+                    const confirmBtn = document.getElementById('confirm-btn');
+                    confirmBtn.classList.remove('btn-secondary');
+                    confirmBtn.classList.add('btn-success');
+
                 });
                 document.getElementById('warning').style.display = "block";
                 document.getElementById('warning2').style.display = "block";
@@ -110,7 +114,7 @@ const enableBtn = () => {
         document.getElementById('Header').appendChild(aboutVote);
         aboutVote.appendChild(alertClose);
         try {
-            console.log(showBtn);
+            // console.log(showBtn);
             for (let i = 0; i < showBtn.length; i++) {
                 showBtn[i].classList.add('btn-primary');
                 showBtn[i].classList.remove('btn-secondary');
@@ -120,6 +124,9 @@ const enableBtn = () => {
         } catch (error) {
             //console.log(error)
         }
+        const confirmBtn = document.getElementById('confirm-btn');
+        confirmBtn.textContent = 'Bekräfta röstning';
+
     } else {
         const alreadyVoted = document.createElement('div');
         alreadyVoted.textContent = 'Du har redan röstat!';
