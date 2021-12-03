@@ -59,7 +59,7 @@ function handleCredentialResponse(response) {
 
     // let popup = document.getElementById("myPopup");
 
-    if (responsePayload.email.includes('edu.huddinge.se')) {
+    if (responsePayload.email.includes('@edu.')) {
 
         email = responsePayload.email;
         // popup.style.display = "none";
