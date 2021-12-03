@@ -22,10 +22,21 @@
     color:black;
     overflow: hidden;
 }
+.CategoryCss{
+    background-color: white;
+    max-width: 80%;
+    max-height: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 10px solid #ff8000;
+    border-radius: 20px;
+    margin-top: 2em;
+    
+
+}
 .ClickMeCss{
     font-size: large;
-    text-decoration: underline;
-    color:blue;
+    
 }
 
 
