@@ -2,8 +2,9 @@
 
 let vote = [];
 
-console.log('Vote.js is alive!');
+// console.log('Vote.js is alive!');
 
+// Save the Users vote 
 const divVoteClick = (event) => {
     const id = event.target.id;
 
@@ -25,6 +26,7 @@ const divVoteClick = (event) => {
 
     let counter = 0;
 
+    // Shows users vote abuve send button
     vote.forEach(Vote => {
 
         if (Vote.CheckVotes == 1) {
@@ -51,6 +53,7 @@ const divVoteClick = (event) => {
         }
     })
 
+    // Maces the vote button for grean for the one that is voted fore
     let btns = document.getElementsByClassName(Category);
     for (let i = 0; i < btns.length; i++) {
         const element = btns[i];
@@ -59,6 +62,7 @@ const divVoteClick = (event) => {
     event.target.classList.add('btn-success');
 }
 
+// Funktion for checbox to confirm votes before sending
 const acceptingChoice = () => {
     const agree = document.getElementById('agree');
 
@@ -69,7 +73,7 @@ const acceptingChoice = () => {
     }
 }
 
-
+// Sends the vote to the server.
 const btnConfirmClick = () => {
     const url = document.URL.split('/');
     const urlSend = `${url[0]}//${url[2]}/Vote`;
@@ -91,11 +95,11 @@ const btnConfirmClick = () => {
     }, 3000);
 }
 
+// Alurt for if user is not in database
 const alertClose = document.createElement('button');
 alertClose.className = 'btn-close';
 alertClose.type = 'button';
 alertClose.setAttribute('data-bs-dismiss', 'alert');
-
 
 const NotInDataBase = () => {
     const NotInDataBase = document.createElement('div');
@@ -105,6 +109,7 @@ const NotInDataBase = () => {
     NotInDataBase.appendChild(alertClose);
 }
 
+// Enables all voting buttons if votestatus is corect
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('vote');
     if (VoteStatus == 'ToVote') {

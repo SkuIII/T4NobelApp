@@ -68,10 +68,10 @@ function handleCredentialResponse(response) {
 
         email = responsePayload.email;
 
-        // Sets your profile picture insted of login with google button
+        // Sets users profile picture insted of login with google button
         loginIndication(responsePayload.picture);
 
-        // Send request to the server to se if you have Voted
+        // Send request to the server to se if user have Voted
         const url = document.URL.split('/');
         const urlSend = `${url[0]}//${url[2]}/VoteLogin`;
         fetch(urlSend, {
@@ -82,7 +82,7 @@ function handleCredentialResponse(response) {
             body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
         }).then(response => response.json()).then(data => {
             VoteStatus = data;
-            if (VoteStatus == 'Empty') { // gives you an alurt if uou are not in the data base
+            if (VoteStatus == 'Empty') { // gives user an alurt if uou are not in the data base
                 NotInDataBase();
             } else { // Sends informational popup and enables buttons
                 showPopup();
@@ -90,7 +90,7 @@ function handleCredentialResponse(response) {
             }
         });
 
-    } else { // Alurt that you need to youse a edu mail
+    } else { // Alurt that user need to use a edu mail
         const alreadyVoted = document.createElement('div');
         alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
         alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
