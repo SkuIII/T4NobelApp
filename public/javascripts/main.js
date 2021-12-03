@@ -55,9 +55,10 @@ const Load = (res) => {
         //Creates headline
         const content = document.getElementById('content');
 
+
         var h1 = document.createElement('h1');
         h1.textContent = Category.record.fields.Category;
-        h1.className = 'text-center pt-5';
+        h1.className = 'text-center sticky-top CategoryCss';
         content.appendChild(h1);
 
         //rows
