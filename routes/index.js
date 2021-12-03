@@ -68,7 +68,6 @@ router.get('/winner', (req, res, next) => {
 router.get('/leaderboard', (req, res, next) => {
 
     const CountdownsArray = [];
-    let CurrentPhase;
     const CurrentTime = new Date();
 
     const getPhases = (callback) => {
@@ -122,15 +121,13 @@ router.post('/VoteLogin', (req, res, next) => { // Receives user, returns vote s
     // Accessing Participants table in Airtable
     base('Participants').select().eachPage(page = (records, fetchNextPage) => {
             records.forEach(record => {
-                if (User.email == record.fields.Email) { // If the users email exists in airtable
+                if (User.email == record.fields.Email) { // If the users email exists in Airtable
                     if (record.fields.VoteStatus == 'ToVote') { // If the user hasn't voted yet
                         VoteStatus = 'ToVote';
                     } else {
                         VoteStatus = 'Voted';
                     }
-
                 }
-
             });
             try {
                 fetchNextPage();
@@ -460,7 +457,8 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
     let ParticipantArray = [];
 
     const GetParticipants = () => {
-        base('Participants').select().eachPage(page = (records, fetchNextPage) => {
+
+        base('ParticipantGroups').select().eachPage(page = (records, fetchNextPage) => {
             records.forEach(record => {
 
                 // Pushes all important info of each particpant group to ParticipantArray
@@ -470,7 +468,6 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
                     "Year": record.fields.Year,
                     "Amount": 0
                 })
-
             });
             try {
                 fetchNextPage();
@@ -482,6 +479,8 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
         }, done = (err) => {
             UpdateYear(WriteYear)
 
+            res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
+
             if (err) {
                 console.error(err);
                 return;
@@ -491,10 +490,11 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
 
     // Updates Year field in Participants table and counts the amount of participants in each Year
     let UpdateYear = (callback) => {
-        ParticipantArray.forEach(element => {
+
+        ParticipantArray.forEach((element, counter) => {
 
             base('Participants').select().eachPage(page = (records, fetchNextPage) => {
-                records.forEach(record => {
+                records.forEach((record, counter2) => {
 
                     // If the Class field of the record matches Class field from ParticipantArray
                     if (record.fields.Class.includes(element.Class)) {
@@ -523,13 +523,15 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
                 }
 
             }, done = (err) => {
+                callback();
+
                 if (err) {
                     console.error(err);
                     return;
                 }
             });
         })
-        callback();
+
     }
 
     // Writes in ParticipantsVotingInfo the amount of participants in each year
@@ -573,7 +575,6 @@ router.post('/admin', (req, res, next) => { // When button on admin page is pres
     }
 
     GetParticipants();
-    res.send('<h1>Alla elever är nu sorterade i korrekt årskurs</h1>');
 });
 
 module.exports = router;
