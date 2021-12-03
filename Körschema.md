@@ -41,4 +41,4 @@
 
 1. Använd QR Koden och testa om den fungerar.
 2. Gå in på följande länk: https://salty-falls-10923.herokuapp.com/ 
-3. Undersök ifall det är vinnar sidan som visas.
+3. Undersök ifall det är vinnarsidan som visas.
