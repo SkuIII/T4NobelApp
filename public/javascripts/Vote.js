@@ -108,11 +108,11 @@ const NotInDataBase = () => {
 const enableBtn = () => {
     let showBtn = document.getElementsByClassName('vote');
     if (VoteStatus == 'ToVote') {
-        const aboutVote = document.createElement('div');
-        aboutVote.textContent = 'Du måste rösta på alla kategorier för att skicka rösten';
-        aboutVote.className = 'alert alert-success alert-dismissible text-center h4 fade show';
-        document.getElementById('Header').appendChild(aboutVote);
-        aboutVote.appendChild(alertClose);
+        // const aboutVote = document.createElement('div');
+        // aboutVote.textContent = 'Du måste rösta på alla kategorier för att skicka rösten';
+        // aboutVote.className = 'alert alert-success alert-dismissible text-center h4 fade show';
+        // document.getElementById('Header').appendChild(aboutVote);
+        // aboutVote.appendChild(alertClose);
         try {
             // console.log(showBtn);
             for (let i = 0; i < showBtn.length; i++) {
@@ -128,10 +128,14 @@ const enableBtn = () => {
         confirmBtn.textContent = 'Bekräfta röstning';
 
     } else {
-        const alreadyVoted = document.createElement('div');
-        alreadyVoted.textContent = 'Du har redan röstat!';
-        alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
-        document.getElementById('Header').appendChild(alreadyVoted);
-        alreadyVoted.appendChild(alertClose);
+        // const alreadyVoted = document.createElement('div');
+        // alreadyVoted.textContent = 'Du har redan röstat!';
+        // alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
+        // document.getElementById('Header').appendChild(alreadyVoted);
+        // alreadyVoted.appendChild(alertClose);
+
+        if(VoteStatus == 'Voted'){
+            document.getElementById('popupText').textContent = 'Du har redan röstat!';
+        }
     }
 };

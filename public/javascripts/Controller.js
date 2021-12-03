@@ -40,7 +40,6 @@ const loginLeader = () => {
         document.getElementById('login').hidden = true;
         document.getElementById('progressBarContainer').hidden = true;
         document.getElementById('confirm-btn').hidden = true;
-
     } else
     if (phase == 2) {
         let ShowMoreText = document.getElementsByClassName('ClickMeCss');
@@ -92,7 +91,5 @@ const ControllerFunc = () => {
     } else if (pugUrl[3] == 'leaderboard') {
         console.log('LEADERBOARD');
         leaderboardBig();
-    } else if (pugUrl[3] == 'winner') {
-        console.log('WINNER');
     }
 }

@@ -76,10 +76,12 @@ function handleCredentialResponse(response) {
             VoteStatus = data;
             if (VoteStatus == 'Empty') {
                 NotInDataBase();
-            } else {
+            } else {        
+                showPopup();
                 enableBtn();
             }
         });
+
     } else {
         const alreadyVoted = document.createElement('div');
         alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';

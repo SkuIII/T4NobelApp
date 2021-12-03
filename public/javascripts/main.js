@@ -164,3 +164,15 @@ const showBio = (sender) => {
         }
     }
 }
+
+const showPopup = () => {
+    var myModal = new bootstrap.Modal(document.getElementById("popupInfo"), {});
+    myModal.show();
+    if(VoteStatus == 'Voted'){
+        document.getElementById('textToVote').hidden = true;
+    }else{
+        document.getElementById('textVoted').hidden = true;
+
+    }
+    
+}

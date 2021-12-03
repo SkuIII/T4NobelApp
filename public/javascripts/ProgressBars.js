@@ -31,6 +31,7 @@ const participantsVotingInfoLoaded = (res) => {
     VotingInfo.forEach((vote, counter) => {
         if (counter % 2 == 0) {
             temp = counter;
+            
             //Creates a new progress row if the created progressbars number is even(if there is 2 progressbars, create a new row to fit the third)
             let rowName = document.createElement('div');
             rowName.id = 'row' + temp;
@@ -45,6 +46,7 @@ const participantsVotingInfoLoaded = (res) => {
         let colProgress = document.createElement('div');
         colProgress.className = 'col-sm p-2 pt-0';
         document.getElementById('row' + temp).appendChild(colProgress);
+
         //Creates the progress bar headline
         let classYear = document.createElement('label');
         classYear.className = 'col-12 fw-bold fs-4 p-2 pb-0';
