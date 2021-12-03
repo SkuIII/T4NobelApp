@@ -16,6 +16,7 @@ router.get('/', (req, res, next) => {
     const CountdownsArray = [];
     const CurrentTime = new Date();
 
+    // gets the pheses form Airtable
     const getPhases = (callback) => {
         base('Countdowns').select().eachPage(page = (records, fetchNextPage) => {
                 records.forEach(record => {
@@ -29,7 +30,7 @@ router.get('/', (req, res, next) => {
                     fetchNextPage();
 
                 } catch (error) {
-                    console.log(error)
+                    // console.log(error)
                 }
             },
             function done(err) {
@@ -42,6 +43,7 @@ router.get('/', (req, res, next) => {
             });
     }
 
+    // Sends voting site or winner site depending on phase
     const Countdowns = () => {
 
         if (CountdownsArray[0].Date.getTime() < CurrentTime.getTime()) {
@@ -70,6 +72,7 @@ router.get('/leaderboard', (req, res, next) => {
     const CountdownsArray = [];
     const CurrentTime = new Date();
 
+    // gets the pheses form Airtable
     const getPhases = (callback) => {
         base('Countdowns').select().eachPage(page = (records, fetchNextPage) => {
                 records.forEach(record => {
@@ -83,7 +86,7 @@ router.get('/leaderboard', (req, res, next) => {
                     fetchNextPage();
 
                 } catch (error) {
-                    console.log(error)
+                    // console.log(error)
                 }
             },
             function done(err) {
@@ -95,7 +98,8 @@ router.get('/leaderboard', (req, res, next) => {
                 }
             });
     }
-
+    
+    // Sends voting site or winner site depending on phase
     const Countdowns = () => {
 
         if (CountdownsArray[0].Date.getTime() < CurrentTime.getTime()) {
