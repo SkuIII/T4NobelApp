@@ -130,13 +130,13 @@ router.get('/QR', (req, res, next) => {
     }
 });
 
-router.get('/favicon', (req, res, next) => {
+router.get('/Favicon', (req, res, next) => {
 
     if (typeof req.headers.referer != 'undefined') {
 
         let recordArray = [];
 
-        // Accessing Nominated table in Airtable
+        // Accessing Favicon table in Airtable
         base('Favicon').select().eachPage(page = (records, fetchNextPage) => {
             records.forEach(record => {
                 // Pushing record data into recordArray
