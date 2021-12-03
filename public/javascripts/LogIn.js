@@ -1,11 +1,13 @@
 'use strict';
 
-console.log('LogIn.js is alive!')
+// console.log('LogIn.js is alive!')
 
+// global varubels to store data in. 
 let email;
 let VoteStatus;
 let Categories;
 
+// Customice Array to store votes
 const fetchCategory = fetch(
     '/data/Categories'
 ).then(res => res.json()).then(Categories => {
@@ -14,10 +16,12 @@ const fetchCategory = fetch(
     });
 });
 
+// the loggout funktion
 const logoutIndication = () => {
     location.reload();
 }
 
+// Creates the profile picture with loggout funktion.
 const AddProfileImg = () => {
     const imgProfile = document.createElement('img');
 
@@ -35,6 +39,7 @@ const AddProfileImg = () => {
     document.getElementById('logout').hidden = true;
 }
 
+// Sendig client id and a funktion to google
 window.onload = () => {
     google.accounts.id.initialize({
         client_id: "623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com",
@@ -43,29 +48,32 @@ window.onload = () => {
     AddProfileImg();
 }
 
+// Handels the response from google
 function handleCredentialResponse(response) {
 
     // Sending the encoded JWT to decodeJwtResponse and storing answer in responsePayload
     const responsePayload = decodeJwtResponse(response.credential);
 
     // responePayload contains the information from the decoded JWT
-    console.log("ID: " + responsePayload.sub);
-    console.log('Full Name: ' + responsePayload.name);
-    console.log('Given Name: ' + responsePayload.given_name);
-    console.log('Family Name: ' + responsePayload.family_name);
-    console.log("Image URL: " + responsePayload.picture);
-    console.log("Email: " + responsePayload.email);
-    console.log(document.cookie)
+    // console.log("ID: " + responsePayload.sub);
+    // console.log('Full Name: ' + responsePayload.name);
+    // console.log('Given Name: ' + responsePayload.given_name);
+    // console.log('Family Name: ' + responsePayload.family_name);
+    // console.log("Image URL: " + responsePayload.picture);
+    // console.log("Email: " + responsePayload.email);
+    // console.log(document.cookie)
 
+    // Checs if it is an education mail
     if (responsePayload.email.includes('@edu.')) {
 
         email = responsePayload.email;
 
+        // Sets your profile picture insted of login with google button
         loginIndication(responsePayload.picture);
 
+        // Send request to the server to se if you have Voted
         const url = document.URL.split('/');
         const urlSend = `${url[0]}//${url[2]}/VoteLogin`;
-
         fetch(urlSend, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc
             headers: {
@@ -74,15 +82,15 @@ function handleCredentialResponse(response) {
             body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
         }).then(response => response.json()).then(data => {
             VoteStatus = data;
-            if (VoteStatus == 'Empty') {
+            if (VoteStatus == 'Empty') { // gives you an alurt if uou are not in the data base
                 NotInDataBase();
-            } else {        
+            } else { // Sends informational popup and enables buttons
                 showPopup();
                 enableBtn();
             }
         });
 
-    } else {
+    } else { // Alurt that you need to youse a edu mail
         const alreadyVoted = document.createElement('div');
         alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
         alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
@@ -106,6 +114,7 @@ const decodeJwtResponse = (token) => {
     return JSON.parse(jsonPayload);
 };
 
+// The funktion that sets the profile picture. 
 const loginIndication = (picture) => {
     document.getElementById('login').hidden = true;
     document.getElementById('logout').hidden = false;
