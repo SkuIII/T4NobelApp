@@ -46,12 +46,12 @@ const Load = (res) => {
 
     const content = document.getElementById('content')
 
-    var h11 = document.createElement('h1');
-    h11.textContent = 'Östras Alternativa Nobelprisvinnare';
-    h11.className = 'text-center p-3';
-    content.appendChild(h11);
+    let h1 = document.createElement('h1');
+    h1.textContent = 'Östras Alternativa Nobelprisvinnare';
+    h1.className = 'text-center p-3';
+    content.appendChild(h1);
 
-    var row = document.createElement('div');
+    let row = document.createElement('div');
     row.className = 'row p-0 mb-4 mx-0 justify-content-center';
     content.appendChild(row);
 
@@ -74,18 +74,18 @@ const Load = (res) => {
                 newCol.appendChild(divBorder);
 
                 //Adds image of each winner
-                var img = document.createElement('img');
+                let img = document.createElement('img');
                 img.className = ' p-0 rounded-3 img-size img-fluid mx-auto d-block';
                 img.src = nominated.record.fields.Picture[0].url;
                 divBorder.appendChild(img);
 
                 //Adds the name of each winner
-                var h1 = document.createElement('h3');
-                h1.innerHTML = winner.record.fields.Winner;
-                h1.className = 'text-center pt-0';
-                divBorder.appendChild(h1);
+                let h12 = document.createElement('h3');
+                h12.innerHTML = winner.record.fields.Winner;
+                h12.className = 'text-center pt-0';
+                divBorder.appendChild(h12);
 
-                var p = document.createElement('p');
+                let p = document.createElement('p');
                 p.innerHTML = winner.record.fields.WinnerBio;
                 p.className = 'text-center pt-0';
                 divBorder.appendChild(p);

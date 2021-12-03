@@ -2,7 +2,7 @@
 
 console.log('Countdown.js is alive')
 
-const countdownFunc = (date, nameName) => {
+const countdownFunc = (date, phaseText) => {
     // Set the date we're counting down to
     let countDownDate = new Date(date).getTime();
 
@@ -23,7 +23,7 @@ const countdownFunc = (date, nameName) => {
     // Update the count down every 1 second
     let x = setInterval(function() {
         document.getElementById("count").innerHTML = null;
-        document.getElementById("count").innerHTML = nameName + "<br> ";
+        document.getElementById("count").innerHTML = phaseText + "<br> ";
 
         // Get today's date and time
         let now = new Date().getTime();

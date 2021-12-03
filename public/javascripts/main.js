@@ -56,13 +56,13 @@ const Load = (res) => {
         const content = document.getElementById('content');
 
 
-        var h1 = document.createElement('h1');
+        let h1 = document.createElement('h1');
         h1.textContent = Category.record.fields.Category;
         h1.className = 'text-center sticky-top CategoryCss';
         content.appendChild(h1);
 
         //rows
-        var row = document.createElement('div');
+        let row = document.createElement('div');
         row.className = rowHome;
         row.id = Category.record.fields.Category + '.Row';
         content.appendChild(row);
@@ -77,19 +77,19 @@ const Load = (res) => {
                 row.appendChild(newCol);
 
                 //Adding img of nominee
-                var img = document.createElement('img');
+                let img = document.createElement('img');
                 img.className = ' p-0 rounded-3 img-size img-fluid mx-auto d-block';
                 img.src = Nominated.record.fields.Picture[1].url;
                 newCol.appendChild(img);
 
                 //Adding info to the cols
-                var info = document.createElement('div');
+                let info = document.createElement('div');
                 info.className = 'text-center m-0 p-2';
                 info.id = Nominated.record.fields.Nominated + '.Info';
                 newCol.appendChild(info);
 
                 //Adding the nominee name
-                var name = document.createElement('h3');
+                let name = document.createElement('h3');
                 name.className = 'text-center';
                 name.textContent = Nominated.record.fields.Nominated;
                 info.appendChild(name);

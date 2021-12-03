@@ -1,10 +1,8 @@
 // 'use strict';
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 const Airtable = require('airtable');
-const {
-    render
-} = require('pug');
+const { render } = require('pug');
 const enviorment = require('dotenv').config();
 
 // Connection to Airtable (APIKEY hidden with .env)
