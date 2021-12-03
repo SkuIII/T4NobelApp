@@ -16,7 +16,11 @@ const fetchFavicon = fetch(
     '/data/Favicon'
 ).then((res) => res.json());
 
-const allData = Promise.all([fetchParticipantsVotingInfo, fetchCategories, fetchNominatedInfo, fetchFavicon]);
+const fetchQrWinner = fetch(
+    '/data/QR'
+).then((res) => res.json());
+
+const allData = Promise.all([fetchParticipantsVotingInfo, fetchCategories, fetchNominatedInfo, fetchFavicon, fetchQrWinner]);
 
 allData.then((res) => Load(res));
 
@@ -92,4 +96,12 @@ const Load = (res) => {
             }
         });
     });
+    let row2 = document.createElement('div');
+    row2.className = 'row p-0 mb-4 mx-0 justify-content-center';
+    content.appendChild(row2);
+
+    let h3 = document.createElement('h3');
+    h3.textContent = res[4][1].record.fields.infoText;
+    h3.className = 'text-center p-3';
+    row2.appendChild(h3);
 };
