@@ -18,18 +18,20 @@ const logoutIndication = () => {
     location.reload();
 }
 
-const Anka = () => {
-    const you = document.createElement('img');
-    you.id = 'profile';
-    you.classList.add('pointer');
-    you.style.borderRadius = '50%';
-    you.style.height = '100px';
-    you.classList.add('p-3');
-    you.setAttribute('type', 'button');
-    you.setAttribute('data-bs-toggle', 'dropdown');
-    you.setAttribute('aria-expanded', 'false');
+const AddProfileImg = () => {
+    const imgProfile = document.createElement('img');
+
+    imgProfile.id = 'profile';
+    imgProfile.classList.add('pointer');
+    imgProfile.style.borderRadius = '50%';
+    imgProfile.style.height = '100px';
+    imgProfile.classList.add('p-3');
+    imgProfile.setAttribute('type', 'button');
+    imgProfile.setAttribute('data-bs-toggle', 'dropdown');
+    imgProfile.setAttribute('aria-expanded', 'false');
     document.getElementById('btnloggout').addEventListener('click', logoutIndication);
-    document.getElementById('logout').prepend(you);
+
+    document.getElementById('logout').prepend(imgProfile);
     document.getElementById('logout').hidden = true;
 }
 
@@ -38,15 +40,13 @@ window.onload = () => {
         client_id: "623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com",
         callback: handleCredentialResponse
     });
-    Anka();
+    AddProfileImg();
 }
 
 function handleCredentialResponse(response) {
-    // console.log("Encoded JWT ID token: " + response.credential);
 
     // Sending the encoded JWT to decodeJwtResponse and storing answer in responsePayload
     const responsePayload = decodeJwtResponse(response.credential);
-    // responsePayload = verify(response.credential);
 
     // responePayload contains the information from the decoded JWT
     console.log("ID: " + responsePayload.sub);
@@ -57,12 +57,10 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
 
-    // let popup = document.getElementById("myPopup");
-
     if (responsePayload.email.includes('@edu.')) {
 
         email = responsePayload.email;
-        // popup.style.display = "none";
+
         loginIndication(responsePayload.picture);
 
         const url = document.URL.split('/');
