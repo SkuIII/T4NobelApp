@@ -31,6 +31,8 @@ const loginLeader = () => {
         document.getElementById('progressBarContainer').hidden = true;
         document.getElementById('confirm-btn').hidden = true;
 
+        document.getElementById('headline').hidden = true;
+
         let ShowMoreText = document.getElementsByClassName('ClickMeCss');
 
         for (let i = 0; i < ShowMoreText.length; i++) {
@@ -86,16 +88,6 @@ const leaderboardBig = () => {
     }
 }
 
-const winner = () => {
-    if (phase == 1) {
-
-    } else if (phase == 2) {
-
-    } else if (phase == 3) {
-
-    }
-}
-
 const yesMan = () => {
     const pugUrl = document.URL.split('/');
     const urlPage = `${pugUrl[0]}//${pugUrl[2]}/${pugUrl[3]}`;
@@ -106,8 +98,5 @@ const yesMan = () => {
     } else if (pugUrl[3] == 'leaderboard') {
         console.log('LEADERBOARD');
         leaderboardBig();
-    } else if (pugUrl[3] == 'winner') {
-        console.log('WINNER');
-        winner();
     }
 }

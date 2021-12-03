@@ -131,6 +131,7 @@ const Load = (res) => {
         document.getElementById('confirm-btn').addEventListener('click', btnConfirmClick);
 
     }
+
     // Creates a div for checkbox
 const acceptDiv = document.createElement('div');
 //checkbox text
@@ -160,4 +161,16 @@ const showBio = (sender) => {
         }
 
     }
+}
+
+const showPopup = () => {
+    var myModal = new bootstrap.Modal(document.getElementById("popupInfo"), {});
+    myModal.show();
+    if(VoteStatus == 'Voted'){
+        document.getElementById('textToVote').hidden = true;
+    }else{
+        document.getElementById('textVoted').hidden = true;
+
+    }
+    
 }
