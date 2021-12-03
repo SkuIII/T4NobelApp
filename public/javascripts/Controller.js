@@ -6,18 +6,29 @@ const fetchPhase = fetch(
     '/data/Countdowns'
 ).then((res) => res.json());
 
-fetchPhase.then((res) => phaseLoad(res));
+
+const fetchqr2 = fetch( //fetch information for qr code from data
+    '/data/qr'
+).then((res) => res.json());
+
+
+const allData2 = Promise.all([fetchPhase, fetchqr2]);
+
+allData2.then((res) => phaseLoad(res));
 
 let phase;
 let date;
 let nameName;
+let infoText;
 
 const phaseLoad = (res) => {
-    phase = res.Phase;
-    date = res.Date;
-    nameName = res.Name;
+    phase = res[0].Phase;
+    date = res[0].Date;
+    nameName = res[0].Name;
 
-    console.log(res.Phase);
+    infoText = res[1][0].record.fields.infoText;
+
+    console.log(phase);
 
     countdownFunc(date, nameName);
     yesMan();
@@ -73,7 +84,8 @@ const leaderboardBig = () => {
 
         document.getElementById('progressBarContainer').hidden = true;
         document.getElementById('countRow').className = 'row justify-content-center text-center display-1';
-        // document.getElementById('headline2').textContent = qr[0].record.fields.infoText;
+
+        document.getElementById('headline2').innerHTML = infoText;
 
     } else
     if (phase == 2) {
