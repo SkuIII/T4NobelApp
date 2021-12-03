@@ -95,11 +95,11 @@ const Load = (res) => {
 
                 //Adds a click funtion to the show more text
                 const ClickMe = document.createElement('p');
-                ClickMe.className = 'ClickMeCss pointer';
-                ClickMe.textContent = 'VISA MERA / RÖSTA';
+                ClickMe.className = 'btn btn-primary text-align-center ClickMeCss pointer';
+                ClickMe.textContent = 'VISA MER';
                 ClickMe.name = counterCategory + '+' + counterNominated;
                 ClickMe.addEventListener('click', showBio);
-                name.appendChild(ClickMe);
+                info.appendChild(ClickMe);
 
                 //Adding the bio 
                 let bio = document.createElement('p');
@@ -119,6 +119,7 @@ const Load = (res) => {
                 //The vote btn in the col
                 const btnVote = document.createElement('button');
                 btnVote.textContent = 'Logga in för att rösta';
+                btnVote.hidden = true;
                 btnVote.className = 'vote btn btn-secondary disabled voteButton ' + Category.record.fields.Category;
                 btnVote.addEventListener('click', divVoteClick);
                 btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
@@ -156,9 +157,9 @@ const showBio = (sender) => {
     if (dropdownText.className == 'col-sm-3 border-phatHome-hover mx-3 my-2 p-0 text-center') {
         dropdownText.className = 'col-sm-3 border-phatHome mx-3 my-2 p-0 text-center';
         if (phase == 2) {
-            sender.target.textContent = 'VISA MERA / RÖSTA';
+            sender.target.textContent = 'VISA MER / RÖSTA';
         } else {
-            sender.target.textContent = 'VISA MERA';
+            sender.target.textContent = 'VISA MER';
         }
     }
 }
