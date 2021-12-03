@@ -34,12 +34,14 @@ const Load = (res) => {
         let headTitle = document.querySelector('head');
 
         let favIcons = [
+             // Makes favicons append in mobile browsers       
             { rel: 'apple-touch-icon' },
             { rel: 'apple-touch-startup-image' },
             { rel: 'shortcut icon' }
         ]
 
         favIcons.forEach(function(favIcon) {
+            // Creates favicon element
             let setFavicon = document.createElement('link');
             setFavicon.setAttribute('rel', favIcon.rel);
             setFavicon.setAttribute('href', favImg);
