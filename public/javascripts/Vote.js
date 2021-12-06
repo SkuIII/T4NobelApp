@@ -87,7 +87,7 @@ const btnConfirmClick = () => {
         },
         body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
     });
-    document.getElementById('confirm-btn').className = 'btn btn-primary fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
+    document.getElementById('confirm-btn').className = 'btn btn-primary disabled sfw-bold btn-lg mb-5 p-3 justify-content-center w-100';
     document.getElementById('confirm-btn').textContent = 'Tack för din röst';
     setInterval(() => {
         window.scrollTo(0, 0);
@@ -139,7 +139,7 @@ const enableBtn = () => {
         // document.getElementById('Header').appendChild(alreadyVoted);
         // alreadyVoted.appendChild(alertClose);
 
-        if(VoteStatus == 'Voted'){
+        if (VoteStatus == 'Voted') {
             document.getElementById('popupText').textContent = 'Du har redan röstat!';
         }
     }
