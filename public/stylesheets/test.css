@@ -1,28 +1,29 @@
-.border-phat{
+.border-phat {
     border: 15px solid #ff8000;
     border-radius: 20px;
-    color:white;
+    color: white;
     /* margin-left: 0px;
     margin-right: 0px; */
     /* padding-bottom: 20px; */
 }
 
-.border-phatHome{
+.border-phatHome {
     border: 15px solid #ff8000;
     border-radius: 20px;
-    color:black;
+    color: black;
     overflow: hidden;
-    height:500px;
-    
+    height: 500px;
 }
-.border-phatHome-hover{
+
+.border-phatHome-hover {
     height: auto;
     border: 15px solid #ff8000;
     border-radius: 20px;
-    color:black;
+    color: black;
     overflow: hidden;
 }
-.CategoryCss{
+
+.CategoryCss {
     background-color: white;
     max-width: 80%;
     max-height: 10%;
@@ -31,41 +32,35 @@
     border: 10px solid #ff8000;
     border-radius: 20px;
     margin-top: 2em;
-    
-
 }
-.ClickMeCss{
+
+.ClickMeCss {
     font-size: large;
-    
 }
 
-
-.img-size{
+.img-size {
     width: 100%;
     height: 250px;
     /* margin-left: auto;
     margin-right:auto; */
 }
 
-.pointer{
+.pointer {
     cursor: pointer;
 }
 
-
-.row-hover{
+.row-hover {
     background-color: rgb(130, 130, 130);
 }
 
-.row-hover:hover{
+.row-hover:hover {
     cursor: pointer;
     background-color: rgb(80, 80, 80);
 }
 
-.row-selected{
+.row-selected {
     background-color: rgb(80, 80, 80);
 }
-
-
 
 .popup {
     position: relative;
@@ -75,8 +70,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
- 
- 
 }
 
 .popup .popuptext {
@@ -92,10 +85,8 @@
     bottom: 125%;
     left: 50%;
     margin-left: -450px;
- 
-    
-   
 }
+
 
 /* .popup .popuptext::after {
     content: "";
@@ -131,3 +122,65 @@
     }
 }
 
+#text-scroll {
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+
+#text-scroll h3 {
+    font-size: 3em;
+    color: black;
+    position: absolute;
+    width: 400%;
+    height: 100%;
+    margin: 0;
+    line-height: 50px;
+    text-align: center;
+    /* Starting position */
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    /* Apply animation to this element */
+    -moz-animation: text-scroll 30s linear infinite;
+    -webkit-animation: text-scroll 30s linear infinite;
+    animation: text-scroll 25s linear infinite;
+}
+
+
+/* Move it (define the animation) */
+
+@-moz-keyframes text-scroll {
+    0% {
+        -moz-transform: translateX(100%);
+    }
+    100% {
+        -moz-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes text-scroll {
+    0% {
+        -webkit-transform: translateX(100%);
+    }
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@keyframes text-scroll {
+    0% {
+        -moz-transform: translateX(100%);
+        /* Firefox bug fix */
+        -webkit-transform: translateX(100%);
+        /* Firefox bug fix */
+        transform: translateX(25%);
+    }
+    100% {
+        -moz-transform: translateX(-100%);
+        /* Firefox bug fix */
+        -webkit-transform: translateX(-100%);
+        /* Firefox bug fix */
+        transform: translateX(-100%);
+    }
+}
