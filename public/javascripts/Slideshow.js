@@ -24,6 +24,7 @@ const LoadNominatedInfo = (res) => {
 
     let QRimg = document.createElement('img'); //creates an image element
     QRimg.src = QR[0].record.fields.Picture[0].url; //sources the qr image into the element
+    QRimg.className = 'width-50'
     document.getElementById('qrcode').appendChild(QRimg); //appends it into the qrcode id
 
     let img2 = document.createElement('img'); //creates an image element
