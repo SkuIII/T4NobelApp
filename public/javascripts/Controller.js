@@ -42,6 +42,9 @@ const loginLeader = () => {
         document.getElementById('confirm-btn').hidden = true;
     } else
     if (phase == 2) {
+
+        document.getElementById('headline').innerHTML = 'LOGGA IN MED DIN EDU MAIL OCH RÖSTA NU!';
+
         let ShowMoreText = document.getElementsByClassName('ClickMeCss');
         for (let i = 0; i < ShowMoreText.length; i++) {
 
@@ -73,7 +76,7 @@ const leaderboardBig = () => {
 
     } else
     if (phase == 2) {
-        document.getElementById('headline2').textContent = 'Valdeltagande';
+        document.getElementById('headline2').innerHTML = 'Gå in och rösta på den kandidat du tycker förtjänar vinsten nu! <br><br> Valdeltagande';
 
     } else
     if (phase == 1) {

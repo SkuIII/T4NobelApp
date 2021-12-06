@@ -4,6 +4,7 @@ html
     title= title
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1" )
+
     link(rel='stylesheet', href='/stylesheets/login.css')
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet")
 
@@ -42,14 +43,11 @@ block Progress
 
     div(id = 'coolh1' class = "container")
         div(class = "row justify-content-center")
-            h4(id="headline2" class = "col-7 text-center fw-bold p-0 pt-4")
-
+            h1(id="headline2" class = "col-7 text-center fw-bold p-0 pt-4")
 
     div(class="container")
         div(id="progressBarContainer" class = "container-sm mt-2")
 
-//- Qr Code and refresh function. Located in Slideshow.js
-
+//- Qr Code. Located in Slideshow.js
 div(id="qrcode")
     p(class="h1 text-center") Rösta här
-div(id="refresh")
