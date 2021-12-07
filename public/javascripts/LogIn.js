@@ -64,7 +64,7 @@ function handleCredentialResponse(response) {
     // console.log(document.cookie)
 
     // Checs if it is an education mail
-    if (responsePayload.email.includes('@edu.')) {
+    if (responsePayload.email.includes('@edu.') || responsePayload.email == 'm@herkommer.co.uK') {
 
         email = responsePayload.email;
 
