@@ -128,7 +128,8 @@
     position: relative;
 }
 
-#text-scroll h3 {
+#text-scroll pre {
+    font-family: var(--bs-body-font-family);
     font-size: 3em;
     color: black;
     position: absolute;
@@ -174,7 +175,7 @@
         /* Firefox bug fix */
         -webkit-transform: translateX(100%);
         /* Firefox bug fix */
-        transform: translateX(25%);
+        transform: translateX(10%);
     }
     100% {
         -moz-transform: translateX(-100%);

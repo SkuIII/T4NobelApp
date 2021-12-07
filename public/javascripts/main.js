@@ -34,7 +34,7 @@ const Load = (res) => {
         let headTitle = document.querySelector('head');
 
         let favIcons = [
-             // Makes favicons append in mobile browsers       
+            // Makes favicons append in mobile browsers       
             { rel: 'apple-touch-icon' },
             { rel: 'apple-touch-startup-image' },
             { rel: 'shortcut icon' }
@@ -139,13 +139,14 @@ const acceptDiv = document.createElement('div');
 //checkbox text
 let acceptingText = document.createElement('p');
 acceptingText.textContent = 'Accepterar du dina val?';
+acceptingText.className = "border border-3 my-4";
 acceptDiv.appendChild(acceptingText);
 
 //Checkbox
 let acceptChoice = document.createElement('input');
 acceptChoice.type = 'checkbox';
 acceptChoice.id = 'agree';
-acceptChoice.className = 'form-check-input';
+acceptChoice.className = 'form-check-input border border-3';
 acceptChoice.addEventListener('change', acceptingChoice);
 acceptingText.appendChild(acceptChoice);
 
@@ -170,18 +171,18 @@ const showBio = (sender) => {
 const showPopup = () => {
     var myModal = new bootstrap.Modal(document.getElementById("popupInfo"), {});
     myModal.show();
-    if(VoteStatus == 'Voted'){
+    if (VoteStatus == 'Voted') {
         document.getElementById('textToVote').hidden = true;
         document.getElementById('wrongEmail').hidden = true;
-    }else if (VoteStatus == 'ToVote'){
+    } else if (VoteStatus == 'ToVote') {
         document.getElementById('textVoted').hidden = true;
         document.getElementById('wrongEmail').hidden = true;
-    }else {
+    } else {
         document.getElementById('textVoted').hidden = true;
         document.getElementById('textToVote').hidden = true;
         setInterval(() => {
             location.reload();
         }, 3000);
     }
-    
+
 }

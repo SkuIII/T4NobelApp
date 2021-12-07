@@ -2,38 +2,30 @@
 
 console.log('LogIn.js is alive!')
 
-// Global variables to store data in. 
+// Global variables to store data in
 let email;
 let VoteStatus;
 let Categories;
 
 let vote = [];
 
-// Customice Array to store votes
+// Customize array to store votes
 const fetchCategory = fetch(
     '/data/Categories'
 ).then(res => res.json()).then(Categories => {
-    console.log('fetchCategory succesfull')
-    console.log(Categories)
 
-    Categories.forEach((element, elementCounter) => {
-        console.log('inside categoreis.foreaeach')
-
-        console.log(elementCounter)
-        console.log(element.record.fields.Category)
+    Categories.forEach(element => {
 
         vote.push({ CategoryVoted: element.record.fields.Category, NominatedVoted: null, CheckVotes: 0 });
-
-        console.log(vote)
     });
 });
 
-// the loggout funktion
+// The log out function
 const logoutIndication = () => {
     location.reload();
 }
 
-// Creates the profile picture with loggout funktion.
+// Creates the profile picture with log out function
 const AddProfileImg = () => {
     const imgProfile = document.createElement('img');
 
@@ -51,7 +43,7 @@ const AddProfileImg = () => {
     document.getElementById('logout').hidden = true;
 }
 
-// Sendig client id and a funktion to google
+// Sending client id and a function to Google
 window.onload = () => {
     google.accounts.id.initialize({
         client_id: "623398996009-sh4vrk42s5ri02ji4g9mokh8maiaroe4.apps.googleusercontent.com",
@@ -75,12 +67,13 @@ function handleCredentialResponse(response) {
     console.log("Email: " + responsePayload.email);
     console.log(document.cookie)
 
-    // Checs if it is an education mail
+    // Checks if it is an edu mail
+    // Exception made for m@herkommer.co.uk for testing purposes
     if (responsePayload.email.includes('@edu.') || responsePayload.email == 'm@herkommer.co.uk') {
 
         email = responsePayload.email;
 
-        // Sets users profile picture insted of login with google button
+        // Sets users profile picture instead of login with Google button
         loginIndication(responsePayload.picture);
 
         // Send request to the server to se if user have Voted
@@ -104,16 +97,6 @@ function handleCredentialResponse(response) {
 
     } else { // Alert that user need to use a edu mail
         showPopup();
-        // const alreadyVoted = document.createElement('div');
-        // alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
-        // alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
-        // document.getElementById('Header').appendChild(alreadyVoted);
-
-        // const alertClose = document.createElement('button');
-        // alertClose.className = 'btn-close';
-        // alertClose.type = 'button';
-        // alertClose.setAttribute('data-bs-dismiss', 'alert');
-        // alreadyVoted.appendChild(alertClose);
     }
 }
 
@@ -124,6 +107,7 @@ const decodeJwtResponse = (token) => {
     var jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
+
     return JSON.parse(jsonPayload);
 };
 
