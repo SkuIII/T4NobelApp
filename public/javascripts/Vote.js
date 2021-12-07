@@ -36,10 +36,10 @@ const divVoteClick = (event) => {
                 document.getElementById('votedfor').innerHTML = null;
 
                 vote.forEach(element => {
-                    const votedfor = document.createElement('h6');
-                    votedfor.textContent = 'Du har röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted;
-                    votedfor.className = 'text-secondary m-0 fw-bold';
-                    document.getElementById('votedfor').appendChild(votedfor);
+                    const votedFor = document.createElement('h6');
+                    votedFor.textContent = 'Du har röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted;
+                    votedFor.className = 'text-secondary m-0 fw-bold';
+                    document.getElementById('votedfor').appendChild(votedFor);
                     document.getElementById('votedfor').appendChild(acceptDiv);
 
                     const confirmBtn = document.getElementById('confirm-btn');
