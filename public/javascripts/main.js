@@ -172,9 +172,16 @@ const showPopup = () => {
     myModal.show();
     if(VoteStatus == 'Voted'){
         document.getElementById('textToVote').hidden = true;
-    }else{
+        document.getElementById('wrongEmail').hidden = true;
+    }else if (VoteStatus == 'ToVote'){
         document.getElementById('textVoted').hidden = true;
-
+        document.getElementById('wrongEmail').hidden = true;
+    }else {
+        document.getElementById('textVoted').hidden = true;
+        document.getElementById('textToVote').hidden = true;
+        setInterval(() => {
+            location.reload();
+        }, 3000);
     }
     
 }

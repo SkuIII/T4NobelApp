@@ -91,16 +91,17 @@ function handleCredentialResponse(response) {
         });
 
     } else { // Alurt that user need to use a edu mail
-        const alreadyVoted = document.createElement('div');
-        alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
-        alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
-        document.getElementById('Header').appendChild(alreadyVoted);
+        showPopup();
+        // const alreadyVoted = document.createElement('div');
+        // alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
+        // alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
+        // document.getElementById('Header').appendChild(alreadyVoted);
 
-        const alertClose = document.createElement('button');
-        alertClose.className = 'btn-close';
-        alertClose.type = 'button';
-        alertClose.setAttribute('data-bs-dismiss', 'alert');
-        alreadyVoted.appendChild(alertClose);
+        // const alertClose = document.createElement('button');
+        // alertClose.className = 'btn-close';
+        // alertClose.type = 'button';
+        // alertClose.setAttribute('data-bs-dismiss', 'alert');
+        // alreadyVoted.appendChild(alertClose);
     }
 }
 
