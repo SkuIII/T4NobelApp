@@ -121,8 +121,8 @@ const Load = (res) => {
 
                 //The vote btn in the col
                 const btnVote = document.createElement('button');
-                btnVote.textContent = 'Logga in för att rösta';
-                btnVote.hidden = true;
+                btnVote.textContent = 'Logga in med edu mail';
+                // btnVote.hidden = true;
                 btnVote.className = 'vote btn btn-secondary disabled voteButton ' + Category.record.fields.Category;
                 btnVote.addEventListener('click', divVoteClick);
                 btnVote.id = Category.record.fields.Category + "," + Nominated.record.fields.Nominated;
@@ -172,9 +172,16 @@ const showPopup = () => {
     myModal.show();
     if(VoteStatus == 'Voted'){
         document.getElementById('textToVote').hidden = true;
-    }else{
+        document.getElementById('wrongEmail').hidden = true;
+    }else if (VoteStatus == 'ToVote'){
         document.getElementById('textVoted').hidden = true;
-
+        document.getElementById('wrongEmail').hidden = true;
+    }else {
+        document.getElementById('textVoted').hidden = true;
+        document.getElementById('textToVote').hidden = true;
+        setInterval(() => {
+            location.reload();
+        }, 3000);
     }
     
 }

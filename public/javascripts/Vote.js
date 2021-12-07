@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 let vote = [];
 
@@ -8,7 +8,7 @@ let vote = [];
 const divVoteClick = (event) => {
     const id = event.target.id;
 
-    console.log(VoteStatus)
+    console.log(VoteStatus);
 
     let temp = id.split(',');
 
@@ -30,17 +30,17 @@ const divVoteClick = (event) => {
     vote.forEach(Vote => {
 
         if (Vote.CheckVotes == 1) {
-            counter++
+            counter++;
 
             if (counter == CategoryInfo.length) {
-                document.getElementById('votedFor').innerHTML = null;
+                document.getElementById('votedfor').innerHTML = null;
 
                 vote.forEach(element => {
                     const votedFor = document.createElement('h6');
                     votedFor.textContent = 'Du har röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted;
                     votedFor.className = 'text-secondary m-0 fw-bold';
-                    document.getElementById('votedFor').appendChild(votedFor);
-                    document.getElementById('votedFor').appendChild(acceptDiv);
+                    document.getElementById('votedfor').appendChild(votedFor);
+                    document.getElementById('votedfor').appendChild(acceptDiv);
 
                     const confirmBtn = document.getElementById('confirm-btn');
                     confirmBtn.classList.remove('btn-secondary');
@@ -87,7 +87,7 @@ const btnConfirmClick = () => {
         },
         body: '{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}' // body data type must match "Content-Type" header 
     });
-    document.getElementById('confirm-btn').className = 'btn btn-primary disabled sfw-bold btn-lg mb-5 p-3 justify-content-center w-100';
+    document.getElementById('confirm-btn').className = 'btn btn-primary disabled fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
     document.getElementById('confirm-btn').textContent = 'Tack för din röst';
     setInterval(() => {
         window.scrollTo(0, 0);
