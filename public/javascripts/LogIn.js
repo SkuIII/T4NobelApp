@@ -13,13 +13,18 @@ let vote = [];
 const fetchCategory = fetch(
     '/data/Categories'
 ).then(res => res.json()).then(Categories => {
+    console.log('fetchCategory succesfull')
+    console.log(Categories)
+
     Categories.forEach((element, elementCounter) => {
-        console.log('fetchCategory succesfull')
+        console.log('inside categoreis.foreaeach')
+
         console.log(elementCounter)
         console.log(element.record.fields.Category)
+
         vote.push({ CategoryVoted: element.record.fields.Category, NominatedVoted: null, CheckVotes: 0 });
+
         console.log(vote)
-        console.log(CategoryInfo[elementCounter].record.fields.Category)
     });
 });
 
