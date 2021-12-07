@@ -123,7 +123,7 @@
 }
 
 #text-scroll {
-    height: 55px;
+    height: 60px;
     overflow: hidden;
     position: relative;
 }
@@ -132,7 +132,7 @@
     font-size: 3em;
     color: black;
     position: absolute;
-    width: 400%;
+    width: 300%;
     height: 100%;
     margin: 0;
     line-height: 50px;
@@ -142,9 +142,9 @@
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
     /* Apply animation to this element */
-    -moz-animation: text-scroll 30s linear infinite;
-    -webkit-animation: text-scroll 30s linear infinite;
-    animation: text-scroll 25s linear infinite;
+    -moz-animation: text-scroll 20s linear infinite;
+    -webkit-animation: text-scroll 20s linear infinite;
+    animation: text-scroll 20s linear infinite;
 }
 
 

@@ -77,7 +77,7 @@ const leaderboardBig = () => {
     } else
     if (phase == 2) {
         document.getElementById('headline2').innerHTML = 'Valdeltagande';
-        document.getElementById('info-scroll').textContent = infoText;
+        document.getElementById('info-scroll').innerHTML = infoText;
 
     } else
     if (phase == 1) {
