@@ -76,7 +76,7 @@ const leaderboardBig = () => {
 
     } else
     if (phase == 2) {
-        document.getElementById('headline2').innerHTML = 'Gå in och rösta på den kandidat du tycker förtjänar vinsten nu! <br><br> Valdeltagande';
+        document.getElementById('headline2').innerHTML = 'Valdeltagande';
         document.getElementById('info-scroll').textContent = infoText;
 
     } else
