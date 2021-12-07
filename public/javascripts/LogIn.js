@@ -7,12 +7,15 @@ let email;
 let VoteStatus;
 let Categories;
 
+let vote = [];
+
 // Customice Array to store votes
 const fetchCategory = fetch(
     '/data/Categories'
 ).then(res => res.json()).then(Categories => {
     Categories.forEach((element, elementCounter) => {
         vote.push({ CategoryVoted: CategoryInfo[elementCounter].record.fields.Category, NominatedVoted: null, CheckVotes: 0 });
+        console.log(vote)
     });
 });
 

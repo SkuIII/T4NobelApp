@@ -1,7 +1,5 @@
 // 'use strict';
 
-let vote = [];
-
 console.log('Vote.js is alive!');
 
 // Save the Users vote 
