@@ -2,19 +2,21 @@
 
 let vote = [];
 
-// console.log('Vote.js is alive!');
+console.log('Vote.js is alive!');
 
 // Save the Users vote 
-const divVoteClick = (event) => {
-    const id = event.target.id;
+let divVoteClick = (event) => {
+    let id = event.target.id;
 
     console.log(VoteStatus);
 
     let temp = id.split(',');
 
-    const Category = temp[0];
-    const Nominated = temp[1];
+    let Category = temp[0];
+    let Nominated = temp[1];
+
     console.log(vote);
+
     vote.forEach((element, elementCounter) => {
         console.log(elementCounter + '--------------------------------------------------');
         if (VoteStatus == 'ToVote' && Category == element.CategoryVoted) {
@@ -26,8 +28,10 @@ const divVoteClick = (event) => {
 
     let counter = 0;
 
-    // Shows users vote abuve send button
+    // Shows users vote above send button
     vote.forEach(Vote => {
+
+        let h1 = document.createElement('h1');
 
         if (Vote.CheckVotes == 1) {
             counter++;
@@ -36,13 +40,13 @@ const divVoteClick = (event) => {
                 document.getElementById('votedfor').innerHTML = null;
 
                 vote.forEach(element => {
-                    const votedFor = document.createElement('h6');
+                    let votedFor = document.createElement('h6');
                     votedFor.textContent = 'Du har röstat på ' + element.NominatedVoted + ' i ' + element.CategoryVoted;
                     votedFor.className = 'text-secondary m-0 fw-bold';
                     document.getElementById('votedfor').appendChild(votedFor);
                     document.getElementById('votedfor').appendChild(acceptDiv);
 
-                    const confirmBtn = document.getElementById('confirm-btn');
+                    let confirmBtn = document.getElementById('confirm-btn');
                     confirmBtn.classList.remove('btn-secondary');
                     confirmBtn.classList.add('btn-success');
 
@@ -56,15 +60,15 @@ const divVoteClick = (event) => {
     // Maces the vote button for grean for the one that is voted fore
     let btns = document.getElementsByClassName(Category);
     for (let i = 0; i < btns.length; i++) {
-        const element = btns[i];
+        let element = btns[i];
         element.classList.remove('btn-success');
     }
     event.target.classList.add('btn-success');
 }
 
 // Funktion for checbox to confirm votes before sending
-const acceptingChoice = () => {
-    const agree = document.getElementById('agree');
+let acceptingChoice = () => {
+    let agree = document.getElementById('agree');
 
     if (agree.checked) {
         document.getElementById('confirm-btn').className = 'btn btn-success fw-bold btn-lg mb-5 p-3 justify-content-center w-100';
@@ -74,9 +78,9 @@ const acceptingChoice = () => {
 }
 
 // Sends the vote to the server.
-const btnConfirmClick = () => {
-    const url = document.URL.split('/');
-    const urlSend = `${url[0]}//${url[2]}/Vote`;
+let btnConfirmClick = () => {
+    let url = document.URL.split('/');
+    let urlSend = `${url[0]}//${url[2]}/Vote`;
 
     console.log('{"email":"' + email + '", "vote":' + JSON.stringify(vote) + '}');
 
@@ -95,14 +99,14 @@ const btnConfirmClick = () => {
     }, 3000);
 }
 
-// Alurt for if user is not in database
-const alertClose = document.createElement('button');
+// Alert for if user is not in database
+let alertClose = document.createElement('button');
 alertClose.className = 'btn-close';
 alertClose.type = 'button';
 alertClose.setAttribute('data-bs-dismiss', 'alert');
 
-const NotInDataBase = () => {
-    const NotInDataBase = document.createElement('div');
+let NotInDataBase = () => {
+    let NotInDataBase = document.createElement('div');
     NotInDataBase.textContent = 'Din edu mail finnns inte i systemet, gå till Te4 eller kontakta Carina Envall';
     NotInDataBase.className = 'alert alert-danger alert-dismissible text-center h4 fade show';
     document.getElementById('Header').appendChild(NotInDataBase);
@@ -110,10 +114,10 @@ const NotInDataBase = () => {
 }
 
 // Enables all voting buttons if votestatus is corect
-const enableBtn = () => {
+let enableBtn = () => {
     let showBtn = document.getElementsByClassName('vote');
     if (VoteStatus == 'ToVote') {
-        // const aboutVote = document.createElement('div');
+        // let aboutVote = document.createElement('div');
         // aboutVote.textContent = 'Du måste rösta på alla kategorier för att skicka rösten';
         // aboutVote.className = 'alert alert-success alert-dismissible text-center h4 fade show';
         // document.getElementById('Header').appendChild(aboutVote);
@@ -129,11 +133,11 @@ const enableBtn = () => {
         } catch (error) {
             //console.log(error)
         }
-        const confirmBtn = document.getElementById('confirm-btn');
+        let confirmBtn = document.getElementById('confirm-btn');
         confirmBtn.textContent = 'Bekräfta röstning';
 
     } else {
-        // const alreadyVoted = document.createElement('div');
+        // let alreadyVoted = document.createElement('div');
         // alreadyVoted.textContent = 'Du har redan röstat!';
         // alreadyVoted.className = 'alert alert-warning alert-dismissible text-center h4 fade show';
         // document.getElementById('Header').appendChild(alreadyVoted);

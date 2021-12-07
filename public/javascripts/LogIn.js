@@ -1,8 +1,8 @@
 'use strict';
 
-// console.log('LogIn.js is alive!')
+console.log('LogIn.js is alive!')
 
-// global varubels to store data in. 
+// Global variables to store data in. 
 let email;
 let VoteStatus;
 let Categories;
@@ -55,13 +55,13 @@ function handleCredentialResponse(response) {
     const responsePayload = decodeJwtResponse(response.credential);
 
     // responePayload contains the information from the decoded JWT
-    // console.log("ID: " + responsePayload.sub);
-    // console.log('Full Name: ' + responsePayload.name);
-    // console.log('Given Name: ' + responsePayload.given_name);
-    // console.log('Family Name: ' + responsePayload.family_name);
-    // console.log("Image URL: " + responsePayload.picture);
-    // console.log("Email: " + responsePayload.email);
-    // console.log(document.cookie)
+    console.log("ID: " + responsePayload.sub);
+    console.log('Full Name: ' + responsePayload.name);
+    console.log('Given Name: ' + responsePayload.given_name);
+    console.log('Family Name: ' + responsePayload.family_name);
+    console.log("Image URL: " + responsePayload.picture);
+    console.log("Email: " + responsePayload.email);
+    console.log(document.cookie)
 
     // Checs if it is an education mail
     if (responsePayload.email.includes('@edu.') || responsePayload.email == 'm@herkommer.co.uk') {
@@ -79,10 +79,10 @@ function handleCredentialResponse(response) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: '{"email":"' + email + '"}' // body data type must match "Content-Type" header
+            body: '{"email":"' + email + '"}' // Body data type must match "Content-Type" header
         }).then(response => response.json()).then(data => {
             VoteStatus = data;
-            if (VoteStatus == 'Empty') { // gives user an alurt if uou are not in the data base
+            if (VoteStatus == 'Empty') { // Gives user an alert if uou are not in the data base
                 NotInDataBase();
             } else { // Sends informational popup and enables buttons
                 showPopup();
@@ -90,7 +90,7 @@ function handleCredentialResponse(response) {
             }
         });
 
-    } else { // Alurt that user need to use a edu mail
+    } else { // Alert that user need to use a edu mail
         showPopup();
         // const alreadyVoted = document.createElement('div');
         // alreadyVoted.textContent = 'Välj din edu mail för att delta i röstningen.';
