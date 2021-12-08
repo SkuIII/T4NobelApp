@@ -9,7 +9,7 @@
  - "Rad" eller "Record" är en rad i en tabell/table. Som en rad i ett Excel ark.
  
  ### Om basen
-1. [Länken till Airtable basen](https://airtable.com/invite/l?inviteId=invHyHGce1Tk8A3IP&inviteToken=d9fb0004cd9a99c8754c3e481aec3890652e8b65fa261cf306ad4e63545eda07&utm_source=email). Denna länk ger en behörigheten att läsa och kommentera men inte ändra något viktigt. För att kunna bli en "Creator" (någon som inte äger basen men ändå har total kontroll över den), kontakta Michael Herkommer.
+1. [Länken till Airtable basen](https://airtable.com/invite/l?inviteId=invHyHGce1Tk8A3IP&inviteToken=d9fb0004cd9a99c8754c3e481aec3890652e8b65fa261cf306ad4e63545eda07&utm_source=email). Det är denna bas som används för webapplikationen. Denna länk ger en behörigheten att läsa och kommentera men inte ändra något viktigt. För att kunna bli en "Creator" (någon som inte äger basen men ändå har total kontroll över den), kontakta Michael Herkommer.
 2. Denna bas är en gratis version och kan max ha 1200 records samtidigt.
 
 ### OBS
@@ -23,11 +23,11 @@ Fältet "AmountVotes" är ett nummer fält i tabellen "Nominated" och får **int
 
 ![image](https://user-images.githubusercontent.com/83644816/144615971-5a4859a3-f490-4490-b69a-06f1a1fc7ec0.png)
 
-Inann röstnignen börjar ska det vara fyllt med "0", på detta sätt
+Det vara fyllt med "0", på detta sätt
 
 ![image](https://user-images.githubusercontent.com/83644816/144615930-2e90c82b-6ac0-47ec-a812-e26d3727525f.png)
 
-## För att lägga till en kategori
+## För att lägga till en kategori,  tabellen "Categories"
 1. I Airtable gå till tabellen "Categories" och lägg till namnet av kategorin i fältet "Category".
 - Fältet "Category" är namnet av kategorin. Vad som står här kommer visas på röstnings sidan.
 - Fältet "Winner" kommer innehålla namnet av den kandidat som fått mest röster i sin kategori.
@@ -35,29 +35,29 @@ Inann röstnignen börjar ska det vara fyllt med "0", på detta sätt
 2. Bara "Category" fältet måste vara ifyllt när man först skapar en kategori. De andra två fälten ska vara tomma från början.
 3. Tabellen "Categories" såg ut på detta sätt innan röstningen började läsåret 21/22 ![image](https://user-images.githubusercontent.com/83644816/144421145-1c4c77e1-458c-420e-aeca-569ef992b21c.png)
 
-## För att lägga till en kandidat
+## För att lägga till en kandidat,  tabellen "Nominated"
 1. I Airtable gå till tabellen "Nominated".
-- I fältet "Nominated" (inte tabellen "Nominated") ska den kandidatens namn skrivas. Detta visas på alla tre sidor.
+- I fältet "Nominated" (inte tabellen "Nominated") ska kandidatens namn skrivas. Detta visas på alla tre sidor.
 - I fältet "Bio" ska en längre bit av information om kandidaten skrivas. För att skapa ett nytt stycke måste en tom textrad skilja de två styckena, som visas på bilden. Text formatering är också möjligt för att använda kursiv, fet stil mm. Skriv det på samma sätt som i bilden. ![image](https://user-images.githubusercontent.com/83644816/144600158-f0044865-251c-4fdc-8c7c-9f1f05e81fb4.png) För att läsa på mer om text formatering gå [hit](https://www.w3schools.com/html/html_formatting.asp). Vad som står i detta fält kommer visas på röstnings sidan. Det är bäst om texterna är uniforma för alla kandidater.
-- I fältet "Category" ska den kategorin som kandidaten är nominerad för skrivas. Det måste skrivas på **exakt** samma sätt det står i "Categories" tabellen.
+- I fältet "Category" ska den kategorin som kandidaten är nominerad för skrivas. Det måste skrivas på **exakt** samma sätt det står i "Category" fältet i tabellen "Categories".
 - I fältet "Picture" ska två bilder av kandidaten läggas in. Den första bilden (vänster) är vad som visas på slideshowen, den ska helst vara bred. Den andra bilden (höger) kommer visas på röstnings sidan och är helst kvadratisk. Det måste finnas två bilder av varje kandidat, ett mindre antal bilder skapar problem och mer bilder kommer inte visas. **TVÅ BILDER** per kandidat. Båda bilderna kan vara samma men det **måste** vara två bilder i det fältet per kandidat.
-- I fältet "Students" kommer det stå vilka deltagare som har röstat på kandidaten. Det ska vara tomt och behöver inte manuellt ändras på under gången av applikationen.
+- I fältet "Participants" kommer det stå vilka deltagare som har röstat på kandidaten. Det ska vara tomt och behöver inte manuellt ändras på under gången av applikationen.
 - I fältet "AmountVotes" kommer det stå antalet röster varje kandidat har fått. Det ska vara "0" från början och borde inte manuellt ändras på under gången av appliaktionens användning. Det fältet används för att veta vilken kandidat det är som vunnit i sin kategori.
 2. Tabellen "Nominated" såg ut på detta sätt innan röstningen började läsåret 21/22 ![image](https://user-images.githubusercontent.com/83644816/144600056-a49bb682-411a-40ab-9ab4-9a7aefe9ba0b.png)
 
-## För att lägga till deltagare
-1. Om det finns ett excel ark med alla deltagares edu email och klass är det bara att klsitra in varje kolumn för sig i rätt fält. Det är bäst om hela tabellen är tom från första början, alltså att endast ha en rad i tabellen och klistra in kolumnerna från excel arket till fälten i tabellen.
+## För att lägga till deltagare, tabellen "Participants"
+1. Om det finns ett excel ark med alla deltagares EDU email och klass är det bara att klsitra in varje kolumn för sig i rätt fält. Det är bäst om hela tabellen är tom från första början, alltså att endast ha en rad i tabellen och klistra in kolumnerna från excel arket till fälten i tabellen.
  - Fältet "Name" ska innehålla namnet av deltagaren, detta fält är inte så viktigt och kan vara tomt.
- - Fältet "Email" ska innehålla deltagarens email och får inte vara tomt. Om en deltagares email inte finns här kan den inte delta i röstningen. 
- - Fältet "Class" ska innehålla vilken klass/grupp deltagaren går i. Detta fält är väldigt viktigt och måste fyllas in korrekt. Det är detta fält i kombination med alla fält i tabellen "ParticipantGroups" som automatiskt ger alla deltagare en grupp. För att läsa på mer om vad som ska stå i detta fältet läs på mer under rubriken "ParticipantGroups" i denna användarmanual.
+ - Fältet "Email" ska innehålla deltagarens EDU email och får inte vara tomt. Om en deltagares email inte finns här kan den inte delta i röstningen. 
+ - Fältet "Class" ska innehålla vilken klass/grupp deltagaren går i. Detta fält är väldigt viktigt och måste fyllas in korrekt. Det är detta fält i kombination med alla fält i tabellen "ParticipantGroups" som automatiskt ger alla deltagare en grupp. För att läsa på mer om vad som ska stå i detta fält läs under rubriken "Tabellen 'ParticipantGroups'" i denna användarmanual.
  - Fältet "Year" ska fyllas i automatiskt när knappen på [admin](https://salty-falls-10923.herokuapp.com/Admin) sidan trycks. Det är meningen att vad som står här ska **exakt** matcha vad som står i fälten "Name" och "Year" i tabellen "ParticipantGroups" och vad som står i fältet "Name" i tabellen "ParticipantsVotingInfo".
- - Fältet "VoteStatus" indikierar ifall deltagaren har röstat eller inte. Innan röstningen börjar ska det stå "ToVote" för alla deltagare. Efter en deltagare har röstat ska det stå "Voted" för just den deltagaren.
- - Fältet "VotedFor" fylls i med namnet av den kandidaten som deltagaren har röstat för automatiskt när deltagare har röstat. Från början ska detta fält vara tomt för alla.
+ - Fältet "VoteStatus" indikierar ifall deltagaren har röstat eller inte. Innan röstningen börjar ska det stå "ToVote" för alla deltagare. Efter en deltagare har röstat ska det stå "Voted" för just den deltagaren. Om det inte står "ToVote" för en deltagare i detta fält kan den inte rösta.
+ - Fältet "VotedFor" fylls i med namnet av de kandidater som deltagaren har röstat på automatiskt när deltagare har röstat. Från början ska detta fält vara tomt för alla.
  - Fältet "VotedFor (from Nominated)" är som fältet innan, det fylls i automatiskt och ska vara tomt från början,
  - Fältet "WhenVoted" fylls med datumet och tidpunkten som deltagaren har röstat. Det fylls i automatiskt när deltagaren har röstat och ska vara tomt från början.
 3. (För att detta steg ska fungera som menat måste tabellen "ParticipantGroups" vara ifylld korrekt. För att läsa på mer om tabellen "ParticipantGroups" läs på mer under rubriken "ParticipantGroups" i denna användarmanual) För att ge alla deltagare en en grupp (fylla i fältet "Year") gå [hit](https://salty-falls-10923.herokuapp.com/Admin) och klicka på knappen där. Efter cirka 1 minut borde alla deltagares "Year" fält vara ifyllt och fältet "Amount" i tabellen "ParticipantsVotingInfo" vara ifyllt med antalet deltagare i varje grupp.
 
-## ParticipantGroups
+## Tabellen "ParticipantGroups"
 Så såg tabellen "ParticipantGroups" ut innan röstningen påbörjade läsåret 21/22 ![image](https://user-images.githubusercontent.com/83644816/144604386-507c76d8-5ce3-4ef8-ad99-0537029694ed.png)
 Om tabellen "ParticipantGroups" såg ut på sättet ovan måste tabellen "Participants" sett ut på detta sätt ![image](https://user-images.githubusercontent.com/83644816/144607027-ad499fcc-eef8-4dc1-bcca-667093ed0bdd.png)
 - Fältet "Name" och fältet "Year" ska skrivas på **exakt** samma sätt. 
@@ -77,20 +77,21 @@ Om en viss grupp inte vill delta är det bara att ta bort raden med den gruppens
 
 **OBS!** De första tre raderna i tabellen "ParticipantGroups" måste vara de tre årskurserna som går på de vanliga gymnasieprogrammen i ordnignen 1->2->3.
 
-## ParticipantsVotingInfo och progressbars
-- Fältet "Name" måste matcha **exakt** vad som står i fälten "Name" och "Year" i tabellen "ParticipantGroups". 
+## Tabellen "ParticipantsVotingInfo" och progressbars
+- Fältet "Name" måste matcha **exakt** vad som står i fälten "Name" och "Year" i tabellen "ParticipantGroups". Också fältet "Year" i tabellen "Participants".
 - Fältet "Amount" ska innehålla antalet deltagare som tillhör den gruppen. Detta fylls i automatiskt när knappen på [admin](https://salty-falls-10923.herokuapp.com/Admin) sidan trycks.
-- Fältet "Voted" ska innehålla antalet från den gruppen som har röstat. Detta fylls i automatiskt när en deltagare har röstat. Det är detta fält i kombination med fältet innan ("Amount") som bestämmer hur progressbarsen ser ut.
+- Fältet "Voted" ska innehålla antalet från den gruppen som har röstat. Detta fylls i automatiskt när en deltagare har röstat. Det är detta fält i kombination med fältet innan ("Amount") som bestämmer hur progressbarsen ser ut. Det ska vara "0" från början.
 - Fältet "Headline" ska innehålla vad som står vid varje progressbar. Detta fält visas vartän det finns progressbars, alltså på både röstnings sidan och leaderboard sidan.
 - Ordningen som raderna är i på Airtable ändrar också ordningen som progressbarsen visas på webbapplikationen.
 Så såg tabellen "ParticipantsVotingInfo" läsåret 21/22 ![image](https://user-images.githubusercontent.com/83644816/144614086-6eed4e69-9744-47c2-8a24-5f4c2348b686.png)
 **OBS** Fälten "Amount" och "Voted" får aldrig vara tomma, de måste alltid vara "0". Om en progressbar visar "NaN" istället för ett nummer beror det antagligen på att en av dessa två fält är tomma.
 
 ## Tabellen "QRKod"
-- Fältet "Name" i denna tabell är helt oväsentlig.
+- Fältet "Name" i denna tabell är helt oväsentlig, den används inte för något och kan glömmas bort.
 - Den första raden för fältet "Picture" ska innehålla en bild av QR koden som ska användas för att besöka röstnings sidan. Bara **en** bild ska vara där. 
-- Den första raden för fältet "infoText" är vad som komer visas under fas 3 (innan röstningen påbörjar). Det är meningen att det ska vara en text som beskriver vad årets NobelPris handlar om. Den visas på röstnings och och leaderboard sidan. 
-- Den andra raden för fältet "Picture" är en bild som visas på leadeboard sida. Den bilden visas sidan om slideshowen på leaderboard sidan.
+- [Besök denna länk](https://docs.google.com/spreadsheets/d/1_RWXn3Ah31yv2lJVZSXdhZdAsh49CqO7GcWIj6l_59I/edit#gid=0) för att kunna skapa en egen QR kod. I "B" kolumnen klistra in länken du vill skapa en QR kod för, då ska en QR kod skapas i "A" kolumnen på samma rad. Kopiera den QR koden och lägg in den på Airtable så kommer den visas på leaderboard sidan.
+- Den första raden för fältet "infoText" är vad som komer visas under fas 2 och 3 (innan röstningen påbörjar och under röstningen). Det är meningen att det ska vara en text som beskriver vad årets NobelPris handlar om. Den visas på leaderboard sidan.
+- Den andra raden för fältet "Picture" är en bild som visas på leaderboard sidan. Den bilden visas sidan om slideshowen på leaderboard sidan.
 - Den andra raden för fältet "infoText" ska vara ett sorts tack till alla som deltagit på röstningen. Den visas under fas 1 och 0 (efter röstnignen är klar). Texten visas på röstnings sidan, leaderboard och vinnar sidan.
 Så såg tabellen "QRKod" läsåret 21/22 ![image](https://user-images.githubusercontent.com/83644816/144846328-510787c0-683c-4405-a719-ef5a5b406316.png)
 
@@ -98,14 +99,14 @@ Så såg tabellen "QRKod" läsåret 21/22 ![image](https://user-images.githubuse
 1. Webapplikationen är uppdelad i 4 olika faser. Faserna är ordningen 3->2->1->0. Vilken fas ändrar både funktionerna och designen av webbapplikationen. 
 - Fas 3 är den första fasen och är innan röstningen påbörjar, tänkt ska visas veckan innan röstningen påbörjar.
 - Fas 2 är den andra fasen och är den fasen man kan rösta under, tänkt ska vara under röstningsveckan. Det är endast i denna fas deltagarna kan rösta.
-- Fas 1 är den tredje fasen.
+- Fas 1 är den tredje fasen denna tid är tänkt att ska användas för att förbereda sig inför presentationen av vinnare på Nobeldagen.
 - Fas 0 är den sista fasen och är då vinnarna inom varje kategori visas om man besöker webapplikationen.
 - För att läsa på mer om faser gå till [körschemat](https://github.com/ogus02/T4NobelApp/blob/main/K%C3%B6rschema.md).
 2. Vilken fas applikationen är i bestämms av tiderna som finns i tabellen "Countdowns".
 - Fältet "Name" ska innehålla vad som står ovanför countdownen på webbapplikationen.
 - Fältet "Date" ska innehålla den tiden som countdownen räknar ner till och är vad som bestämmer vilken fas det är.
 
-Så såg tabellen "Countdowns" läsåret 21/22 ![image](https://user-images.githubusercontent.com/83644816/144848031-1bf021ef-e799-433f-8dc4-af546aa87aae.png)
+Så såg tabellen "Countdowns" läsåret 21/22 ![image](https://user-images.githubusercontent.com/83644816/145203851-f5198bc3-ad91-4d4b-bbe4-7d567174b5fa.png)
 
 ## Favicon
 - Fältet "Name" i denna tabell är helt oväsentlig.
