@@ -60,7 +60,9 @@ let divVoteClick = (event) => {
     for (let i = 0; i < btns.length; i++) {
         let element = btns[i];
         element.classList.remove('btn-success');
+        element.textContent = 'Rösta';
     }
+    event.target.textContent = 'Röstat';
     event.target.classList.add('btn-success');
 }
 
